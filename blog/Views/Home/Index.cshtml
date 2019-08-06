@@ -1,0 +1,151 @@
+﻿@model IEnumerable<blog.Models.Blog>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+    <div class="text-center">
+        @*<h1 class="display-4">Welcome</h1>*@
+        <p style="color: red;"> Warning! This site is under construction from the ground up. Thank you for your patience.</p>
+        <div class="row banner-container">
+            <div class="col-12 banner">
+                <ul>
+                    <li>
+                        <img src="~/images/i1.gif" />
+                          <h1 class="Banner_text">
+                             <span> ASP.NET Core MVC </span>
+                          </h1>
+                    </li>
+                    <li>
+                        <img src="~/images/i2.gif" />
+                        <h1 class="Banner_text">
+                            <span> CSS3 </span>
+                        </h1>
+                    </li>
+                    <li>
+                        <img src="~/images/i3.gif" />
+                        <h1 class="Banner_text">
+                            <span> HTML </span>
+                        </h1>
+                    </li>
+                    <li>
+                        <img src="~/images/i4.gif" />
+                        <h1 class="Banner_text">
+                            <span> JavaScript <br /> jQuery <br /> Ajax </span>
+                        </h1>
+                    </li>
+                    <li>
+                        <img src="~/images/i5.gif" />
+                        <h1 class="Banner_text">
+                            <span> C# </span>
+                        </h1>
+                    </li>
+                    <li>
+                        <img src="~/images/i6.gif" />
+                        <h1 class="Banner_text">
+                            <span> Entity Framework </span>
+                        </h1>
+                    </li>
+                    <li>
+                        <img src="~/images/i7.gif" />
+                        <h1 class="Banner_text">
+                            <span> Web Development </span>
+                        </h1>
+                    </li>
+                    <li>
+                        <img src="~/images/i8.gif" />
+                        <h1 class="Banner_text">
+                            <span> Responsive Design </span>
+                        </h1>
+                    </li>
+                    <li>
+                        <img src="~/images/i9.gif" />
+                        <h1 class="Banner_text">
+                            <span> Mobile First </span>
+                        </h1>
+                    </li>
+                    <li>
+                        <img src="~/images/i10.gif" />
+                        <h1 class="Banner_text">
+                            <span> Content Management System </span>
+                        </h1>
+                    </li>
+                    <li>
+                        <img src="~/images/i11.gif" />
+                        <h1 class="Banner_text">
+                            <span> Bootstrap </span>
+                        </h1>
+                    </li>
+
+                </ul>
+                
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <h2 class="profile"><img src="~/images/profile.jpg" /><br />Improve your IT knowledge: Learn to code with example
+                </h2>
+                <div class="left-nav">
+                    <ul>
+                        <li>HTML5</li>
+                        <li>JavaScript</li>
+                        <li>jQuery</li>
+                        <li>AngularJS</li>
+                        <li>CSS3</li>
+                        <li>C#</li>
+                        <li>Database</li>
+                        <li>ColdFusion</li>
+                        <li>Entity Framework</li>
+                        <li>ASP.NET core MVC</li>
+                        <li>Linq query</li>
+                        <li>Dreamweaver</li>
+                        <li>Networking</li>
+                        <li>Integration</li>
+                        <li>Security</li>
+                        <li>E-commerce</li>
+
+                    </ul>
+
+                </div>
+            </div>
+            
+            <div class="col-md-9 home-main-content-area">
+                <div class="member-area">
+                    <span><strong>@Html.ActionLink("Member Area", "Index", "Blogs")</strong></span> <br />Please login to post, edit, remove, or comment
+                    <div class="row">
+                        <div class="col-12">
+                            <h2>@Html.ActionLink("Post your question", "Create", "Blogs")</h2>
+                        </div>
+
+
+                    </div>
+                </div>
+
+                <div class="posts">
+                    @foreach (var post in Model)
+                    {
+                        <div class="row">
+                            <div class="col-md-10">
+                                <h5>@Html.ActionLink(post.Title, "blog", "Home", new { id = post.BlogId })</h5>
+                            </div>
+                            
+                            @*@if (User.Identity.Name == post.Author) {
+                            <div class="col-md-1">
+                                <h6>@Html.ActionLink("Edit", "Edit", "Home", new { id = post.BlogId })</h6>
+                            </div>
+
+                            <div class="col-md-1">
+                                <h6>@Html.ActionLink("Delete", "Delete", "Home", new { id = post.BlogId })</h6>
+                            </div>
+                            }*@
+
+                        </div>
+                        <div class="teaser">@post.Body</div>
+                        <div style="font-style: italic">@post.Author | @post.Posted.</div> <br />
+
+                    }
+                </div>
+
+            </div>
+        </div>
+    </div>
