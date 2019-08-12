@@ -191,3 +191,10 @@ span.text-info {
 #Result {
     width: 100%;
 }
+
+pre {
+    white-space:pre-wrap;
+    word-break:break-word;
+    overflow: visible;
+    font-family: inherit;
+}

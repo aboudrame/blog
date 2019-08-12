@@ -73,5 +73,6 @@ namespace blog
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
         }
+
     }
 }
