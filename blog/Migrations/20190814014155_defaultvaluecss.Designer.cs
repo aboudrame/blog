@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using blog.Data;
 
 namespace blog.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190814014155_defaultvaluecss")]
+    partial class defaultvaluecss
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -190,17 +192,13 @@ namespace blog.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Author")
-                        .IsRequired();
+                    b.Property<string>("Author");
 
-                    b.Property<string>("Body")
-                        .IsRequired();
+                    b.Property<string>("Body");
 
                     b.Property<string>("CSS");
 
                     b.Property<int>("CategoryId");
-
-                    b.Property<int>("ContentTypeId");
 
                     b.Property<string>("HTML");
 
@@ -208,14 +206,13 @@ namespace blog.Migrations
 
                     b.Property<DateTime>("Posted");
 
-                    b.Property<string>("Title")
-                        .IsRequired();
+                    b.Property<string>("Result");
+
+                    b.Property<string>("Title");
 
                     b.HasKey("BlogId");
 
                     b.HasIndex("CategoryId");
-
-                    b.HasIndex("ContentTypeId");
 
                     b.ToTable("Blogs");
                 });
@@ -226,8 +223,7 @@ namespace blog.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Name")
-                        .IsRequired();
+                    b.Property<string>("Name");
 
                     b.HasKey("CategoryId");
 
@@ -242,11 +238,9 @@ namespace blog.Migrations
 
                     b.Property<long>("BlogId");
 
-                    b.Property<string>("Body")
-                        .IsRequired();
+                    b.Property<string>("Body");
 
-                    b.Property<string>("Commenter")
-                        .IsRequired();
+                    b.Property<string>("Commenter");
 
                     b.Property<DateTime>("DateCommented");
 
@@ -255,19 +249,6 @@ namespace blog.Migrations
                     b.HasIndex("BlogId");
 
                     b.ToTable("Comments");
-                });
-
-            modelBuilder.Entity("blog.Models.ContentType", b =>
-                {
-                    b.Property<int>("ContentTypeId")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Type");
-
-                    b.HasKey("ContentTypeId");
-
-                    b.ToTable("ContentTypes");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -317,14 +298,9 @@ namespace blog.Migrations
 
             modelBuilder.Entity("blog.Models.Blog", b =>
                 {
-                    b.HasOne("blog.Models.Category")
+                    b.HasOne("blog.Models.Category", "Category")
                         .WithMany("Blogs")
                         .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("blog.Models.ContentType")
-                        .WithMany("Blogs")
-                        .HasForeignKey("ContentTypeId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

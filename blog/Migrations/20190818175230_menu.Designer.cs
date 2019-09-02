@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using blog.Data;
 
 namespace blog.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190818175230_menu")]
+    partial class menu
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -200,8 +202,6 @@ namespace blog.Migrations
 
                     b.Property<int>("CategoryId");
 
-                    b.Property<int>("ContentTypeId");
-
                     b.Property<string>("HTML");
 
                     b.Property<string>("JavaScript");
@@ -214,8 +214,6 @@ namespace blog.Migrations
                     b.HasKey("BlogId");
 
                     b.HasIndex("CategoryId");
-
-                    b.HasIndex("ContentTypeId");
 
                     b.ToTable("Blogs");
                 });
@@ -255,19 +253,6 @@ namespace blog.Migrations
                     b.HasIndex("BlogId");
 
                     b.ToTable("Comments");
-                });
-
-            modelBuilder.Entity("blog.Models.ContentType", b =>
-                {
-                    b.Property<int>("ContentTypeId")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Type");
-
-                    b.HasKey("ContentTypeId");
-
-                    b.ToTable("ContentTypes");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -320,11 +305,6 @@ namespace blog.Migrations
                     b.HasOne("blog.Models.Category")
                         .WithMany("Blogs")
                         .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("blog.Models.ContentType")
-                        .WithMany("Blogs")
-                        .HasForeignKey("ContentTypeId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

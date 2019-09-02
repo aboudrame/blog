@@ -54,9 +54,12 @@ namespace blog.Controllers
         // GET: Blogs/Create
         public IActionResult Create()
         {
-             ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryId", "Name");
+            var x = new Blog();
+            ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryId", "Name");
 
-            return View();
+            x.Category = _context.Categories.ToList();
+
+            return View(x);
         }
 
         // POST: Blogs/Create

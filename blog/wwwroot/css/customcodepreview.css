@@ -1,0 +1,12 @@
+﻿.Run_container {
+    margin: 0;
+    text-align: right;
+    position: relative;
+    top: -8px;
+    right: -8px;
+}
+
+    .Run_container .Run {
+        height: 50px;
+        border-radius: 15px;
+    }

@@ -9,14 +9,11 @@
             el.html('');
             el.append(
                 "<div class='teaser-long'>" +
-                     long_text +
+                    long_text +
                     ' <span class="teaser-see-less text-info" style="cursor:pointer;margin-top:5px;">See less</span>...' +
                 "</div>" +
                 '<div class="teaser-short">' +
                     short_text +
-                    //"<span class='teaser-see-more text-info' style='cursor:pointer;margin-top:5px;' " +
-                    //"onclick='$(this).parent().hide();$(this).parent().siblings(\".teaser-long\").show();'> Read more...</span>" +
-
                     ' <span class="teaser-see-more text-info" style="cursor:pointer;margin-top:5px;">Read more</span>...' +
                 '</div>'
             );

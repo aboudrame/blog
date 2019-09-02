@@ -22,19 +22,19 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><h3>blog</h3></a>
+                <a class="navbar-brand logo" asp-area="" asp-controller="Home" asp-action="Index" ><h4>Home</h4></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse menu-container">
                     <partial name="_LoginPartial" />
                     <ul class="navbar-nav flex-grow-1 custom-ul">
-                        @*<li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index"><h3>Home</h3></a>
-                        </li>*@
+                        <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Blog" asp-action="Index"><h4>Blog</h4></a>
+                        </li>
                         <li class="nav-item topics">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Frontend"><h3>Topics</h3></a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Frontend"><h4>Topics</h4></a>
                             <div class="row">
                                 <div class="col-md-6 custom-column">
                                     <h5>Subject</h5>
@@ -51,6 +51,9 @@
                                     <p>Cyber security</p>
                                 </div>
                             </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" ><h4>About</h4></a>
                         </li>
                     </ul>
                 </div>

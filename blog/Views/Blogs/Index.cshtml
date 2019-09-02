@@ -26,7 +26,7 @@
             @Html.DisplayFor(modelitem => blog.Posted)
         </div>
         <div class="col-md-4">
-            <strong> @Html.DisplayNameFor(model => model.Category): @Html.DisplayFor(modelitem => blog.Category.Name) </strong>
+            @*<strong> @Html.DisplayNameFor(model => model.Category): @Html.DisplayFor(modelitem => blog.Category.Name) </strong>*@
         </div>
 
 
@@ -42,6 +42,10 @@
         </div>
     </div>
 }
+
+
+@Html.PartialAsync("_CodeEditor")
+
 @*<table class="table blog-home">
         <thead>
             <tr>

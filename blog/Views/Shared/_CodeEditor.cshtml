@@ -1,0 +1,32 @@
+﻿@model blog.Models.Blog
+
+<div>
+    <p>It is always a good practice to share the codes to help others assist you quickly. Please place the codes in the corresponding box below.</p>
+</div>
+<ul class="codeeditor_nav">
+    <li><h3>HTML</h3></li>
+    <li><h3>CSS</h3></li>
+    <li><h3>JavaScript</h3></li>
+</ul>
+<div class="row codeeditor">
+    <div class="col-12 HTML">
+        <div class="placeholder">@Model.PlaceHolder_HTML</div>
+        <pre>@Html.TextAreaFor(x => x.HTML)</pre>
+    </div>
+
+    <div class="col-12 CSS">
+        <div class="placeholder">@Model.PlaceHolder_CSS</div>
+        <pre>@Html.TextAreaFor(x => x.CSS)</pre>
+    </div>
+    <div class="col-12 JavaScript">
+        <div class="placeholder">@Model.PlaceHolder_JavaScript</div>
+        <pre>@Html.TextAreaFor(x => x.JavaScript)</pre>
+    </div>
+    <div class="col-12 Result">
+        <h3 class="RUN">Run the code</h3>
+        <iframe id="Result" src="~/iframe/index"></iframe>
+    </div>
+</div>
+<div class="form-group submit">
+    <input type="submit" value="Post a blog" class="btn btn-primary submit" />
+</div>

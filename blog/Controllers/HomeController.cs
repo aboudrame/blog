@@ -13,6 +13,7 @@ namespace blog.Controllers
 {
     public class HomeController : Controller
     {
+
         private readonly ApplicationDbContext _db;
         public HomeController(ApplicationDbContext db)
         {
@@ -22,30 +23,29 @@ namespace blog.Controllers
         
         public IActionResult Index()
         {
-            var Recents = _db.Blogs.OrderByDescending(x => x.Posted).Take(5).ToList();
-            
-            return View(Recents);
+             var Course = _db.Blogs.Where(x=>x.ContentTypeId==1).OrderByDescending(x =>  x.Posted ).Take(5).ToList();
+            return View(Course);
         }
 
-        public IActionResult Blog(long id)
+        public IActionResult Course(long id)
         {
-            var blog = _db.Blogs.FirstOrDefault(x => x.BlogId == id);
-            var Category = _db.Categories.FirstOrDefault(x => x.CategoryId == blog.CategoryId);
+            //var blog = _db.Blogs.FirstOrDefault(x => x.BlogId == id);
+            //var Category = _db.Categories.FirstOrDefault(x => x.CategoryId == blog.CategoryId);
                        
-            blog.Category.Name = Category.Name;
-            return View(blog);
+            //blog.Category. = Category.Name;
+           // var userStore = new userStore<application>();
+
+            return View();
         }
 
         [Authorize]
         public IActionResult Create()
         {
-            var myblog = new Blog();
+            var myCourse = new Blog();
             var mylist = new SelectList(_db.Categories.ToList(), "CategoryId", "Name");
 
             ViewBag.CategoryId = mylist;
-           
-
-            return View(myblog);
+            return View(myCourse);
         }
 
 
@@ -54,7 +54,8 @@ namespace blog.Controllers
         public IActionResult Create(Blog blog)
         {
             blog.Posted = DateTime.Now;
-            blog.Author = User.Identity.Name;  
+            blog.Author = User.Identity.Name;
+            blog.ContentTypeId = 1;
 
             //UserName can also be get using this method
             //blog.Author =_db.Users.FirstOrDefault().UserName; 
