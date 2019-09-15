@@ -29,7 +29,8 @@ namespace blog.Models
         [Required]
         public int CategoryId { get; set; }
         [NotMapped]
-        public  List<Category> Category { get; set; }
+        public  List<Category> Categories { get; set; }
+        public Category category { get; set; }
         [Required]
         public int ContentTypeId { get; set; } = 2;
         [NotMapped]

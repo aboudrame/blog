@@ -12,6 +12,7 @@ $(function () {
             main.codeeditor_nav();
             main.placeholder();
             main.TextareaResize();
+            main.ToolsRotation();
         },
 
         banner: function () {
@@ -75,37 +76,37 @@ $(function () {
 
         codeEditorNew: function () {
 
-                $('.RUN').off('click').on('click', function () {
-                    var IFRAME = $('#Result');
+            $('.RUN').off('click').on('click', function () {
+                var IFRAME = $('#Result');
 
-                    var getHTML = $('.HTML  #HTML').val();
-                    var getCSS = $('.CSS  #CSS').val();
-                    var getJavaScript = '$(function () {' + $('.JavaScript  #JavaScript').val() + '});';
+                var getHTML = $('.HTML  #HTML').val();
+                var getCSS = $('.CSS  #CSS').val();
+                var getJavaScript = '$(function () {' + $('.JavaScript  #JavaScript').val() + '});';
 
-                    var IFRAME_HEAD = IFRAME.contents().find('head');
-                    var IFRAME_BODY = IFRAME.contents().find('body');
+                var IFRAME_HEAD = IFRAME.contents().find('head');
+                var IFRAME_BODY = IFRAME.contents().find('body');
 
-                    var js = document.createElement('script');
-                    var cjquery = document.createElement('script');
-                    var css = document.createElement('style');
+                var js = document.createElement('script');
+                var cjquery = document.createElement('script');
+                var css = document.createElement('style');
 
-                        css.type = "text/css";
-                         js.type = "text/javascript";
-                    cjquery.type = "text/javascript";
-                     cjquery.src = "https://localhost:44347/lib/jquery/dist/jquery.js";
+                css.type = "text/css";
+                js.type = "text/javascript";
+                cjquery.type = "text/javascript";
+                cjquery.src = "https://localhost:44347/lib/jquery/dist/jquery.js";
 
-                    $(css).html(getCSS);
-                    $(js).html(getJavaScript);
+                $(css).html(getCSS);
+                $(js).html(getJavaScript);
 
-                    IFRAME_HEAD.html('');
-                    IFRAME_HEAD
-                        .append(css)
-                        .append(cjquery)
-                        .append(js);
+                IFRAME_HEAD.html('');
+                IFRAME_HEAD
+                    .append(css)
+                    .append(cjquery)
+                    .append(js);
 
-                    IFRAME_BODY.html('');
-                    IFRAME_BODY.append(getHTML);
-                });
+                IFRAME_BODY.html('');
+                IFRAME_BODY.append(getHTML);
+            });
 
 
         },
@@ -128,7 +129,7 @@ $(function () {
                 $('.codeeditor > div').each(function () {
                     $(this).hide();
 
-                    if ( $(this).is('.' + $.trim(el.find($('h3')).text())) || $(this).is('.Result')) {
+                    if ($(this).is('.' + $.trim(el.find($('h3')).text())) || $(this).is('.Result')) {
                         $(this).show();
                     }
 
@@ -164,16 +165,43 @@ $(function () {
 
                     el.closest('div').find($('.placeholder')).css('width', el.outerWidth(true));
                 }, 100);
-                
-            });
-            
-            $('.codeeditor textarea').off('mouseup').on('mouseup', function () {
-               // alert('before= ' + repeat);
-                clearInterval(repeat);uk
-               // alert('after= ' + repeat);
-            });
-        }
 
+            });
+
+            $('.codeeditor textarea').off('mouseup').on('mouseup', function () {
+                // alert('before= ' + repeat);
+                clearInterval(repeat); uk
+                // alert('after= ' + repeat);
+            });
+        },
+
+        ToolsRotation: function () {
+            setInterval(Toollist, 5000);
+
+            function Toollist() {
+
+                $('.tools li.active').each(function (index, element) {
+                    if ($(element).next().length) {
+                        $(element).removeClass('active');
+                        $(element).next().addClass('active');
+                    }
+                    else {
+                        $(element).removeClass('active');
+                        $('.tools li:first-child').addClass('active');  
+                    }
+
+                });
+
+                $('.tools li').each(function () {
+                    if ($(this).hasClass('active')) {
+                        activeIndex = $(this).index();
+                    }
+                });
+
+                $('.tools').css({ 'background-image': 'url("../images/bkg' + activeIndex + '.jpg")', 'background-position': 'center', 'background- clip': 'content - box' });
+
+            }
+        }
     };
 
     main.init();

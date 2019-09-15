@@ -31,10 +31,10 @@
                     <partial name="_LoginPartial" />
                     <ul class="navbar-nav flex-grow-1 custom-ul">
                         <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Blog" asp-action="Index"><h4>Blog</h4></a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Blogs" asp-action="Index"><h4>Blog</h4></a>
                         </li>
                         <li class="nav-item topics">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Frontend"><h4>Topics</h4></a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Topics" asp-action="Index"><h4>Topics</h4></a>
                             <div class="row">
                                 <div class="col-md-6 custom-column">
                                     <h5>Subject</h5>
@@ -53,8 +53,14 @@
                             </div>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" ><h4>About</h4></a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="About" asp-action="Index"><h4>About</h4></a>
                         </li>
+                        @if (User.IsInRole("Admin"))
+                        {
+                        <li class="nav-item">
+                            <a class="nav-link text-dark"><h4>Admin</h4></a>
+                        </li>
+                        }
                     </ul>
                 </div>
             </div>

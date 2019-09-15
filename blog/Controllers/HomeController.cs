@@ -8,6 +8,7 @@ using blog.Models;
 using blog.Data;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.EntityFrameworkCore;
 
 namespace blog.Controllers
 {
@@ -23,7 +24,7 @@ namespace blog.Controllers
         
         public IActionResult Index()
         {
-             var Course = _db.Blogs.Where(x=>x.ContentTypeId==1).OrderByDescending(x =>  x.Posted ).Take(5).ToList();
+             var Course = _db.Blogs.Include(x=>x.category).Where(x=>x.ContentTypeId==1).OrderByDescending(x =>  x.Posted ).Take(5).ToList();
             return View(Course);
         }
 

@@ -42,7 +42,7 @@
 }
 
 .home-main-content-area {
-    border: solid;
+    background-color: antiquewhite;
 }
 
 
@@ -129,9 +129,56 @@ nav.navbar {
 }
 
 .left-nav {
-    background-color: #e1d8b9;
     box-shadow: 5px -5px;
     border-radius: 15px 15px;
+}
+
+.topic-title {
+    text-align: center;
+}
+
+.topic-element {
+    display: flex;
+    align-items: center;
+    min-height: 200px;
+    margin-bottom: 60px;
+    background-clip: content-box;
+}
+
+.bkg-img {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    opacity: .2;
+    background-repeat: no-repeat;
+    background-position:center;
+    margin: 10px;
+}
+
+.bkg-img:hover {
+    opacity: 1;
+}
+
+
+.topic-round-head {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-repeat: no-repeat;
+    border-radius: 50%;
+    height: 120px;
+    width: 120px;
+    background-position: center;
+    transform: translateY(-50%);
+    margin: 0 auto;
+}
+
+.topic-title {
+    margin: auto;
 }
 
 .left-nav ul {
@@ -280,6 +327,169 @@ h3.RUN {
 .submit {text-align: right;}
 
 .logo {min-width: 60px;}
+
+.img-about {
+    margin: auto;
+    width: 100%;
+}
+
+.img-about-profile {
+    display: block;
+    max-width: 500px;
+    margin: auto;
+}
+
+.tools li {
+    display: none;
+}
+
+.tools ul {
+    margin: auto;
+    padding: 0;
+}
+
+.container {
+    background-color: #FFF;
+}
+
+.tools li.active {
+    display: block;
+    font-weight: bold;
+    font-size: 1.2em;
+    background-color: #FFF;
+    text-align: center;
+    margin: auto;
+    padding: 10px;
+}
+
+.tools {
+    display: flex;
+    align-items: center;
+    min-height: 160px;
+}
+/* Padding */
+
+.padding0 {
+    padding: 0;
+}
+
+
+/* 3D */
+
+@-webkit-keyframes spinner {
+    from {
+        -webkit-transform: rotateY(0deg);
+    }
+
+    to {
+        -webkit-transform: rotateY(360deg);
+    }
+}
+
+#stage {
+    margin: 1em auto;
+    -webkit-perspective: 900px;
+    margin-bottom: 100px;
+}
+
+#spinner {
+    
+    -webkit-animation-name: spinner;
+    -webkit-animation-timing-function: linear;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-duration: 20s;
+    -webkit-transform-style: preserve-3d;
+}
+
+    #spinner:hover {
+        -webkit-animation-play-state: paused;
+    }
+
+    #spinner img {
+        position: absolute;
+        border: 1px solid #ccc;
+        background: rgba(255,255,255,0.8);
+        box-shadow: inset 0 0 20px rgba(0,0,0,0.2);
+    }
+.wrapper {
+   
+}
+
+.w1 {
+    perspective: 1000px;
+}
+
+.w2 {
+    perspective: 250px;
+}
+
+.wrapper h1 {
+    text-align: center;
+}
+
+
+
+.cube {
+    font-size: 4em;
+    width: 2em;
+    margin: .8em auto;
+    transform-style: preserve-3d;
+    transform: rotateX(-40deg) rotateY(32deg);
+    -webkit-animation-timing-function: linear;
+    -webkit-animation-duration: 20s;
+    -webkit-animation-iteration-count: infinite;
+    min-height: 126px;
+    font-weight: bold;
+    -webkit-animation-name: cubeAnimation;
+}
+
+@-webkit-keyframes cubeAnimation {
+    from {
+        -webkit-transform: rotateY(0deg) rotateX(0deg);
+    }
+
+    to {
+        -webkit-transform: rotateY(360deg) rotateX(360deg);
+    }
+}
+
+.side {
+    position: absolute;
+    width: 2em;
+    height: 2em;
+    background-color: antiquewhite;
+    opacity: .4;
+    border: 1px solid rgba(0,0,0,.5);
+    color: black;
+    text-align: center;
+    line-height: 2em;
+}
+
+.front {
+    transform: translateZ(1em);
+}
+
+.top {
+    transform: rotateX( 90deg) translateZ(1em);
+}
+
+.right {
+    transform: rotateY( 90deg) translateZ(1em);
+}
+
+.left {
+    transform: rotateY(-90deg) translateZ(1em);
+}
+
+.bottom {
+    transform: rotateX(-90deg) translateZ(1em);
+}
+
+.back {
+    transform: rotateY(-180deg) translateZ(1em);
+}
+
+/* END 3D */
 
 @media only screen and (min-width: 577px) {
     .login-box {

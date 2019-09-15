@@ -1,6 +1,5 @@
 ﻿using blog.Data;
 using blog.Models;
-using Microsoft.AspNet.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;

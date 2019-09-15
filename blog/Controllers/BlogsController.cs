@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace blog.Controllers
 {
-    [Authorize]
+   
     public class BlogsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -27,7 +27,7 @@ namespace blog.Controllers
 
             //  var applicationDbContext =  _context.Blogs.Include(b => b.Category);
             // Only show the post belong to the user
-            var applicationDbContext = _context.Blogs.Include(b => b.Category).Where(x => x.Author == User.Identity.Name).OrderByDescending(x => x.Posted);
+            var applicationDbContext = _context.Blogs.Include(b => b.category);
 
             return View(await applicationDbContext.ToListAsync());
         }
@@ -41,7 +41,7 @@ namespace blog.Controllers
             }
 
             var blog = await _context.Blogs
-                .Include(b => b.Category)
+                .Include(b => b.Categories)
                 .FirstOrDefaultAsync(m => m.BlogId == id);
             if (blog == null)
             {
@@ -57,7 +57,7 @@ namespace blog.Controllers
             var x = new Blog();
             ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryId", "Name");
 
-            x.Category = _context.Categories.ToList();
+            x.Categories = _context.Categories.ToList();
 
             return View(x);
         }
@@ -143,13 +143,14 @@ namespace blog.Controllers
         public async Task<IActionResult> Delete(long? id)
         {
             var blog = await _context.Blogs
-                .Include(b => b.Category)
+                .Include(b => b.Categories)
                 .FirstOrDefaultAsync(m => m.BlogId == id);
 
             
             if (id == null || blog.Author != User.Identity.Name)
             {
                 return NotFound();
+                
             }
 
             if (blog == null)
