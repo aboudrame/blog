@@ -15,9 +15,9 @@ namespace blog.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly RoleManager<IdentityRole> roleManager;
-        private readonly UserManager<IdentityUser> userManager;
+        private readonly UserManager<ApplicationUser> userManager;  
 
-        public AdministratorController(RoleManager<IdentityRole> roleManager, UserManager<IdentityUser> userManager, ApplicationDbContext context)
+        public AdministratorController(RoleManager<IdentityRole> roleManager, UserManager<ApplicationUser> userManager, ApplicationDbContext context)
         {
             this.roleManager = roleManager;
             this.userManager = userManager;
@@ -61,9 +61,10 @@ namespace blog.Controllers
 
         public IActionResult AddToRole ()
         {
-            List<IdentityUser> user = _context.Users.ToList();
+            List<ApplicationUser> user = _context.Users.ToList();
             List<IdentityRole> Role = _context.Roles.ToList();
 
+           
             AddToRoleViewModel model = new AddToRoleViewModel
             {
                 identityUsers = user,
@@ -77,13 +78,13 @@ namespace blog.Controllers
         public async Task<IActionResult> AddToRole(AddToRoleViewModel model)
         {
             if (ModelState.IsValid) {
-                IdentityUser identityUser = new IdentityUser
+                ApplicationUser identityUser = new ApplicationUser
                 {
                     UserName = model.UserId
                 };
 
                 
-                IdentityUser getUser  = await userManager.FindByIdAsync(identityUser.UserName);
+                ApplicationUser getUser  = await userManager.FindByIdAsync(identityUser.UserName);
                 IdentityRole getRole = await roleManager.FindByIdAsync(model.RoleId);
 
                 IdentityResult result = await userManager.AddToRoleAsync(getUser, getRole.ToString());
@@ -97,7 +98,7 @@ namespace blog.Controllers
                     ViewBag.S = string.Format("Failed: {0} has not been added to the {1} role", getUser.UserName, getRole);
                 }
 
-                List<IdentityUser> user = _context.Users.ToList();
+                List<ApplicationUser> user = _context.Users.ToList();
                 List<IdentityRole> role = _context.Roles.ToList();
 
                 model.identityUsers = user;

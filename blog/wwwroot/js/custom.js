@@ -101,6 +101,7 @@ $(function () {
                 IFRAME_HEAD.html('');
                 IFRAME_HEAD
                     .append(css)
+                    .append('<style type="text/css" >body {background-color: whitesmoke;} </style>')
                     .append(cjquery)
                     .append(js);
 

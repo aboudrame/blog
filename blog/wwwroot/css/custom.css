@@ -298,7 +298,7 @@ textarea {
 }
 
 h3.RUN:hover {
-    background-color: #dee2e6;
+    background-color: antiquewhite;
 }
 
 h3.RUN {
@@ -306,7 +306,7 @@ h3.RUN {
     margin: 0;
     border-radius: 15px 15px 0 0;
     padding: 15px;
-    background-color: #FFF;
+    background-color: whitesmoke;
 }
 .Result {text-align: center;}
 
@@ -433,23 +433,30 @@ h3.RUN {
     font-size: 4em;
     width: 2em;
     margin: .8em auto;
-    transform-style: preserve-3d;
-    transform: rotateX(-40deg) rotateY(32deg);
-    -webkit-animation-timing-function: linear;
-    -webkit-animation-duration: 20s;
-    -webkit-animation-iteration-count: infinite;
     min-height: 126px;
     font-weight: bold;
     -webkit-animation-name: cubeAnimation;
+    -webkit-transform-style: preserve-3d;
+    -webkit-animation-timing-function: linear;
+    -webkit-animation-duration: 20s;
+    -webkit-animation-iteration-count: infinite;
+
+    animation-name: cubeAnimation;
+    transform-style: preserve-3d;
+    animation-timing-function: linear;
+    animation-duration: 20s;
+    animation-iteration-count: infinite;
 }
 
 @-webkit-keyframes cubeAnimation {
     from {
         -webkit-transform: rotateY(0deg) rotateX(0deg);
+        transform: rotateY(0deg) rotateX(0deg);
     }
 
     to {
         -webkit-transform: rotateY(360deg) rotateX(360deg);
+        transform: rotateY(360deg) rotateX(360deg);
     }
 }
 

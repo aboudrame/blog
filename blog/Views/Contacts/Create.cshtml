@@ -1,21 +1,18 @@
-﻿@model blog.Models.Blog
+﻿@model blog.Models.Contact
 
 @{
     ViewData["Title"] = "Create";
 }
 
+<h1>Contact</h1>
+<hr />
 <div class="row">
     <div class="col-12" style="padding: 0;">
-        <img src="~/images/sunset.jpg" style="width: 100%;"/>
+        <img src="~/images/f1.jpeg" style="width: 100%;"/>
     </div>
-</div>
-<h1>Create a new post</h1>
-<hr />
-
-<div class="row">
     <div class="col-md-12">
         <form asp-action="Create">
-            <div asp-validation-summary="All" class="text-danger"></div>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Title" class="control-label"></label>
                 <input asp-for="Title" class="form-control" />
@@ -23,19 +20,13 @@
             </div>
             <div class="form-group">
                 <label asp-for="Body" class="control-label"></label>
-                <textarea asp-for="Body" class="form-control"> </textarea>
+                <textarea asp-for="Body" class="form-control" > </textarea>
                 <span asp-validation-for="Body" class="text-danger"></span>
             </div>
-            <div class="form-group category-list">
-                <label asp-for="CategoryId" class="control-label"></label>
-                @Html.DropDownListFor(x => x.CategoryId, new SelectList(Model.Categories, "CategoryId", "Name"), "Select", new { @class = "form-control" })
-                <span>@Html.ValidationMessageFor(x => x.CategoryId, "", new { @class = "text-danger" })</span>
+            <div class="form-group">
+                <input type="submit" value="SEND" class="btn btn-primary" />
             </div>
-
-            @await Html.PartialAsync("_CodeEditor")
-
         </form>
-
     </div>
 </div>
 

@@ -13,6 +13,8 @@ using Microsoft.EntityFrameworkCore;
 using blog.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using blog.Models;
 
 namespace blog
 {
@@ -35,6 +37,7 @@ namespace blog
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            services.AddTransient<EmailSenderService>();
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
@@ -44,8 +47,9 @@ namespace blog
             //    .AddDefaultUI(UIFramework.Bootstrap4)
             //    .AddEntityFrameworkStores<ApplicationDbContext>();
 
+
             //implementing role based login
-            services.AddIdentity<IdentityUser, IdentityRole>()
+            services.AddIdentity<ApplicationUser, IdentityRole>()
                     .AddDefaultUI(UIFramework.Bootstrap4)
                     .AddEntityFrameworkStores<ApplicationDbContext>()
                     .AddDefaultTokenProviders();
@@ -58,6 +62,7 @@ namespace blog
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, IServiceProvider serviceProvider)
         {
+ 
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -69,7 +74,8 @@ namespace blog
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-
+           
+           // UpdateDatabase(app); //adding automatic migration
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
@@ -86,8 +92,20 @@ namespace blog
 
         }
 
+        //adding automatic migration
+        //private static void UpdateDatabase(IApplicationBuilder app)
+        //{
+        //    using (var serviceScope = app.ApplicationServices
+        //        .GetRequiredService<IServiceScopeFactory>()
+        //        .CreateScope())
+        //    {
+        //        using (var context = serviceScope.ServiceProvider.GetService<ApplicationDbContext>())
+        //        {
+        //            context.Database.Migrate();
+        //        }
+        //    }
+        //}
 
 
-      
     }
 }

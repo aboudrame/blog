@@ -52,6 +52,7 @@ namespace blog.Controllers
         }
 
         // GET: Blogs/Create
+        [Authorize]
         public IActionResult Create()
         {
             var x = new Blog();
@@ -67,6 +68,7 @@ namespace blog.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Create([Bind("BlogId,Title,Body,CategoryId")] Blog blog)
         {
             if (ModelState.IsValid)
@@ -85,6 +87,7 @@ namespace blog.Controllers
         }
 
         // GET: Blogs/Edit/5
+        [Authorize]
         public async Task<IActionResult> Edit(long? id)
         {
             var blog = await _context.Blogs.FindAsync(id);
@@ -108,6 +111,7 @@ namespace blog.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Edit(long id, [Bind("BlogId,Title,Author,Posted,Body,CategoryId")] Blog blog)
         {
             if (id != blog.BlogId)
@@ -140,6 +144,7 @@ namespace blog.Controllers
         }
 
         // GET: Blogs/Delete/5
+        [Authorize]
         public async Task<IActionResult> Delete(long? id)
         {
             var blog = await _context.Blogs
@@ -164,6 +169,7 @@ namespace blog.Controllers
         // POST: Blogs/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> DeleteConfirmed(long id)
         {
             var blog = await _context.Blogs.FindAsync(id);

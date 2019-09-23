@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using blog.Data;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -17,6 +18,6 @@ namespace blog.Models
         [NotMapped]
         public List<IdentityRole> identityRoles { get; set; }
         [NotMapped]
-        public List<IdentityUser> identityUsers { get; set; }
+        public List<ApplicationUser> identityUsers { get; set; }
     }
 }
