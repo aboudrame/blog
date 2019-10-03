@@ -15,7 +15,6 @@ namespace blog.Models
         public long BlogId { get; set; }
         [Required]
         public string Title {get;  set; }
-
         [Required]
         public string Author { get; set; }
         [Required]
@@ -25,7 +24,7 @@ namespace blog.Models
         public string HTML { get; set; }
         public string CSS { get; set; }
         public string JavaScript { get; set; }
-        [Display(Name ="Choose a category")]
+        [Display(Name ="Category")]
         [Required]
         public int CategoryId { get; set; }
         [NotMapped]
@@ -61,6 +60,10 @@ namespace blog.Models
         [Required]
         public string Body { get; set; }
         [Required]
+
+        public string HTML { get; set; }
+        public string CSS { get; set; }
+        public string JavaScript { get; set; }
         public string Commenter { get; set; }
         [Required]
         public DateTime DateCommented { get; set; } 

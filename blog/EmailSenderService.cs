@@ -1,12 +1,16 @@
-﻿using MailKit.Net.Smtp;
+﻿using blog.Data;
+using MailKit.Net.Smtp;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using MimeKit;
 using MimeKit.Utils;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace blog
@@ -15,51 +19,27 @@ namespace blog
     public class EmailSenderService
     {
         private readonly IHostingEnvironment _env;
-        public EmailSenderService(IHostingEnvironment env)
+        private readonly IConfiguration _config;
+        private readonly IHttpContextAccessor _HttpContextAccessor;
+        private readonly ApplicationDbContext _db;
+        public EmailSenderService(IHostingEnvironment env, IConfiguration config, IHttpContextAccessor HttpContextAccessor, ApplicationDbContext db)
         {
             _env = env;
+            _config = config;
+            _HttpContextAccessor = HttpContextAccessor;
+            _db = db;            
         }
         public void Sender(string ToEmailAddress)
         {
             var message = new MimeMessage();
             message.From.Add(new MailboxAddress("aboudrame", "aboudrame@yahoo.fr"));
             message.To.Add(new MailboxAddress(ToEmailAddress, ToEmailAddress));
-            //  message.To.Add(new MailboxAddress("Me", "aboudrame@yahoo.fr"));
-            message.Subject = "tesing";
-            //message.Body = new TextPart("plain")
-            //{
-            //   Text = "this is a test"
-
-            //};
-
-
-            //var builder = new BodyBuilder();
-            //var page = builder.LinkedResources.Add(@"C:\Users\aboubacar\source\repos\blog\blog\Views\About\Index.cshtml");
-            ////var page = builder.LinkedResources.Add(@"C:\Users\aboubacar\source\repos\blog\blog\wwwroot\htmlpage.html");
-            //page.ContentId = MimeUtils.GenerateMessageId();
-
-            //builder.HtmlBody = string.Format(@"this is a test {0}", page.ContentId);
-            //message.Body = builder.ToMessageBody();
-
-
-
-
-            var webRoot = _env.WebRootPath; //get wwwroot Folder  
-
-            //Get TemplateFile located at wwwroot/Templates/EmailTemplate/Register_EmailTemplate.html
-            //C:\Users\aboubacar\source\repos\blog\blog\Views\Blogs\Index.cshtml
-            //C:\Users\aboubacar\source\repos\blog\blog\wwwroot\Blogs\Index.cshtml
-            //https://localhost:44347/
-            //C:\Users\aboubacar\source\repos\blog\blog\wwwroot\htmlpage.html
-
-
-
+            message.Bcc.Add(new MailboxAddress("aboudrame@yahoo.fr", "aboudrame@yahoo.fr"));
+            message.Subject = "Confirmation from aboudrame.com";
 
             var pathToFile = _env.WebRootPath
                     + Path.DirectorySeparatorChar.ToString()
                     + "contact.html";
-
-            var subject = "Confirm Account Registration";
 
             var builder = new BodyBuilder();
             using (StreamReader SourceReader = System.IO.File.OpenText(pathToFile))
@@ -67,33 +47,32 @@ namespace blog
                 builder.HtmlBody = SourceReader.ReadToEnd();
             }
 
-            //{0} : Subject  
-            //{1} : DateTime  
-            //{2} : Email  
-            //{3} : Username  
-            //{4} : Password  
-            //{5} : Message  
-            //{6} : callbackURL  
+            MimeEntity banner;
+            MimeEntity profile;
+            string getTheRoot;
+            
+            if (_config.GetValue<string>("ASPNETCORE_ENVIRONMENT") == "Development")
+            {
+                getTheRoot = string.Format(@"C:\Users\aboubacar\source\repos\blog\blog\wwwroot");
+            }
+            else
+            {
+                getTheRoot = string.Format(@"h:\root\home\aboudrame-002\www\root\wwwroot");
+            }
 
-            //string messageBody = string.Format(builder.HtmlBody,
-            //                                                    subject
-            //    //String.Format("{0:dddd, d MMMM yyyy}", DateTime.Now),
-            //    //model.Email,
-            //    //model.Email,
-            //    //model.Password,
-            //    //Message,
-            //    //callbackUrl
-            //    );
+            banner  = builder.LinkedResources.Add(getTheRoot + @"\images\emailcontact.jpeg");
+            profile = builder.LinkedResources.Add(getTheRoot + @"\images\about-profile.png");
 
-            //string messageBody = builder.HtmlBody;
-
-            var banner = builder.LinkedResources.Add(@"C:\Users\aboubacar\source\repos\blog\blog\wwwroot\images\emailcontact.jpeg");
-            var profile = builder.LinkedResources.Add(@"C:\Users\aboubacar\source\repos\blog\blog\wwwroot\images\about-profile.png");
             banner.ContentId = MimeUtils.GenerateMessageId();
             profile.ContentId = MimeUtils.GenerateMessageId();
 
-            builder.HtmlBody = string.Format(builder.HtmlBody, banner.ContentId, profile.ContentId);
+            var LogginUserId = _HttpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var LogginUser = _db.Users.FirstOrDefault(x => x.Id == LogginUserId);
+            var Full_Name = LogginUser.First_Name + ' ' + LogginUser.Last_Name;
+        
+            builder.HtmlBody = string.Format(builder.HtmlBody, banner.ContentId, profile.ContentId, Full_Name);
             message.Body = builder.ToMessageBody();
+
 
 
             using (var client = new SmtpClient())

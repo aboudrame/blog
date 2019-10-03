@@ -215,11 +215,7 @@ a {
     padding: 15px;
 }
 
-.blog-update-line {
-    padding: 15px;
-    background-color: #FFF;
-    margin-bottom: 15px;
-}
+
 
 .blog-home-banner img {
     width: 100%;
@@ -232,6 +228,42 @@ span.text-info {
     overflow: inherit;
 }
 
+.HTML {
+    background-color: #F5F5F5;
+}
+
+.CSS {
+    background-color: #ebfdff;
+}
+
+.JavaScript {
+    background-color: #f1eadf;
+}
+
+.HTML,
+.CSS,
+.JavaScript {
+    margin-top: 15px;
+    padding: 15px;
+}
+
+.codeType {
+    text-align: right;
+}
+
+.row.blog-home:nth-child(2n+1) {
+    background-color: #dce6f2;
+}
+
+.row.blog-home {
+    padding: 0 15px;
+}
+
+.Posted,
+.Author {
+    padding: 15px;
+}
+
 textarea#Body,
 .codeeditor #HTML,
 .codeeditor #CSS,
@@ -242,30 +274,35 @@ textarea#Body,
     min-width: 200px;
 }
 
+.Code_content,
+.placeholder {
+    font-size: 16px;
+}
+
 pre {
-    white-space:pre-wrap;
-    word-break:break-word;
+    white-space: pre-wrap;
+    word-break: break-word;
     overflow: visible;
     font-family: inherit;
     margin: 0;
 }
 
-.codeeditor_nav > li:first-child:hover,
-.codeeditor_nav > li.active:first-child,
+.codeeditor > li:first-child:hover,
+.codeeditor > li.active:first-child,
 .codeeditor #HTML {
     background-color: antiquewhite;
     border-radius: 15px 15px 0 0;
 }
 
-.codeeditor_nav > li:nth-child(2):hover,
-.codeeditor_nav > li.active:nth-child(2),
+.codeeditor > li:nth-child(2):hover,
+.codeeditor > li.active:nth-child(2),
 .codeeditor #CSS {
     background-color: azure;
     border-radius: 15px 15px 0 0;
 }
 
-.codeeditor_nav > li:nth-child(3):hover,
-.codeeditor_nav > li.active:nth-child(3),
+.codeeditor > li:nth-child(3):hover,
+.codeeditor > li.active:nth-child(3),
 .codeeditor #JavaScript {
     background-color: lightgoldenrodyellow;
     border-radius: 15px 15px 0 0;
@@ -275,53 +312,53 @@ pre {
     background-color: white;
 }
 
-.codeeditor_nav {
+.codeeditor {
     list-style: none;
     text-align: center;
     padding: 0;
     margin: 0;
 }
 
-.codeeditor_nav li {
-    display: inline-block;
-    padding: 5px 25px;
-}
-
 .codeeditor textarea,
 #Result {
-    border: 0;
     border-radius: 15px;
 }
 
-textarea {
-    resize: both;
+#Result {
+    border: solid 15px whitesmoke;
 }
 
-h3.RUN:hover {
+    textarea {
+        resize: both;
+    }
+
+li[class*="list"] {
+    max-width:none;
+    padding: 0;
+}
+
+.Code_container .Code_content {
+    display: block;
+    width: 100%;
+    min-height: 200px;
+    min-width: 360px;
+    margin:auto !important;
+    text-align: center;
+}
+
+.RUN:hover {
     background-color: antiquewhite;
 }
 
-h3.RUN {
+.RUN {
     display: inline-block;
-    margin: 0;
-    border-radius: 15px 15px 0 0;
-    padding: 15px;
-    background-color: whitesmoke;
+    margin: 15px;
 }
+
 .Result {text-align: center;}
 
 .placeholder {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    left: 0;
-    right: 0;
-    text-align: center;
-    font-size: 1.5em;
-    font-weight: bold;
-    background-color: #FFF;
-    margin: 0 15px;
-    pointer-events: none;
+    display: none;
 }
 
 .submit {text-align: right;}

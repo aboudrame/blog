@@ -41,6 +41,15 @@ namespace blog.Areas.Identity.Pages.Account
         public class InputModel
         {
             [Required]
+            [StringLength(20, ErrorMessage ="The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 3)]
+            public string First_Name { get; set; }
+            
+            public string Middle_Name { get; set; }
+            [Required]
+            [StringLength(20, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 3)]
+            public string Last_Name { get; set; }
+
+            [Required]
             [EmailAddress]
             [Display(Name = "Email")]
             public string Email { get; set; }
@@ -55,7 +64,7 @@ namespace blog.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
-            public DateTime Created { get; set; }
+            public DateTime UserCreatedOn { get; set; }
         }
 
         public void OnGet(string returnUrl = null)
@@ -69,7 +78,15 @@ namespace blog.Areas.Identity.Pages.Account
             if (ModelState.IsValid)
             {
                
-                var user = new ApplicationUser { UserName = Input.Email, Email = Input.Email, UserCreatedOn = DateTime.Now};
+                var user = new ApplicationUser
+                        {  UserName = Input.Email,
+                              Email = Input.Email,
+                         First_Name = Input.First_Name,
+                        Middle_Name = Input.Middle_Name,
+                          Last_Name = Input.Last_Name,
+                      UserCreatedOn = DateTime.Now
+                         };
+
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {

@@ -57,10 +57,7 @@ namespace blog.Controllers
             blog.Posted = DateTime.Now;
             blog.Author = User.Identity.Name;
             blog.ContentTypeId = 1;
-
-            //UserName can also be get using this method
-            //blog.Author =_db.Users.FirstOrDefault().UserName; 
-
+            
             _db.Blogs.Add(blog);
             _db.SaveChanges();
 

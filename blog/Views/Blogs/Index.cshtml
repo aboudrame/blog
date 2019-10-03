@@ -9,6 +9,7 @@
 <p style="text-align: right;">
     <strong><a asp-action="Create">Post new blog</a> </strong>
 </p>
+
 @foreach (var blog in Model)
 {
     <div class="row blog-home">
@@ -18,79 +19,39 @@
             </h4>
         </div>
         <div class="col-12 teaser">
-            @Html.DisplayFor(modelitem=>blog.Body)
-        </div>
-    </div>
-    <div class="row blog-update-line">
-        <div class="col-md-4">
-            @Html.DisplayFor(modelitem => blog.Posted)
-        </div>
-        <div class="col-md-4">
-            @*<strong> @Html.DisplayNameFor(model => model.Category): @Html.DisplayFor(modelitem => blog.Category.Name) </strong>*@
+            @Html.DisplayFor(x => blog.Body)
         </div>
 
+        @if (!String.IsNullOrEmpty(blog.HTML))
+        {
+            <div class="col-12 HTML">
+                <h5 class="codeType">HTML</h5>
+                <pre>@blog.HTML</pre>
+            </div>
+        }
 
+        @if (!String.IsNullOrEmpty(blog.CSS))
+        {
+            <div class="col-12 CSS">
+                <h5 class="codeType">CSS</h5>
+                <pre>@blog.CSS</pre>
+            </div>
+        }
 
-        <div class="col-md-2">
-            <strong> <a asp-action="Edit" asp-route-id="@blog.BlogId">Edit</a> </strong>
-        </div>
-        @*<div class="col-md-4">
-                <a asp-action="Details" asp-route-id="@blog.BlogId">Details</a>
-            </div>*@
-        <div class="col-md-2">
-            <strong> <a asp-action="Delete" asp-route-id="@blog.BlogId">Delete</a> </strong>
-        </div>
+        @if (!String.IsNullOrEmpty(blog.JavaScript))
+        {
+            <div class="col-12 JavaScript">
+                <h5 class="codeType">JavaScript</h5>
+                <pre>@blog.JavaScript</pre>
+            </div>
+        }
+
+            <div class="col-md-6 Posted">
+                @Html.DisplayFor(x => blog.Posted)
+            </div>
+            <div class="col-md-6 Author">
+                @Html.DisplayFor(x=> blog.Author)
+            </div>
     </div>
 }
 
-
-@Html.PartialAsync("_CodeEditor")
-
-@*<table class="table blog-home">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Title)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Author)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Posted)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Body)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Category)
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-    @foreach (var item in Model) {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Title)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Author)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Posted)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Body)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Category.Name)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.BlogId">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.BlogId">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.BlogId">Delete</a>
-                </td>
-            </tr>
-    }
-        </tbody>
-    </table>*@

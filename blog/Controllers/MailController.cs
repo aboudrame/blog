@@ -62,7 +62,7 @@ namespace blog.Controllers
                     + Path.DirectorySeparatorChar.ToString()
                     + "htmlpage.html";
 
-            var subject = "Confirm Account Registration";
+           // var subject = "Confirm Account Registration";
 
             var builder = new BodyBuilder();
             using (StreamReader SourceReader = System.IO.File.OpenText(pathToFile))

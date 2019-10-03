@@ -27,7 +27,7 @@ namespace blog.Controllers
 
             //  var applicationDbContext =  _context.Blogs.Include(b => b.Category);
             // Only show the post belong to the user
-            var applicationDbContext = _context.Blogs.Include(b => b.category);
+            var applicationDbContext = _context.Blogs.Include(b => b.category).OrderByDescending(x=>x.Posted);
 
             return View(await applicationDbContext.ToListAsync());
         }
@@ -41,7 +41,7 @@ namespace blog.Controllers
             }
 
             var blog = await _context.Blogs
-                .Include(b => b.Categories)
+                .Include(b => b.category)
                 .FirstOrDefaultAsync(m => m.BlogId == id);
             if (blog == null)
             {
@@ -69,7 +69,7 @@ namespace blog.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public async Task<IActionResult> Create([Bind("BlogId,Title,Body,CategoryId")] Blog blog)
+        public async Task<IActionResult> Create(Blog blog)
         {
             if (ModelState.IsValid)
             {
@@ -81,7 +81,7 @@ namespace blog.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryId", "CategoryId", blog.CategoryId);
+            blog.Categories = _context.Categories.ToList();
 
             return View(blog);
         }
@@ -182,5 +182,17 @@ namespace blog.Controllers
         {
             return _context.Blogs.Any(e => e.BlogId == id);
         }
+
+        public IActionResult Comment()
+        {
+            return View();
+        }
+        
+        [HttpPost]
+        public IActionResult Comment(Comment comment)
+        {
+            return View();
+        }
+
     }
 }
