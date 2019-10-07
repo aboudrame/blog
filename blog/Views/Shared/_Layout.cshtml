@@ -38,17 +38,17 @@
                             <div class="row">
                                 <div class="col-md-6 custom-column">
                                     <h5>Subject</h5>
-                                    <p>CSS3</p>
-                                    <p>jQuery</p>
-                                    <p>.Net Core MVC</p>
-                                    <p>AngularJS</p>
-                                    <p>C#</p>
+                                    <p>@Html.ActionLink("CSS3", "Index", "Blogs", new { search = "CSS" })</p>
+                                    <p>@Html.ActionLink("jQuery", "Index", "Blogs", new { search = "jQuery" })</p>
+                                    <p>@Html.ActionLink(".Net Core MVC", "Index", "Blogs", new { search = "MVC" })</p>
+                                    <p>@Html.ActionLink("AngularJS", "Index", "Blogs", new { search = "CSS" })</p>
+                                    <p>@Html.ActionLink("C#", "Index", "Blogs", new { search = "CSS" })</p>
                                 </div>
                                 <div class="col-md-6 custom-column">
                                     <h5>Trending</h5>
-                                    <p>Bootstraps</p>
-                                    <p>Mobile first</p>
-                                    <p>Cyber security</p>
+                                    <p>@Html.ActionLink("Bootstraps", "Index", "Blogs", new { search = "Bootstraps" })</p>
+                                    <p>@Html.ActionLink("Mobile first", "Index", "Blogs", new { search = "Mobile first" })</p>
+                                    <p>@Html.ActionLink("Cyber security", "Index", "Blogs", new { search = "CSS" })</p>
                                 </div>
                             </div>
                         </li>

@@ -86,6 +86,13 @@ namespace blog
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
+                    name: "searchkeyword",
+                    template: "{Home}/{Index}/{search}");
+            });
+
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });

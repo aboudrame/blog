@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using blog.Data;
 using blog.Models;
 using Microsoft.AspNetCore.Authorization;
+using blog.ViewModels;
 
 namespace blog.Controllers
 {
@@ -22,14 +23,36 @@ namespace blog.Controllers
         }
 
         // GET: Blogs
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string search)
         {
+            List<Blog> blog = new List<Blog>();
+            var applicationDbContext = _context.Blogs.Include(b => b.Comments);
 
-            //  var applicationDbContext =  _context.Blogs.Include(b => b.Category);
-            // Only show the post belong to the user
-            var applicationDbContext = _context.Blogs.Include(b => b.category).OrderByDescending(x=>x.Posted);
+            if (search == null)
+            {
+                var getappDbContext = await applicationDbContext.OrderByDescending(x => x.Posted).ToListAsync();
+                foreach (var x in getappDbContext)
+                {
+                    blog.Add(x);
+                };
+            }
+            else
+            {
+                var getappDbContext = await applicationDbContext.Where(b=>b.Body.Contains(search)).ToListAsync();
 
-            return View(await applicationDbContext.ToListAsync());
+                foreach (var x in getappDbContext)
+                {
+                    blog.Add(x);
+                }
+            }
+
+            if (!blog.Any())
+            {
+                return RedirectToAction("Index","Nocontent");
+            }
+
+            return View(blog);
+
         }
 
         // GET: Blogs/Details/5
@@ -50,6 +73,9 @@ namespace blog.Controllers
 
             return View(blog);
         }
+
+
+
 
         // GET: Blogs/Create
         [Authorize]
@@ -182,16 +208,45 @@ namespace blog.Controllers
         {
             return _context.Blogs.Any(e => e.BlogId == id);
         }
-
-        public IActionResult Comment()
+        [Authorize]
+        public async Task<IActionResult> Comment(long id)
         {
-            return View();
+
+            var blog = await _context.Blogs.FindAsync(id);
+            RegisterCommentViewModel comment = new RegisterCommentViewModel();
+
+            comment.BlogBody = blog.Body;
+            comment.BlogHTML = blog.HTML;
+            comment.BlogCSS = blog.CSS;
+            comment.BlogJavaScript = blog.JavaScript;
+
+            return View(comment);
         }
         
         [HttpPost]
-        public IActionResult Comment(Comment comment)
+        [Authorize]
+        public async Task<IActionResult> Comment(long id, RegisterCommentViewModel registerCommentViewModel )
         {
-            return View();
+            if (ModelState.IsValid)
+            {
+                Comment comment = new Comment
+                {
+                    DateCommented = DateTime.Now,
+                        Commenter = User.Identity.Name,
+                           BlogId = id,
+                             Body = registerCommentViewModel.CommentBody,
+                             HTML = registerCommentViewModel.CommentHTML,
+                              CSS = registerCommentViewModel.CommentCSS,
+                       JavaScript = registerCommentViewModel.CommentJavaScript
+                };
+
+                _context.Comments.Add(comment);
+               await _context.SaveChangesAsync();
+
+                return RedirectToAction("Index", "Blogs");
+            }
+
+            return View(registerCommentViewModel);
         }
 
     }

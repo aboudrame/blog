@@ -1,4 +1,4 @@
-﻿@model IEnumerable<blog.Models.Blog>
+﻿@model List<blog.Models.Blog>
 
 @{
     ViewData["Title"] = "Index";
@@ -10,8 +10,11 @@
     <strong><a asp-action="Create">Post new blog</a> </strong>
 </p>
 
+
 @foreach (var blog in Model)
 {
+
+
     <div class="row blog-home">
         <div class="col-12 blog-title">
             <h4>
@@ -46,12 +49,49 @@
             </div>
         }
 
-            <div class="col-md-6 Posted">
-                @Html.DisplayFor(x => blog.Posted)
-            </div>
-            <div class="col-md-6 Author">
-                @Html.DisplayFor(x=> blog.Author)
-            </div>
+        <div class="col-md-4 Posted">
+            @Html.DisplayFor(x => blog.Posted)
+        </div>
+        <div class="col-md-4 Author">
+            @Html.DisplayFor(x => blog.Author)
+        </div>
+        <div class="col-md-4 Comment">
+            @Html.ActionLink("REPLY", "Comment", "Blogs", new { id = blog.BlogId })
+        </div>
     </div>
-}
+
+    @if (blog.Comments.Any())
+        {
+        <div class="row comment_block">
+            <div class="col-12">
+                <h6>Comments</h6>
+            </div>
+        </div>
+            @foreach (var comment in blog.Comments.OrderByDescending(x => x.DateCommented).Take(5))
+            {
+                <div class="row comment_block">
+                    <div class="col-12">
+                        <pre>@string.Format("{0}", comment.Body)</pre>
+                    </div>
+                    <div class="col-12">
+                        <pre>@comment.HTML</pre>
+                    </div>
+                    <div class="col-12">
+                        <pre>@string.Format("{0}", comment.CSS)</pre>
+                    </div>
+                    <div class="col-12">
+                        <pre>@string.Format("{0}", comment.JavaScript)</pre>
+                    </div>
+                    <div class="col-md-6">
+                        @string.Format("{0}", comment.DateCommented)
+                    </div>
+                    <div class="col-md-6">
+                        @string.Format("{0}", comment.Commenter)
+                    </div>
+                </div>
+            }
+        }
+
+    }
+ }
 

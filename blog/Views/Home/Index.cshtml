@@ -112,22 +112,22 @@
 
                 <div class="left-nav">
                     <ul>
-                        <li>HTML5</li>
-                        <li>JavaScript</li>
-                        <li>jQuery</li>
-                        <li>AngularJS</li>
-                        <li>CSS3</li>
-                        <li>C#</li>
-                        <li>Database</li>
-                        <li>ColdFusion</li>
-                        <li>Entity Framework</li>
-                        <li>ASP.NET core MVC</li>
-                        <li>Linq query</li>
-                        <li>Dreamweaver</li>
-                        <li>Networking</li>
-                        <li>Integration</li>
-                        <li>Security</li>
-                        <li>E-commerce</li>
+                        <li>@Html.ActionLink("HTML5", "Index", "Blogs", new { search = "HTML" })</li>
+                        <li>@Html.ActionLink("JavaScript", "Index", "Blogs", new { search = "JavaScript" })</li>
+                        <li>@Html.ActionLink("jQuery", "Index", "Blogs", new { search = "jQuery" })</li>
+                        <li>@Html.ActionLink("AngularJS", "Index", "Blogs", new { search = "AngularJS" })</li>
+                        <li>@Html.ActionLink("CSS3", "Index", "Blogs", new { search = "CSS" })</li>
+                        <li>@Html.ActionLink("C#", "Index", "Blogs", new { search = "C#" })</li>
+                        <li>@Html.ActionLink("Database", "Index", "Blogs", new { search = "Database" })</li>
+                        <li>@Html.ActionLink("ColdFusion", "Index", "Blogs", new { search = "ColdFusion" })</li>
+                        <li>@Html.ActionLink("Entity Framework", "Index", "Blogs", new { search = "Entity Framework" })</li>
+                        <li>@Html.ActionLink("ASP.NET core MVC", "Index", "Blogs", new { search = "MVC" })</li>
+                        <li>@Html.ActionLink("Linq query", "Index", "Blogs", new { search = "Linq query" })</li>
+                        <li>@Html.ActionLink("Dreamweaver", "Index", "Blogs", new { search = "Dreamweaver" })</li>
+                        <li>@Html.ActionLink("Networking", "Index", "Blogs", new { search = "Networking" })</li>
+                        <li>@Html.ActionLink("Integration", "Index", "Blogs", new { search = "Integration" })</li>
+                        <li>@Html.ActionLink("Security", "Index", "Blogs", new { search = "Security" })</li>
+                        <li>@Html.ActionLink("E-commerce", "Index", "Blogs", new { search = "E-commerce" })</li>
 
                     </ul>
 
@@ -136,10 +136,10 @@
             
             <div class="col-md-9 home-main-content-area">
                 <div class="member-area">
-                    <span><strong>@Html.ActionLink("Member Area", "Create", "Blogs")</strong></span> <br />Please login to post, edit, remove, or comment
+                    <span><strong>@Html.ActionLink("Member Area", "Index", "Member")</strong></span> <br />Please login to post, edit, remove, or comment
                     <div class="row">
                         <div class="col-12">
-                            <h2>@Html.ActionLink("Post your question", "Create", "Blogs")</h2>
+                            <h2>@Html.ActionLink("Post your question", "Create", "Member")</h2>
                         </div>
 
 

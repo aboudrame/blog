@@ -1,0 +1,60 @@
+﻿@model IEnumerable<blog.Models.Blog>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>My POSTS</h1>
+<div class="row">
+    <div class="col-12 padding0">
+        <img src="~/images/member_index.jpg" style="width: 100%;"/>
+    </div>
+</div>
+
+@foreach (var x in Model) {
+<div class="row">
+    <div class="col-12 marginTopBottom15">
+        <h4><strong><pre>@Html.ActionLink(x.Title,"Details","Member", new { id=x.BlogId})</pre></strong></h4>
+    </div>
+    <div class="col-12">
+        <pre>@x.Body</pre>
+    </div>
+    @if (!string.IsNullOrEmpty(x.HTML))
+    {
+    <div class="col-12 HTML">
+        <h5 style="text-align: right">HTML</h5>
+        <pre>@x.HTML</pre>
+    </div>
+    }
+    @if (!string.IsNullOrEmpty(x.CSS))
+    {
+<div class="col-12 CSS">
+    <h5 style="text-align: right">CSS</h5>
+    <pre>@x.CSS</pre>
+</div>
+    }
+
+    @if (!string.IsNullOrEmpty(x.JavaScript))
+    {
+<div class="col-12 JavaScript">
+    <h5 style="text-align: right">JavaScript</h5>
+    <pre>@x.JavaScript</pre>
+</div>
+    }
+</div>
+<div class="row edit_line paddingTopBottom15">
+    <div class="col-md-3">
+        @x.Posted
+    </div>
+    <div class="col-md-3">
+        <a asp-action="Edit" asp-route-id="@x.BlogId">Edit</a>
+    </div>
+    <div class="col-md-3">
+        <a asp-action="Delete" asp-route-id="@x.BlogId">Delete</a>
+    </div>
+    <div class="col-md-3">
+        <a asp-action="Create">POST</a>
+    </div>
+</div>
+}
+

@@ -257,11 +257,55 @@ span.text-info {
 
 .row.blog-home {
     padding: 0 15px;
+    margin-bottom: 15px;
 }
 
 .Posted,
-.Author {
+.Author,
+.Comment {
     padding: 15px;
+}
+
+.comment_block {
+    margin-bottom: 15px;
+}
+
+.comment_block:nth-child(2n+1) {
+    border-bottom: solid 15px #f5f5f5;
+}
+
+.login-box-container > ul {
+    display: none;
+}
+
+.login-box-container:hover > ul {
+    display: block;
+    list-style: none;
+    text-decoration: none;
+    background-color: #fff;
+    position: absolute;
+    top: 100%;
+    padding: 0;
+}
+
+.login-box-container:hover > ul > li {
+    padding: 10px;
+}
+
+.login-box-container > ul > li:hover {
+    background-color: #b3b3b3
+}
+
+.login-box-container {
+    transform: translateY(-50%);
+    top: 50%;
+    position: absolute;
+    right: 90px;
+    z-index: 1;
+}
+
+.edit_line {
+    background-color: #f5f5f5;
 }
 
 textarea#Body,
@@ -404,12 +448,6 @@ li[class*="list"] {
     align-items: center;
     min-height: 160px;
 }
-/* Padding */
-
-.padding0 {
-    padding: 0;
-}
-
 
 /* 3D */
 
@@ -535,16 +573,32 @@ li[class*="list"] {
 
 /* END 3D */
 
+.margin0 {margin: 0;}
+.margin15 {margin: 15px;}
+.marginTop15 {margin-top: 15px;}
+.marginLeft15 {margin-left: 15px;}
+.marginRight15 {margin-right: 15px;}
+.marginBottom15 {margin-bottom: 15px;}
+.marginTopBottom15 {margin: 15px 0;}
+
+.padding0 {padding: 0;}
+.padding15 {padding: 15px;}
+.paddingTop15 {padding-top: 15px;}
+.paddingLeft15 {padding-left: 15px;}
+.paddingRight15 {padding-right: 15px;}
+.paddingBottom15 {padding-bottom: 15px;}
+.paddingTopBottom15 {padding: 15px 0;}
+
 @media only screen and (min-width: 577px) {
     .login-box {
-        padding: .5rem;
+        /*padding: .5rem;
         border: solid 1px transparent;
         line-height: 1.2;
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
         right: 90px;
-        padding-top: 4px;
+        padding-top: 4px;*/
     }
 }
 

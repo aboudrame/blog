@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace blog.Models
 {
+
     public class Blog
     {
         public string PlaceHolder_HTML = "Type or paste your HTML code in this box";
@@ -59,18 +60,16 @@ namespace blog.Models
         public long CommentId { get; set; }
         [Required]
         public string Body { get; set; }
-        [Required]
-
         public string HTML { get; set; }
         public string CSS { get; set; }
         public string JavaScript { get; set; }
+        [Required]
         public string Commenter { get; set; }
         [Required]
         public DateTime DateCommented { get; set; } 
+        [Required]
         public long BlogId { get; set; }
         public virtual Blog blog { get; set; }
-
-        
     }
 }
 

@@ -1,4 +1,4 @@
-﻿@model blog.Models.Comment
+﻿@model blog.ViewModels.RegisterCommentViewModel
 
 @{
     ViewData["Title"] = "Comment";
@@ -13,38 +13,44 @@
         <form asp-action="Comment">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Body" class="control-label"></label>
-                <input asp-for="Body" class="form-control" />
-                <span asp-validation-for="Body" class="text-danger"></span>
+                <label asp-for="BlogBody" class="control-label"></label>
+                <pre><textarea asp-for="BlogBody" class="form-control"></textarea></pre>
+                <span asp-validation-for="BlogBody" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="HTML" class="control-label"></label>
-                <input asp-for="HTML" class="form-control" />
-                <span asp-validation-for="HTML" class="text-danger"></span>
+                <label asp-for="BlogHTML" class="control-label"></label>
+                <pre><textarea asp-for="BlogHTML" class="form-control"></textarea></pre>
+                <span asp-validation-for="BlogHTML" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="CSS" class="control-label"></label>
-                <input asp-for="CSS" class="form-control" />
-                <span asp-validation-for="CSS" class="text-danger"></span>
+                <label asp-for="BlogCSS" class="control-label"></label>
+                <pre><textarea asp-for="BlogCSS" class="form-control"></textarea></pre>
+                <span asp-validation-for="BlogCSS" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="JavaScript" class="control-label"></label>
-                <input asp-for="JavaScript" class="form-control" />
-                <span asp-validation-for="JavaScript" class="text-danger"></span>
+                <label asp-for="BlogJavaScript" class="control-label"></label>
+                <pre><textarea asp-for="BlogJavaScript" class="form-control"></textarea></pre>
+                <span asp-validation-for="BlogJavaScript" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Commenter" class="control-label"></label>
-                <input asp-for="Commenter" class="form-control" />
-                <span asp-validation-for="Commenter" class="text-danger"></span>
+                <label asp-for="CommentBody" class="control-label"></label>
+                <pre><textarea asp-for="CommentBody" class="form-control"></textarea></pre>
+                <span asp-validation-for="CommentBody" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="DateCommented" class="control-label"></label>
-                <input asp-for="DateCommented" class="form-control" />
-                <span asp-validation-for="DateCommented" class="text-danger"></span>
+                <label asp-for="CommentHTML" class="control-label"></label>
+                <pre><textarea asp-for="CommentHTML" class="form-control"></textarea></pre>
+                <span asp-validation-for="CommentHTML" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="BlogId" class="control-label"></label>
-                <select asp-for="BlogId" class ="form-control" asp-items="ViewBag.BlogId"></select>
+                <label asp-for="CommentCSS" class="control-label"></label>
+                <pre><textarea asp-for="CommentCSS" class="form-control"></textarea></pre>
+                <span asp-validation-for="CommentCSS" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CommentJavaScript" class="control-label"></label>
+                <pre><textarea asp-for="CommentJavaScript" class="form-control"></textarea> </pre>
+                <span asp-validation-for="CommentJavaScript" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
