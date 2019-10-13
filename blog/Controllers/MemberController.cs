@@ -24,7 +24,7 @@ namespace blog.Controllers
         // GET: Member
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Blogs.Include(b => b.category).Where(x=>x.Author == User.Identity.Name).OrderByDescending(x=>x.Posted);
+            var applicationDbContext = _context.Blogs.Where(x=>x.Author == User.Identity.Name).OrderByDescending(x=>x.Posted);
 
             return View(await applicationDbContext.ToListAsync());
         }
@@ -38,7 +38,6 @@ namespace blog.Controllers
             }
 
             var blog = await _context.Blogs
-                .Include(b => b.category)
                 .FirstOrDefaultAsync(m => m.BlogId == id);
             if (blog == null)
             {
@@ -49,10 +48,10 @@ namespace blog.Controllers
         }
 
         // GET: Member/Create
-        public IActionResult Create()
+        public IActionResult  Create()
         {
-            ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryId", "Name");
-            return View();
+            var blog = new Blog();
+            return View(blog);
         }
 
         // POST: Member/Create
@@ -68,7 +67,6 @@ namespace blog.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryId", "Name", blog.CategoryId);
             return View(blog);
         }
 
@@ -85,7 +83,6 @@ namespace blog.Controllers
             {
                 return NotFound();
             }
-            ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryId", "Name", blog.CategoryId);
             ViewData["ContentTypeId"] = new SelectList(_context.ContentTypes, "ContentTypeId", "Type", blog.ContentTypeId);
 
             return View(blog);
@@ -123,7 +120,6 @@ namespace blog.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryId", "Name", blog.CategoryId);
             return View(blog);
         }
 
@@ -136,7 +132,6 @@ namespace blog.Controllers
             }
 
             var blog = await _context.Blogs
-                .Include(b => b.category)
                 .FirstOrDefaultAsync(m => m.BlogId == id);
             if (blog == null)
             {

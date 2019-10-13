@@ -64,7 +64,6 @@ namespace blog.Controllers
             }
 
             var blog = await _context.Blogs
-                .Include(b => b.category)
                 .FirstOrDefaultAsync(m => m.BlogId == id);
             if (blog == null)
             {
@@ -82,10 +81,6 @@ namespace blog.Controllers
         public IActionResult Create()
         {
             var x = new Blog();
-            ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryId", "Name");
-
-            x.Categories = _context.Categories.ToList();
-
             return View(x);
         }
 
@@ -107,8 +102,6 @@ namespace blog.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            blog.Categories = _context.Categories.ToList();
-
             return View(blog);
         }
 
@@ -128,7 +121,6 @@ namespace blog.Controllers
                
                 return NotFound();
             }
-            ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryId", "Name", blog.CategoryId);
             return View(blog);
         }
 
@@ -165,7 +157,6 @@ namespace blog.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryId", "CategoryId", blog.CategoryId);
             return View(blog);
         }
 
@@ -174,7 +165,6 @@ namespace blog.Controllers
         public async Task<IActionResult> Delete(long? id)
         {
             var blog = await _context.Blogs
-                .Include(b => b.Categories)
                 .FirstOrDefaultAsync(m => m.BlogId == id);
 
             

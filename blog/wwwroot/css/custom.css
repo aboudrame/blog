@@ -224,8 +224,8 @@ a {
 span.text-info {
     color: #0066c0 !important;
 }
-.codeeditor pre {
-    overflow: inherit;
+.keepspace {
+    position: relative;
 }
 
 .HTML {
@@ -382,12 +382,8 @@ li[class*="list"] {
 }
 
 .Code_container .Code_content {
-    display: block;
     width: 100%;
     min-height: 200px;
-    min-width: 360px;
-    margin:auto !important;
-    text-align: center;
 }
 
 .RUN:hover {
@@ -403,6 +399,16 @@ li[class*="list"] {
 
 .placeholder {
     display: none;
+    position: absolute;
+    left: 0;
+    right: 0;
+    text-align: center;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.placeholder.on {
+    display: block;
 }
 
 .submit {text-align: right;}

@@ -15,7 +15,6 @@ namespace blog.Data
         }
 
         public DbSet<Blog> Blogs { get; set; }
-        public DbSet<Category> Categories { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<ContentType> ContentTypes { get; set; }
         public DbSet<Contact> Contacts { get; set; }

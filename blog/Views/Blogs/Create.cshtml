@@ -29,11 +29,6 @@
                 <textarea asp-for="Body" class="form-control"> </textarea>
                 <span asp-validation-for="Body" class="text-danger"></span>
             </div>
-            <div class="form-group category-list">
-                <label asp-for="CategoryId" class="control-label"></label>
-                @Html.DropDownListFor(x => x.CategoryId, new SelectList(Model.Categories, "CategoryId", "Name"), "Select", new { @class = "form-control" })
-                <span>@Html.ValidationMessageFor(x => x.CategoryId, "", new { @class = "text-danger" })</span>
-            </div>
 
             @await Html.PartialAsync("_CodeEditor")
 

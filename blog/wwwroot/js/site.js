@@ -42,7 +42,7 @@
 
                 var getHTML = $(this).closest($('form')).find($('textarea[name="HTML"]')).val();
                 var getCSS = $(this).closest($('form')).find($('textarea[name="CSS"]')).val();
-                var getJavaScript =  $(this).closest($('form')).find($('textarea[name="JavaScript"]')).val();
+                var getJavaScript = $(this).closest($('form')).find($('textarea[name="JavaScript"]')).val();
 
                 var IFRAME_HEAD = IFRAME.contents().find('head');
                 var IFRAME_BODY = IFRAME.contents().find('body');
@@ -96,65 +96,30 @@
         },
 
         placeholder: function () {
+
             $('.Code_content').each(function () {
-                reset(this);
-            });
-
-            $('.Code_content').each(function (i, e) {
-               vAlign(e);
-            });
-
-            $('.Code_content').off('mouseup').on('mouseup', function () {
-                vAlign(this);
-            });
-
-            $('.Code_content').off('keyup').on('keyup', function () {
-                vAlign(this);
-            });
-
-            $('.Code_content').off('keypress').on('keypress', function () {
-                $(this).css({ 'padding': 10, 'text-align': 'left' });
-            });
-
-            $('.Code_content').off('mouseenter').on('mouseenter', function () {
-                if ($(this).val() === $(this).closest($('.Code_container')).find($('.placeholder')).text()) {
-                    $(this).val('');
+                if ($(this).val().length === 0) {
+                    Showpholder(this);
                 }
             });
 
             $('.Code_content').off('mouseleave').on('mouseleave', function () {
                 if ($(this).val().length === 0) {
-                    $(this).val($(this).closest($('.Code_container')).find($('.placeholder')).text());
-                    vAlign(this);
+                    Showpholder(this);
                 }
-                if ($(this).val() !== $(this).closest($('.Code_container')).find($('.placeholder')).text()) {
-                    $(this).css({ 'padding': 10, 'text-align': 'left' });
+                else {
+                    Hidepholder(this);
                 }
             });
 
-            function reset(p) {
-                if ($(p).val() === $(p).closest($('.Code_container')).find($('.placeholder')).text()) {
-                    $(p).val('');
-                }
-
-                if ($(p).val().length === 0) {
-                    $(p).val($(p).closest($('.Code_container')).find($('.placeholder')).text());
-                }
+            function Showpholder(p) {
+                $(p).closest($('.keepspace')).find($('.placeholder')).addClass("on");
             }
 
-            //vertically align the placeholder
-            function vAlign(code) {
-                
-                var PlaceHolderBox = $(code).closest($('.Code_container')).find($('.placeholder'));
-                var PlaceHolderText = PlaceHolderBox.text();
-                var PlaceHolderHeight = PlaceHolderBox.outerHeight(true);
-                var TextAreaHeight = $(code).outerHeight(true);
-                var TextAreaPaddingTop = (TextAreaHeight - 2 * PlaceHolderHeight) * 0.5;
+            function Hidepholder(p) {
+                $(p).closest($('.keepspace')).find($('.placeholder')).removeClass("on");
+            }
 
-                if ($(code).val() === PlaceHolderText) {
-                    $(code).css({ 'padding-top': TextAreaPaddingTop, 'text-align': 'center' });
-                }
-            } 
         },
 
         ToolsRotation: function () {

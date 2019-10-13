@@ -4,63 +4,30 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<div class="row">
+    <div class="col-12" style="padding: 0;">
+        <img src="~/images/blog_details.jpg" style="width: 100%;" />
+    </div>
+</div>
 
-<div>
-    <h4>Blog</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Title)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Author)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Author)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Posted)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Posted)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Body)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Body)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.HTML)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.HTML)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CSS)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CSS)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.JavaScript)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.JavaScript)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.category)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.category.Name)
-        </dd>
-    </dl>
+<div class="row">
+    <div class="col-12" style="font-weight: bold; font-size: 1.2em;">
+        @Html.DisplayFor(model => model.Title)
+    </div>
+    <div class="col-12">
+        <pre>@Html.DisplayFor(model => model.Body)</pre>
+    </div>
+    <div class="col-12 HTML">
+        <pre>@Html.DisplayFor(model => model.HTML)</pre>
+    </div>
+    <div class="col-12 CSS">
+        <pre>@Html.DisplayFor(model => model.CSS)</pre>
+    </div>
+    <div class="col-12 JavaScript">
+        <pre>@Html.DisplayFor(model => model.JavaScript)</pre>
+    </div>
+    <div class="col-md-3"><a asp-action="Index">Back to List</a></div>
+    <div class="col-md-3" style="font-style: italic;">@Html.DisplayFor(model => model.Author)</div>
+    <div class="col-md-3" style="font-style: italic;">@Html.DisplayFor(model => model.Posted)</div>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.BlogId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+

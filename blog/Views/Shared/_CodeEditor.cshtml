@@ -7,23 +7,21 @@
     <li class="col-md-4 HTML_list">
         <div class="codeType">HTML</div>
         <div class="HTML Code_container">
-            <div class="placeholder">@Model.PlaceHolder_HTML</div>
-            <pre>@Html.TextAreaFor(x => x.HTML, new { id = "" , @class= "Code_content"}) </pre>
+            <pre class="keepspace"><span class="placeholder">@Model.PlaceHolder_HTML</span>@Html.TextAreaFor(x => x.HTML, new { id = "" , @class= "Code_content"})</pre>
         </div>
 
     </li>
     <li class="col-md-4 CSS_list">
         <div class="codeType">CSS</div>
         <div class="CSS Code_container">
-            <div class="placeholder">@Model.PlaceHolder_CSS</div>
-            <pre>@Html.TextAreaFor(x => x.CSS, new { id = "" , @class= "Code_content"})</pre>
+            
+            <pre class="keepspace"><span class="placeholder">@Model.PlaceHolder_CSS</span>@Html.TextAreaFor(x => x.CSS, new { id = "" , @class= "Code_content"})</pre>
         </div>
     </li>
     <li class="col-md-4 JavaScript_list">
         <div class="codeType">JavaScript</div>
         <div class="JavaScript Code_container">
-            <div class="placeholder">@Model.PlaceHolder_JavaScript</div>
-            <pre>@Html.TextAreaFor(x => x.JavaScript, new { id = "" , @class= "Code_content"})</pre>
+            <pre class="keepspace"><span class="placeholder">@Model.PlaceHolder_JavaScript</span>@Html.TextAreaFor(x => x.JavaScript, new { id = "" , @class= "Code_content"})</pre>
         </div>
     </li>
 </ul>

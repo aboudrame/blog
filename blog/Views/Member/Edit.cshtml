@@ -9,7 +9,7 @@
 <h4>Blog</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-12">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="BlogId" />
@@ -30,34 +30,12 @@
             </div>
             <div class="form-group">
                 <label asp-for="Body" class="control-label"></label>
-                <input asp-for="Body" class="form-control" />
+                <textarea asp-for="Body" class="form-control"> </textarea>
                 <span asp-validation-for="Body" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="HTML" class="control-label"></label>
-                <input asp-for="HTML" class="form-control" />
-                <span asp-validation-for="HTML" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CSS" class="control-label"></label>
-                <input asp-for="CSS" class="form-control" />
-                <span asp-validation-for="CSS" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="JavaScript" class="control-label"></label>
-                <input asp-for="JavaScript" class="form-control" />
-                <span asp-validation-for="JavaScript" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CategoryId" class="control-label"></label>
-                <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.CategoryId"></select>
-                <span asp-validation-for="CategoryId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ContentTypeId" class="control-label"></label>
-                <select asp-for="ContentTypeId" class="form-control" asp-items="ViewBag.ContentTypeId"></select>
-                <span asp-validation-for="ContentTypeId" class="text-danger"></span>
-            </div>
+
+            @await Html.PartialAsync("_CodeEditor")
+
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>

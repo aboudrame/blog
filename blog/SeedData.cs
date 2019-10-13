@@ -18,15 +18,6 @@ namespace blog
         {
             var context = serviceProvider.GetRequiredService<ApplicationDbContext>();
             context.Database.EnsureCreated();
-            if (!context.Categories.Any())
-            {
-                context.Categories.Add(new Category() {Name = "JavaScript"});
-                context.Categories.Add(new Category() {Name = "jQuery" });
-                
-                context.SaveChanges();
-
-            }
-
             if (!context.Blogs.Any())
             {
                 context.Blogs.Add(
@@ -36,7 +27,6 @@ namespace blog
                         Author = "seeddata@gmail.com",
                         Posted = DateTime.Now,
                         Body = "I would like to be able to place a search form. Any help would be immensely appreciated.",
-                        CategoryId = 1,
                         ContentTypeId = 2
                         
                     });
@@ -48,7 +38,6 @@ namespace blog
                         Author = "seeddata@gmail.com",
                         Posted = DateTime.Now,
                         Body = "The div has a title. When we click on the title the div expand. I want the div to collapse when we click on anything else not just the title. How would i do that?",
-                        CategoryId = 1,
                         ContentTypeId = 2,
                     });
 

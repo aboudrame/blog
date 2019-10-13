@@ -24,7 +24,7 @@ namespace blog.Controllers
         
         public IActionResult Index()
         {
-             var Course = _db.Blogs.Include(x=>x.category).Where(x=>x.ContentTypeId==1).OrderByDescending(x =>  x.Posted ).Take(5).ToList();
+             var Course = _db.Blogs.Where(x=>x.ContentTypeId==1).OrderByDescending(x =>  x.Posted ).Take(5).ToList();
             return View(Course);
         }
 
@@ -43,9 +43,7 @@ namespace blog.Controllers
         public IActionResult Create()
         {
             var myCourse = new Blog();
-            var mylist = new SelectList(_db.Categories.ToList(), "CategoryId", "Name");
 
-            ViewBag.CategoryId = mylist;
             return View(myCourse);
         }
 
@@ -72,7 +70,6 @@ namespace blog.Controllers
         public IActionResult Edit (long id)
         {
             var blog = _db.Blogs.FirstOrDefault(x => x.BlogId == id);
-            ViewBag.CategoryId = new SelectList(_db.Categories, "CategoryId", "Name", blog.BlogId);
 
             return View(blog);
         }

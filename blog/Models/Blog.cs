@@ -27,24 +27,10 @@ namespace blog.Models
         public string JavaScript { get; set; }
         [Display(Name ="Category")]
         [Required]
-        public int CategoryId { get; set; }
-        [NotMapped]
-        public  List<Category> Categories { get; set; }
-        public Category category { get; set; }
-        [Required]
         public int ContentTypeId { get; set; } = 2;
         [NotMapped]
         public List<ContentType> ContentTypes { get; set; }
         public virtual ICollection<Comment> Comments { get; set; }
-    }
-
-    public class Category
-    {
-        public int CategoryId { get; set; }
-        [Required]
-        public  string Name { get; set; }
-
-        public virtual ICollection<Blog> Blogs { get; set; }
     }
 
     public class ContentType
