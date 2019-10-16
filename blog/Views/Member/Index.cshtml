@@ -19,28 +19,6 @@
     <div class="col-12">
         <pre>@x.Body</pre>
     </div>
-    @if (!string.IsNullOrEmpty(x.HTML))
-    {
-    <div class="col-12 HTML">
-        <h5 style="text-align: right">HTML</h5>
-        <pre>@x.HTML</pre>
-    </div>
-    }
-    @if (!string.IsNullOrEmpty(x.CSS))
-    {
-<div class="col-12 CSS">
-    <h5 style="text-align: right">CSS</h5>
-    <pre>@x.CSS</pre>
-</div>
-    }
-
-    @if (!string.IsNullOrEmpty(x.JavaScript))
-    {
-<div class="col-12 JavaScript">
-    <h5 style="text-align: right">JavaScript</h5>
-    <pre>@x.JavaScript</pre>
-</div>
-    }
 </div>
 <div class="row edit_line paddingTopBottom15">
     <div class="col-md-3">

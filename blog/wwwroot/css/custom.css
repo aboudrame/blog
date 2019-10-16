@@ -251,23 +251,23 @@ span.text-info {
     text-align: right;
 }
 
-.row.blog-home:nth-child(2n+1) {
+.blog-home:nth-child(2n+1) {
     background-color: #dce6f2;
 }
 
-.row.blog-home {
+.blog-home {
     padding: 0 15px;
     margin-bottom: 15px;
+}
+
+.comment_block {
+    background-color: floralwhite;
 }
 
 .Posted,
 .Author,
 .Comment {
     padding: 15px;
-}
-
-.comment_block {
-    margin-bottom: 15px;
 }
 
 .comment_block:nth-child(2n+1) {
@@ -411,19 +411,58 @@ li[class*="list"] {
     display: block;
 }
 
-.submit {text-align: right;}
+.submit {
+    text-align: right;
+}
 
 .logo {min-width: 60px;}
+
+div[class$="code"] {
+    background-color: #F5F5F5;
+    padding: 5px;
+    margin: 5px;
+}
+
+.inline-code {
+    display: inline-block;
+}
+
+.create-preview {
+border: solid 10px #F5F5F5;
+}
+
+.preview {
+    padding: 10px;
+}
 
 .img-about {
     margin: auto;
     width: 100%;
 }
 
+.codeEditorDescription {
+    padding: 15px;
+    margin: 15px 0;
+    background-color: #F5F5F5;
+}
+
 .img-about-profile {
     display: block;
     max-width: 500px;
     margin: auto;
+}
+
+.code-instruction {
+    display: none;
+}
+
+.code-instruction.on {
+    display: block;
+}
+
+.instruction {
+    margin-left: calc(100% - 145px);
+    margin-bottom: 15px;
 }
 
 .tools li {
@@ -595,17 +634,14 @@ li[class*="list"] {
 .paddingBottom15 {padding-bottom: 15px;}
 .paddingTopBottom15 {padding: 15px 0;}
 
+.txtaligncenter {text-align: center;}
+.txtalignleft {text-align: left;}
+.txtalignright {text-align: right;}
+
+.width100 {width: 100%;}
+
 @media only screen and (min-width: 577px) {
-    .login-box {
-        /*padding: .5rem;
-        border: solid 1px transparent;
-        line-height: 1.2;
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        right: 90px;
-        padding-top: 4px;*/
-    }
+
 }
 
 @media only screen and (max-width: 576px) {

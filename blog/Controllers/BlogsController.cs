@@ -206,9 +206,6 @@ namespace blog.Controllers
             RegisterCommentViewModel comment = new RegisterCommentViewModel();
 
             comment.BlogBody = blog.Body;
-            comment.BlogHTML = blog.HTML;
-            comment.BlogCSS = blog.CSS;
-            comment.BlogJavaScript = blog.JavaScript;
 
             return View(comment);
         }

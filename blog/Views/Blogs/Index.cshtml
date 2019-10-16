@@ -6,92 +6,75 @@
 
 
 <div class="row blog-home-banner"> <img src="~/images/i4.gif" /> </div>
-<p style="text-align: right;">
-    <strong><a asp-action="Create">Post new blog</a> </strong>
-</p>
+<div class="row">
+    <div class="col-12 txtalignright marginTopBottom15">
+        @Html.ActionLink("Post a new Blog", "Index","Member", null, new { @class="btn btn-primary"})
+    </div>
+</div>
 
 
 @foreach (var blog in Model)
 {
 
-
-    <div class="row blog-home">
-        <div class="col-12 blog-title">
-            <h4>
-                @Html.ActionLink(blog.Title, "Details", "Blogs", new { id = blog.BlogId })
-            </h4>
-        </div>
-        <div class="col-12 teaser">
-            @Html.DisplayFor(x => blog.Body)
-        </div>
-
-        @if (!String.IsNullOrEmpty(blog.HTML))
-        {
-            <div class="col-12 HTML">
-                <h5 class="codeType">HTML</h5>
-                <pre>@blog.HTML</pre>
+    <div class="blog-home padding15">
+        <div class="row">
+            <div class="col-12 blog-title">
+                <h4>
+                    @Html.ActionLink(blog.Title, "Details", "Blogs", new { id = blog.BlogId })
+                </h4>
             </div>
-        }
-
-        @if (!String.IsNullOrEmpty(blog.CSS))
-        {
-            <div class="col-12 CSS">
-                <h5 class="codeType">CSS</h5>
-                <pre>@blog.CSS</pre>
+            <div class="col-12 teaser" style="display:none;">
+                @Html.TextAreaFor(x => blog.Body, new { @class = "width100 get-preview" })
             </div>
-        }
-
-        @if (!String.IsNullOrEmpty(blog.JavaScript))
-        {
-            <div class="col-12 JavaScript">
-                <h5 class="codeType">JavaScript</h5>
-                <pre>@blog.JavaScript</pre>
-            </div>
-        }
-
-        <div class="col-md-4 Posted">
-            @Html.DisplayFor(x => blog.Posted)
-        </div>
-        <div class="col-md-4 Author">
-            @Html.DisplayFor(x => blog.Author)
-        </div>
-        <div class="col-md-4 Comment">
-            @Html.ActionLink("REPLY", "Comment", "Blogs", new { id = blog.BlogId })
-        </div>
-    </div>
-
-    @if (blog.Comments.Any())
-        {
-        <div class="row comment_block">
-            <div class="col-12">
-                <h6>Comments</h6>
-            </div>
-        </div>
-            @foreach (var comment in blog.Comments.OrderByDescending(x => x.DateCommented).Take(5))
-            {
-                <div class="row comment_block">
-                    <div class="col-12">
-                        <pre>@string.Format("{0}", comment.Body)</pre>
-                    </div>
-                    <div class="col-12">
-                        <pre>@comment.HTML</pre>
-                    </div>
-                    <div class="col-12">
-                        <pre>@string.Format("{0}", comment.CSS)</pre>
-                    </div>
-                    <div class="col-12">
-                        <pre>@string.Format("{0}", comment.JavaScript)</pre>
-                    </div>
-                    <div class="col-md-6">
-                        @string.Format("{0}", comment.DateCommented)
-                    </div>
-                    <div class="col-md-6">
-                        @string.Format("{0}", comment.Commenter)
-                    </div>
+            <div class="form-group col-12 preview">
+                <div class="preview-container">
                 </div>
-            }
-        }
+            </div>
 
-    }
+
+            <div class="col-md-4 Posted">
+                @Html.DisplayFor(x => blog.Posted)
+            </div>
+            <div class="col-md-4 Author">
+                @Html.DisplayFor(x => blog.Author)
+            </div>
+            <div class="col-md-4 Comment">
+                @Html.ActionLink("REPLY", "Comment", "Blogs", new { id = blog.BlogId })
+            </div>
+        </div>
+
+        @if (blog.Comments.Any())
+            {
+            <div class="row comment_block margin15 paddingTopBottom15">
+                <div class="col-12">
+                    <h6>Comments</h6>
+                </div>
+            </div>
+                @foreach (var comment in blog.Comments.OrderByDescending(x => x.DateCommented).Take(5))
+                {
+                    <div class="row comment_block margin15 paddingTopBottom15">
+                        <div class="col-12">
+                            <pre>@string.Format("{0}", comment.Body)</pre>
+                        </div>
+                        <div class="col-12">
+                            <pre>@comment.HTML</pre>
+                        </div>
+                        <div class="col-12">
+                            <pre>@string.Format("{0}", comment.CSS)</pre>
+                        </div>
+                        <div class="col-12">
+                            <pre>@string.Format("{0}", comment.JavaScript)</pre>
+                        </div>
+                        <div class="col-md-6">
+                            @string.Format("{0}", comment.DateCommented)
+                        </div>
+                        <div class="col-md-6">
+                            @string.Format("{0}", comment.Commenter)
+                        </div>
+                    </div>
+                }
+
+        }
+    </div>
  }
 

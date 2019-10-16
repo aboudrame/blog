@@ -7,6 +7,8 @@
             main.codeEditorNav();
             main.placeholder();
             main.ToolsRotation();
+            main.codeFormating();
+            main.codeInstruction();
         },
 
         banner: function () {
@@ -38,17 +40,17 @@
 
             $('.RUN').off('click').on('click', function () {
                 var IFRAME = $('#Result');
-                var $T = $(this);
 
-                var getHTML = $(this).closest($('form')).find($('textarea[name="HTML"]')).val();
-                var getCSS = $(this).closest($('form')).find($('textarea[name="CSS"]')).val();
-                var getJavaScript = $(this).closest($('form')).find($('textarea[name="JavaScript"]')).val();
+                var getHTML = $('textarea[name="HTML"]').val();
+                var getCSS = $('textarea[name="CSS"]').val();
+                var getJavaScript = $('textarea[name="JavaScript"]').val();
 
                 var IFRAME_HEAD = IFRAME.contents().find('head');
                 var IFRAME_BODY = IFRAME.contents().find('body');
 
                 var js = document.createElement('script');
                 var css = document.createElement('style');
+
 
                 css.type = "text/css";
                 js.type = "text/javascript";
@@ -63,7 +65,6 @@
 
                 IFRAME_BODY.html('');
                 IFRAME_BODY.append(getHTML);
-
 
             });
 
@@ -148,8 +149,51 @@
                 $('.tools').css({ 'background-image': 'url("../images/bkg' + activeIndex + '.jpg")', 'background-position': 'center', 'background- clip': 'content - box' });
 
             }
-        }
+        },
 
+        codeFormating: function () {
+
+            $('.get-preview').each(function () {
+                format(this);
+            });
+
+            $('.get-preview').off('keyup').on('keyup', function () {
+                format(this);
+            });
+
+            function format(txt) {
+                var regInlineOpen = /<inlinecode>/gi;
+                var regInlineClose = /<\/inlinecode>/gi;
+                var regBlockOpen = /<blockcode>/gi;
+                var regBlockClose = /<\/blockcode>/gi;
+
+                var bodyTxt = '<pre>' + $(txt).val() + '<pre>';
+
+                cleancode = bodyTxt
+                    .replace(regInlineOpen, '<div class="inline-code">')
+                    .replace(regInlineClose, '</div>')
+                    .replace(regBlockOpen, '<div class="block-code">')
+                    .replace(regBlockClose, '</div>');
+
+                $(txt).closest($('.row')).find($('.preview-container')).html('');
+                $(txt).closest($('.row')).find($('.preview-container')).append($(cleancode));
+
+                if ($(txt).val().length === 0) {
+                    $(txt).closest($('.row')).find($('.preview')).hide();
+                }
+                else {
+                    $(txt).closest($('.row')).find($('.preview')).show();
+                }
+            }
+
+         
+        },
+
+        codeInstruction: function () {
+            $('.instruction').off('click').on('click', function () {
+                $('.code-instruction').toggleClass('on');
+            });
+        }
     };
 
     main.init();

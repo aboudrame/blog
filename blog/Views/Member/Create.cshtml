@@ -12,9 +12,10 @@
 <h1>Create a new post</h1>
 <hr />
 
-<div class="row">
-    <div class="col-md-12">
-        <form asp-action="Create">
+
+<form asp-action="Create">
+    <div class="row">
+        <div class="col-md-12">
             <div asp-validation-summary="All" class="text-danger"></div>
             <div class="form-group">
                 <input type="hidden" asp-for="Author" class="form-control" value="@User.Identity.Name" />
@@ -25,25 +26,34 @@
                 <span asp-validation-for="Title" class="text-danger"></span>
             </div>
             <div class="form-group">
+                
                 <label asp-for="Body" class="control-label"></label>
-                <textarea asp-for="Body" class="form-control"> </textarea>
+                @await Html.PartialAsync("_CodeInstructionPartial")
+                <textarea asp-for="Body" class="form-control get-preview"></textarea>
                 <span asp-validation-for="Body" class="text-danger"></span>
             </div>
-
-            @await Html.PartialAsync("_CodeEditor")
-
-            <div class="form-group submit">
-                <input type="submit" value="Post a blog" class="btn btn-primary submit" />
+            <div class="form-group create-preview preview">
+                <h4 style="text-align: center;">PREVIEW</h4>
+                <div class="preview-container">
+                </div>
             </div>
-
-        </form>
-
+        </div>
     </div>
-</div>
+    <div class="row">
+        <div class="col-md-4">
+            @Html.ActionLink("Back to List", "Index", "Member", null, new { @class = "btn btn-primary" })
+        </div>
+        <div class="col-md-4 txtaligncenter" >
+            @Html.ActionLink("Test The Code", "CodeTester", "CodeEditor",null, new {@class="btn btn-primary"})
+        </div>
+        <div class="form-group col-md-4 submit">
+            <input type="submit" value="Post a blog" class="btn btn-primary submit" />
+        </div>
+    </div>
+</form>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

@@ -12,7 +12,7 @@ namespace blog.Models
     {
         public string PlaceHolder_HTML = "Type or paste your HTML code in this box";
         public string PlaceHolder_CSS = "Type or paste your CSS code in this box";
-        public string PlaceHolder_JavaScript = "Type or paste your JavaScript code in this box";
+        public string PlaceHolder_JavaScript = "Type or paste your JavaScript/jQuery code in this box";
         public long BlogId { get; set; }
         [Required]
         public string Title {get;  set; }
@@ -22,10 +22,6 @@ namespace blog.Models
         public DateTime Posted { get; set; }
         [Required]
         public string Body { get; set; }
-        public string HTML { get; set; }
-        public string CSS { get; set; }
-        public string JavaScript { get; set; }
-        [Display(Name ="Category")]
         [Required]
         public int ContentTypeId { get; set; } = 2;
         [NotMapped]
@@ -57,6 +53,8 @@ namespace blog.Models
         public long BlogId { get; set; }
         public virtual Blog blog { get; set; }
     }
+
+  
 }
 
 

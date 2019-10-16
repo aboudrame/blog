@@ -1,27 +1,31 @@
 ﻿@model blog.Models.Blog
 
 <div>
-    <p>It is always a good practice to share the codes to help others assist you quickly. Please place the codes in the corresponding box below. Run your code in the Preview box to ensure accuracy.</p>
+    <p class="codeEditorDescription txtaligncenter">
+        It is always a good practice to share the codes that you have tested to ensure accuracy and help others assist you quickly.
+        This code tester is available for HTML, CSS, JavaScript and jQuery codes. <br />
+        Place the jQuery code within the wrapper $(function () { <strong>jQuery code goes here!</strong> });
+    </p>
 </div>
 <ul class="row codeeditor">
     <li class="col-md-4 HTML_list">
         <div class="codeType">HTML</div>
         <div class="HTML Code_container">
-            <pre class="keepspace"><span class="placeholder">@Model.PlaceHolder_HTML</span>@Html.TextAreaFor(x => x.HTML, new { id = "" , @class= "Code_content"})</pre>
+            <pre class="keepspace"><span class="placeholder">@Model.PlaceHolder_HTML</span></pre>
         </div>
 
     </li>
     <li class="col-md-4 CSS_list">
         <div class="codeType">CSS</div>
         <div class="CSS Code_container">
-            
-            <pre class="keepspace"><span class="placeholder">@Model.PlaceHolder_CSS</span>@Html.TextAreaFor(x => x.CSS, new { id = "" , @class= "Code_content"})</pre>
+
+            <pre class="keepspace"><span class="placeholder">@Model.PlaceHolder_CSS</span></pre>
         </div>
     </li>
     <li class="col-md-4 JavaScript_list">
         <div class="codeType">JavaScript</div>
         <div class="JavaScript Code_container">
-            <pre class="keepspace"><span class="placeholder">@Model.PlaceHolder_JavaScript</span>@Html.TextAreaFor(x => x.JavaScript, new { id = "" , @class= "Code_content"})</pre>
+            <pre class="keepspace"><span class="placeholder">@Model.PlaceHolder_JavaScript</span></pre>
         </div>
     </li>
 </ul>
@@ -30,3 +34,4 @@
     <h3 class="RUN btn-dark btn-lg">Run the code</h3>
     <iframe id="Result" src="~/iframe/index"></iframe>
 </div>
+@Html.ActionLink("back", null, null, null, new {href=@ViewBag.UrlReferer, @class="btn btn-primary" })
