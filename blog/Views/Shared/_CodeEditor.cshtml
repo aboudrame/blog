@@ -2,36 +2,35 @@
 
 <div>
     <p class="codeEditorDescription txtaligncenter">
-        It is always a good practice to share the codes that you have tested to ensure accuracy and help others assist you quickly.
+        It is always a good practice to share the codes that you have tested to ensure accuracy and help others assist you quickly.<br />
         This code tester is available for HTML, CSS, JavaScript and jQuery codes. <br />
         Place the jQuery code within the wrapper $(function () { <strong>jQuery code goes here!</strong> });
     </p>
 </div>
 <ul class="row codeeditor">
     <li class="col-md-4 HTML_list">
-        <div class="codeType">HTML</div>
-        <div class="HTML Code_container">
-            <pre class="keepspace"><span class="placeholder">@Model.PlaceHolder_HTML</span></pre>
+        <div class="txtaligncenter">HTML</div>
+        <div class="code-container">
+            <pre class="keepspace"><span class="placeholder">Type or paste your HTML code in this box</span><textarea class="HTML code-content" name="HTML"></textarea></pre>
         </div>
 
     </li>
     <li class="col-md-4 CSS_list">
-        <div class="codeType">CSS</div>
-        <div class="CSS Code_container">
-
-            <pre class="keepspace"><span class="placeholder">@Model.PlaceHolder_CSS</span></pre>
+        <div class="txtaligncenter">CSS</div>
+        <div class="code-container">
+            <pre class="keepspace"><span class="placeholder">Type or paste your CSS code in this box</span><textarea class="CSS code-content" name="CSS"></textarea></pre>
         </div>
     </li>
     <li class="col-md-4 JavaScript_list">
-        <div class="codeType">JavaScript</div>
-        <div class="JavaScript Code_container">
-            <pre class="keepspace"><span class="placeholder">@Model.PlaceHolder_JavaScript</span></pre>
+        <div class="txtaligncenter">JavaScript</div>
+        <div class="code-container">
+            <pre class="keepspace"><span class="placeholder">Type or paste your JavaScript/jQuery code in this box</span><textarea class="JavaScript code-content" name="JavaScript"></textarea></pre>
         </div>
     </li>
 </ul>
 
 <div class="Result">
-    <h3 class="RUN btn-dark btn-lg">Run the code</h3>
+    <h3 class="RUN btn btn-primary">Run the code</h3>
     <iframe id="Result" src="~/iframe/index"></iframe>
 </div>
 @Html.ActionLink("back", null, null, null, new {href=@ViewBag.UrlReferer, @class="btn btn-primary" })

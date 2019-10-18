@@ -10,9 +10,6 @@ namespace blog.Models
 
     public class Blog
     {
-        public string PlaceHolder_HTML = "Type or paste your HTML code in this box";
-        public string PlaceHolder_CSS = "Type or paste your CSS code in this box";
-        public string PlaceHolder_JavaScript = "Type or paste your JavaScript/jQuery code in this box";
         public long BlogId { get; set; }
         [Required]
         public string Title {get;  set; }

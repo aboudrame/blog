@@ -14,9 +14,15 @@
     <div class="col-12" style="font-weight: bold; font-size: 1.2em;">
         @Html.DisplayFor(model => model.Title)
     </div>
-    <div class="col-12">
-        <pre>@Html.DisplayFor(model => model.Body)</pre>
+    <div class="col-12" style="display: none;">
+        <pre>@Html.TextAreaFor(model => model.Body, new { @class = "width100 get-preview" })</pre>
     </div>
+
+    <div class="col-12 teaser preview">
+        <div class="preview-container">
+        </div>
+    </div>
+
     <div class="col-md-3"><a asp-action="Index">Back to List</a></div>
     <div class="col-md-3" style="font-style: italic;">@Html.DisplayFor(model => model.Author)</div>
     <div class="col-md-3" style="font-style: italic;">@Html.DisplayFor(model => model.Posted)</div>

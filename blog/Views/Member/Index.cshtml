@@ -4,11 +4,10 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>My POSTS</h1>
-<div class="row">
-    <div class="col-12 padding0">
-        <img src="~/images/member_index.jpg" style="width: 100%;"/>
-    </div>
+
+<div class="banner-container">
+    <h1 class="banner-text-container margin15 txtaligncenter"><span class="banner-text">My POSTS</span></h1>
+    <img src="~/images/member_index.jpg" class="width100" />
 </div>
 
 @foreach (var x in Model) {
@@ -17,7 +16,7 @@
         <h4><strong><pre>@Html.ActionLink(x.Title,"Details","Member", new { id=x.BlogId})</pre></strong></h4>
     </div>
     <div class="col-12">
-        <pre>@x.Body</pre>
+        @x.Body
     </div>
 </div>
 <div class="row edit_line paddingTopBottom15">

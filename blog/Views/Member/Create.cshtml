@@ -4,14 +4,11 @@
     ViewData["Title"] = "Create";
 }
 
-<div class="row">
-    <div class="col-12" style="padding: 0;">
-        <img src="~/images/sunset.jpg" style="width: 100%;" />
-    </div>
-</div>
-<h1>Create a new post</h1>
-<hr />
 
+<div class="banner-container">
+    <h1 class="banner-text-container margin15 txtaligncenter"><span class="banner-text">Create a new post</span></h1>
+        <img src="~/images/sunset.jpg" class="width100" />
+</div>
 
 <form asp-action="Create">
     <div class="row">
@@ -26,7 +23,7 @@
                 <span asp-validation-for="Title" class="text-danger"></span>
             </div>
             <div class="form-group">
-                
+
                 <label asp-for="Body" class="control-label"></label>
                 @await Html.PartialAsync("_CodeInstructionPartial")
                 <textarea asp-for="Body" class="form-control get-preview"></textarea>
@@ -43,8 +40,8 @@
         <div class="col-md-4">
             @Html.ActionLink("Back to List", "Index", "Member", null, new { @class = "btn btn-primary" })
         </div>
-        <div class="col-md-4 txtaligncenter" >
-            @Html.ActionLink("Test The Code", "CodeTester", "CodeEditor",null, new {@class="btn btn-primary"})
+        <div class="col-md-4 txtaligncenter">
+            @Html.ActionLink("Test The Code", "CodeTester", "CodeEditor", null, new { @class = "btn btn-primary" })
         </div>
         <div class="form-group col-md-4 submit">
             <input type="submit" value="Post a blog" class="btn btn-primary submit" />

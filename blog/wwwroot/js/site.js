@@ -98,13 +98,13 @@
 
         placeholder: function () {
 
-            $('.Code_content').each(function () {
+            $('.code-content').each(function () {
                 if ($(this).val().length === 0) {
                     Showpholder(this);
                 }
             });
 
-            $('.Code_content').off('mouseleave').on('mouseleave', function () {
+            $('.code-content').off('mouseleave').on('mouseleave', function () {
                 if ($(this).val().length === 0) {
                     Showpholder(this);
                 }
@@ -167,18 +167,20 @@
                 var regBlockOpen = /<blockcode>/gi;
                 var regBlockClose = /<\/blockcode>/gi;
 
-                var bodyTxt = '<pre>' + $(txt).val() + '<pre>';
+                var bodyTxt = '<pre>' + $(txt).html() + '<\/pre>';
 
                 cleancode = bodyTxt
                     .replace(regInlineOpen, '<div class="inline-code">')
-                    .replace(regInlineClose, '</div>')
+                    .replace(regInlineClose, '<\/div>')
                     .replace(regBlockOpen, '<div class="block-code">')
-                    .replace(regBlockClose, '</div>');
+                    .replace(regBlockClose, '<\/div>');
 
-                $(txt).closest($('.row')).find($('.preview-container')).html('');
-                $(txt).closest($('.row')).find($('.preview-container')).append($(cleancode));
+               // alert(cleancode);
 
-                if ($(txt).val().length === 0) {
+               //$(txt).closest($('.row')).find($('.preview-container')).html('');
+                $(txt).closest($('.row')).find($('.preview-container')).html($(cleancode));
+
+                if ($(txt).html().length === 0) {
                     $(txt).closest($('.row')).find($('.preview')).hide();
                 }
                 else {
