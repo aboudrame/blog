@@ -1,0 +1,62 @@
+﻿@model IEnumerable<blog.Models.Comment>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="banner-container">
+    <h1 class="banner-text-container margin15 txtaligncenter"><span class="banner-text">My Comments</span></h1>
+    <img src="~/images/comment.jpeg" class="fullwidth" />
+</div>
+
+@foreach (var comment in Model)
+{
+    <div class="comment-container bkgfloralwhite marginBottom15 padding15" style="padding-bottom: 0;">
+        <div class="row comment marginBottom15">
+            @*<div class="col-12 paddingTop15 paddingBottom15">
+                @comment.Body
+            </div>*@
+
+            <div class="col-12 hidden">
+                <textarea asp-for="@comment.Body" class="form-control get-preview"> </textarea>
+                <span asp-validation-for="@comment.Body" class="text-danger"></span>
+            </div>
+
+            <div class="col-12 preview">
+                <div class="preview-container">
+                </div>
+            </div>
+
+            <div class="col-md-3 paddingTop15 paddingBottom15">
+                @comment.LastModifiedDate
+            </div>
+            <div class="col-md-3 paddingTop15 paddingBottom15">
+                @Html.ActionLink("DELETE", "Delete", "Comments", new { id = comment.CommentId })
+            </div>
+            <div class="col-md-3 paddingTop15 paddingBottom15">
+                @Html.ActionLink("EDIT", "Edit", "Comments", new { id = comment.CommentId })
+            </div>
+            <div class="col-md-3 paddingTop15 paddingBottom15">
+                <input type="button" value="Blog" class="toggleblog" />
+            </div>
+        </div>
+
+        <div class="row bkgazure paddingTop15 paddingBottom15 blog">
+            <div class="col-12">
+                @Html.ActionLink(comment.blog.Title, "Details", "Member", new { id = comment.BlogId })
+            </div>
+
+            <div class="col-12 hidden">
+                <textarea asp-for="@comment.blog.Body" class="form-control get-preview"> </textarea>
+                <span asp-validation-for="@comment.blog.Body" class="text-danger"></span>
+            </div>
+
+            <div class="col-12 preview">
+                <div class="preview-container">
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+}

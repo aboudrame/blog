@@ -8,18 +8,16 @@ namespace blog.ViewModels
 {
     public class RegisterCommentViewModel
     {
+        public long Id { get; set; }
+        public string BlogTitle { get; set; }
         public string BlogBody { get; set; }
-        public string BlogHTML { get; set; }
-        public string BlogCSS { get; set; }
-        public string BlogJavaScript { get; set; }
         [Required]
         public string CommentBody { get; set; }
-        public string CommentHTML { get; set; }
-        public string CommentCSS { get; set; }
-        public string CommentJavaScript { get; set; }
         public string Commenter { get; set; }
         [Required]
-        public DateTime DateCommented { get; set; }
+        public DateTime CreatedDate { get; set; }
+        [Required]
+        public DateTime LastModifiedDate { get; set; }
         [Required]
         public long BlogId { get; set; }
     }

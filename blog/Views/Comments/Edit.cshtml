@@ -1,11 +1,11 @@
-﻿@model blog.Models.Blog
+﻿@model blog.Models.Comment
 
 @{
     ViewData["Title"] = "Edit";
 }
 
 <div class="banner-container">
-    <h1 class="banner-text-container margin15 txtaligncenter"><span class="banner-text">Blog Editor</span></h1>
+    <h1 class="banner-text-container margin15 txtaligncenter"><span class="banner-text">Comment Editor</span></h1>
     <img src="~/images/sunset.jpg" class="fullwidth" />
 </div>
 <form asp-action="Edit">
@@ -13,18 +13,9 @@
         <div class="col-12">
 
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="BlogId" />
+            <input type="hidden" asp-for="CommentId" />
             <div class="form-group">
-                <label asp-for="Title" class="control-label"></label>
-                <input asp-for="Title" class="form-control"  />
-                <span asp-validation-for="Title" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input asp-for="Author" class="form-control" type="hidden"/>
-                <span asp-validation-for="Author" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input asp-for="LastModifiedDate" class="form-control" type="hidden"/>
+                <input asp-for="LastModifiedDate" class="form-control" type="hidden" />
                 <span asp-validation-for="LastModifiedDate" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -47,14 +38,10 @@
             @Html.ActionLink("Back to List", "Index", "Member", null, new { @class = "btn btn-primary" })
         </div>
         <div class="col-md-4 txtaligncenter">
-            @Html.ActionLink("Test The Code", "CodeTester", "CodeEditor", null, new { @class="btn btn-primary"})
+            @Html.ActionLink("Test The Code", "CodeTester", "CodeEditor", null, new { @class = "btn btn-primary" })
         </div>
         <div class="form-group submit col-md-4">
             <input type="submit" value="SAVE" class="btn btn-primary submit" />
         </div>
     </div>
 </form>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}

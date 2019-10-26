@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using blog.Data;
 using blog.Models;
 using Microsoft.AspNetCore.Authorization;
+using blog.ViewModels;
 
 namespace blog.Controllers
 {
@@ -24,7 +25,7 @@ namespace blog.Controllers
         // GET: Member
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Blogs.Where(x=>x.Author == User.Identity.Name).OrderByDescending(x=>x.Posted);
+            var applicationDbContext = _context.Blogs.Include(x=>x.Comments).Where(x=>x.Author == User.Identity.Name).OrderByDescending(x=>x.LastModifiedDate);
 
             return View(await applicationDbContext.ToListAsync());
         }
@@ -37,7 +38,7 @@ namespace blog.Controllers
                 return NotFound();
             }
 
-            var blog = await _context.Blogs
+            var blog = await _context.Blogs.Include(x=>x.Comments)
                 .FirstOrDefaultAsync(m => m.BlogId == id);
             if (blog == null)
             {
@@ -51,7 +52,12 @@ namespace blog.Controllers
         public IActionResult  Create()
         {
             var blog = new Blog();
-            ViewBag.y = Request.Headers["Referer"].ToString();
+
+            blog.Author = User.Identity.Name;
+            blog.CreatedDate = DateTime.Now;
+            blog.LastModifiedDate = DateTime.Now;
+            blog.ContentTypeId = 2;
+
             return View(blog);
         }
 
@@ -60,7 +66,7 @@ namespace blog.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("BlogId,Title,Author,Posted,Body,HTML,CSS,JavaScript,CategoryId,ContentTypeId")] Blog blog)
+        public async Task<IActionResult> Create(Blog blog)
         {
             if (ModelState.IsValid)
             {
@@ -84,7 +90,8 @@ namespace blog.Controllers
             {
                 return NotFound();
             }
-            ViewData["ContentTypeId"] = new SelectList(_context.ContentTypes, "ContentTypeId", "Type", blog.ContentTypeId);
+
+            blog.LastModifiedDate = DateTime.Now;
 
             return View(blog);
         }
@@ -94,7 +101,7 @@ namespace blog.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(long id, [Bind("BlogId,Title,Author,Posted,Body,HTML,CSS,JavaScript,CategoryId,ContentTypeId")] Blog blog)
+        public async Task<IActionResult> Edit(long id, Blog blog)
         {
             if (id != blog.BlogId)
             {
@@ -148,7 +155,7 @@ namespace blog.Controllers
         public async Task<IActionResult> DeleteConfirmed(long id)
         {
             var blog = await _context.Blogs.FindAsync(id);
-            _context.Blogs.Remove(blog);
+            _context.Remove(blog);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
@@ -156,6 +163,47 @@ namespace blog.Controllers
         private bool BlogExists(long id)
         {
             return _context.Blogs.Any(e => e.BlogId == id);
+        }
+
+
+        public async Task<IActionResult> CreateComment(long id)
+        {
+
+            var blog = await _context.Blogs.FindAsync(id);
+            RegisterCommentViewModel registerCommentViewModel = new RegisterCommentViewModel();
+
+            registerCommentViewModel.BlogBody = blog.Body;
+            registerCommentViewModel.BlogId = blog.BlogId;
+            registerCommentViewModel.CreatedDate = DateTime.Now;
+            registerCommentViewModel.LastModifiedDate = DateTime.Now;
+            registerCommentViewModel.Commenter = User.Identity.Name;
+
+            return View(registerCommentViewModel);
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> CreateComment(RegisterCommentViewModel registerCommentViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                Comment comment = new Comment
+                {
+                         CreatedDate = registerCommentViewModel.CreatedDate,
+                    LastModifiedDate = registerCommentViewModel.LastModifiedDate,
+                           Commenter = registerCommentViewModel.Commenter,
+                              BlogId = registerCommentViewModel.BlogId,
+                                Body = registerCommentViewModel.CommentBody,
+                    
+                };
+
+                _context.Comments.Add(comment);
+                await _context.SaveChangesAsync();
+
+                return RedirectToAction("Index", "Blogs");
+            }
+
+            return View(registerCommentViewModel);
         }
     }
 }

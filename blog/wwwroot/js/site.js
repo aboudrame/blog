@@ -9,6 +9,7 @@
             main.ToolsRotation();
             main.codeFormating();
             main.codeInstruction();
+            main.toggleblog();
         },
 
         banner: function () {
@@ -167,7 +168,7 @@
                 var regBlockOpen = /<blockcode>/gi;
                 var regBlockClose = /<\/blockcode>/gi;
 
-                var bodyTxt = '<pre>' + $(txt).html() + '<\/pre>';
+                var bodyTxt = '<pre>' + $(txt).val() + '<\/pre>';
 
                 cleancode = bodyTxt
                     .replace(regInlineOpen, '<div class="inline-code">')
@@ -175,12 +176,11 @@
                     .replace(regBlockOpen, '<div class="block-code">')
                     .replace(regBlockClose, '<\/div>');
 
-               // alert(cleancode);
 
-               //$(txt).closest($('.row')).find($('.preview-container')).html('');
-                $(txt).closest($('.row')).find($('.preview-container')).html($(cleancode));
+                $(txt).closest($('.row')).find($('.preview-container')).html('');
+                $(txt).closest($('.row')).find($('.preview-container')).append($(cleancode));
 
-                if ($(txt).html().length === 0) {
+                if ($(txt).val().length === 0) {
                     $(txt).closest($('.row')).find($('.preview')).hide();
                 }
                 else {
@@ -188,14 +188,21 @@
                 }
             }
 
-         
         },
 
         codeInstruction: function () {
             $('.instruction').off('click').on('click', function () {
                 $('.code-instruction').toggleClass('on');
             });
-        }
+        },
+
+        toggleblog: function () {
+            $('.comment-container .toggleblog').off('click').on('click', function () {
+                var el = $(this).closest($('.comment-container')).find($('.blog'));
+                el.toggleClass('on');
+            });
+        } 
+
     };
 
     main.init();

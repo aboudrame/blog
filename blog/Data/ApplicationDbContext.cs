@@ -4,6 +4,7 @@ using System.Text;
 using blog.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using blog.ViewModels;
 
 namespace blog.Data
 {
@@ -18,6 +19,7 @@ namespace blog.Data
         public DbSet<Comment> Comments { get; set; }
         public DbSet<ContentType> ContentTypes { get; set; }
         public DbSet<Contact> Contacts { get; set; }
+        public DbSet<blog.ViewModels.RegisterCommentViewModel> RegisterCommentViewModel { get; set; }
 
     }
 }

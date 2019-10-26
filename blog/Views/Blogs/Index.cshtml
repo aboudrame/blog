@@ -6,7 +6,7 @@
 
 <div class="banner-container">
     <h1 class="banner-text-container margin15 txtaligncenter"><span class="banner-text">BLOGS</span></h1>
-    <img src="~/images/i4.gif" class="width100" />
+    <img src="~/images/i4.gif" class="fullwidth" />
 </div>
 
 <div class="row">
@@ -19,55 +19,49 @@
 @foreach (var blog in Model)
 {
 
-    <div class="blog-home padding15">
+    <div class="bkglightblue padding15">
         <div class="row">
-            <div class="col-12 blog-title">
+            <div class="col-12 padding15">
                 <h4>
                     @Html.ActionLink(blog.Title, "Details", "Blogs", new { id = blog.BlogId })
                 </h4>
             </div>
-            <div class="col-12" style="display:none;">
-                @Html.TextAreaFor(x => blog.Body, new { @class = "width100 get-preview" })
-            </div>
-            <div class="col-12  preview">
-                <div class="teaser preview-container">
-                </div>
-            </div>
 
+            @await Html.PartialAsync("_BlogBodyCodePreviewPartial", blog)
 
-            <div class="col-md-4 Posted">
-                @Html.DisplayFor(x => blog.Posted)
+            <div class="col-md-3">
+                @Html.DisplayFor(x => blog.CreatedDate)
             </div>
-            <div class="col-md-4 Author">
+            <div class="col-md-3">
+                @Html.DisplayFor(x => blog.LastModifiedDate)
+            </div>
+            <div class="col-md-3">
                 @Html.DisplayFor(x => blog.Author)
             </div>
-            <div class="col-md-4 Comment">
-                @Html.ActionLink("REPLY", "Comment", "Blogs", new { id = blog.BlogId })
+            <div class="col-md-3">
+                @Html.ActionLink("REPLY", "Create", "Comments", new { id = blog.BlogId })
             </div>
         </div>
 
         @if (blog.Comments.Any())
             {
-                @foreach (var comment in blog.Comments.OrderByDescending(x => x.DateCommented).Take(5))
+                @foreach (var comment in blog.Comments.Where(x=>x.BlogId == blog.BlogId).OrderByDescending(x => x.CreatedDate).Take(5))
                 {
-                    <div class="row comment_block marginTopBottom15 paddingTopBottom15">
-                        <div class="col-12">
-                            <pre>@string.Format("{0}", comment.Body)</pre>
+                    <div class="row bkgfloralwhite marginTopBottom15 paddingTop15">
+                        <div class="col-12 hidden">
+                            <pre>@Html.TextAreaFor(x => comment.Body, new {@class="form-control get-preview" })</pre>
                         </div>
-                        <div class="col-12">
-                            <pre>@comment.HTML</pre>
+                        <div class="col-12 noborder preview ">
+                            <div class="preview-container">
+                            </div>
                         </div>
-                        <div class="col-12">
-                            <pre>@string.Format("{0}", comment.CSS)</pre>
-                        </div>
-                        <div class="col-12">
-                            <pre>@string.Format("{0}", comment.JavaScript)</pre>
+
+
+                        <div class="col-md-6 padding15">
+                            @comment.CreatedDate
                         </div>
                         <div class="col-md-6 padding15">
-                            @string.Format("{0}", comment.DateCommented)
-                        </div>
-                        <div class="col-md-6 padding15">
-                            @string.Format("{0}", comment.Commenter)
+                            @comment.Commenter
                         </div>
                     </div>
                 }

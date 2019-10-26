@@ -24,7 +24,7 @@ namespace blog.Controllers
         
         public IActionResult Index()
         {
-             var Course = _db.Blogs.Where(x=>x.ContentTypeId==1).OrderByDescending(x =>  x.Posted ).Take(5).ToList();
+             var Course = _db.Blogs.Where(x=>x.ContentTypeId==1).OrderByDescending(x =>  x.LastModifiedDate ).Take(5).ToList();
             return View(Course);
         }
 
@@ -52,7 +52,8 @@ namespace blog.Controllers
         [HttpPost]
         public IActionResult Create(Blog blog)
         {
-            blog.Posted = DateTime.Now;
+            blog.LastModifiedDate = DateTime.Now;
+            blog.CreatedDate = DateTime.Now;
             blog.Author = User.Identity.Name;
             blog.ContentTypeId = 1;
             

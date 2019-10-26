@@ -92,7 +92,7 @@ namespace blog.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(long id, [Bind("BlogId,Title,Author,Posted,Body,HTML,CSS,JavaScript,ContentTypeId")] Blog blog)
+        public async Task<IActionResult> Edit(long id, [Bind("BlogId,Title,Author,Posted,Body,ContentTypeId")] Blog blog)
         {
             if (id != blog.BlogId)
             {

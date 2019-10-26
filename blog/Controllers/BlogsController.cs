@@ -30,7 +30,7 @@ namespace blog.Controllers
 
             if (search == null)
             {
-                var getappDbContext = await applicationDbContext.OrderByDescending(x => x.Posted).ToListAsync();
+                var getappDbContext = await applicationDbContext.OrderByDescending(x => x.LastModifiedDate).ToListAsync();
                 foreach (var x in getappDbContext)
                 {
                     blog.Add(x);
@@ -95,7 +95,8 @@ namespace blog.Controllers
             if (ModelState.IsValid)
             {
                 blog.Author = User.Identity.Name;
-                blog.Posted = DateTime.Now;
+                blog.LastModifiedDate = DateTime.Now;
+                blog.CreatedDate = DateTime.Now;
 
                 _context.Add(blog);
                 await _context.SaveChangesAsync();
@@ -218,13 +219,10 @@ namespace blog.Controllers
             {
                 Comment comment = new Comment
                 {
-                    DateCommented = DateTime.Now,
+                    CreatedDate = DateTime.Now,
                         Commenter = User.Identity.Name,
                            BlogId = id,
-                             Body = registerCommentViewModel.CommentBody,
-                             HTML = registerCommentViewModel.CommentHTML,
-                              CSS = registerCommentViewModel.CommentCSS,
-                       JavaScript = registerCommentViewModel.CommentJavaScript
+                             Body = registerCommentViewModel.CommentBody
                 };
 
                 _context.Comments.Add(comment);

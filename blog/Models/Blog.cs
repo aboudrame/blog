@@ -16,7 +16,9 @@ namespace blog.Models
         [Required]
         public string Author { get; set; }
         [Required]
-        public DateTime Posted { get; set; }
+        public DateTime CreatedDate { get; set; }
+        [Required]
+        public DateTime LastModifiedDate { get; set; }
         [Required]
         public string Body { get; set; }
         [Required]
@@ -39,13 +41,12 @@ namespace blog.Models
         public long CommentId { get; set; }
         [Required]
         public string Body { get; set; }
-        public string HTML { get; set; }
-        public string CSS { get; set; }
-        public string JavaScript { get; set; }
         [Required]
         public string Commenter { get; set; }
         [Required]
-        public DateTime DateCommented { get; set; } 
+        public DateTime CreatedDate { get; set; } 
+        [Required]
+        public DateTime LastModifiedDate { get; set; }
         [Required]
         public long BlogId { get; set; }
         public virtual Blog blog { get; set; }

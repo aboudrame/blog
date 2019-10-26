@@ -10,7 +10,7 @@
         <a  class="nav-link text-dark login-box" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity.Name!</a>
         <ul>
             <li>@Html.ActionLink("My Posts","Index", "Member")</li>
-            <li>My Comments</li>
+            <li>@Html.ActionLink("My Comments", "Index", "Comments")</li>
         </ul>
     </li>
     <li class="nav-item">

@@ -1,0 +1,9 @@
+﻿@model blog.Models.Blog
+
+<div class="col-12" style="display:none;">
+    @Html.TextAreaFor(x =>x.Body, new { @class = "fullwidth get-preview" })
+</div>
+<div class="col-12 paddingRight15 paddingBottom15 preview">
+    <div class="teaser preview-container">
+    </div>
+</div>

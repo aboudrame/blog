@@ -1,4 +1,4 @@
-﻿@model blog.Models.Blog
+﻿@model blog.Models.Comment
 
 @{
     ViewData["Title"] = "Delete";
@@ -6,14 +6,11 @@
 
 
 <div class="banner-container">
-    <h1 class="banner-text-container margin15 txtaligncenter"><span class="banner-text">Detete a BLOG</span></h1>
+    <h1 class="banner-text-container margin15 txtaligncenter"><span class="banner-text">Detete a Comment</span></h1>
     <img src="~/images/delete.jpg" class="fullwidth" />
 </div>
-<h3 class="txtaligncenter padding15">Are you sure you want to delete this BLOG?</h3>
+<h3 class="txtaligncenter padding15">Are you sure you want to delete this Comment?</h3>
 <div class="row">
-    <div class="col-12">
-        <h4>@Model.Title</h4>
-    </div>
     <div class="col-12 hidden">
         @Html.TextAreaFor(x => x.Body, new { @class = "fullwidth get-preview" })
     </div>
@@ -25,12 +22,9 @@
     <div class="col-12 padding15">
         @Model.LastModifiedDate
     </div>
-</div>
-
-
-<div>
     <form asp-action="Delete">
-        <input type="hidden" asp-for="BlogId" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> <a asp-action="Index" class="btn btn-primary">Back to List</a>
+        <input type="hidden" asp-for="CommentId" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-action="Index">Back to List</a>
     </form>
 </div>

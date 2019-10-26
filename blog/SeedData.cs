@@ -25,7 +25,7 @@ namespace blog
                     {
                         Title = "How to place a form over a picture?",
                         Author = "seeddata@gmail.com",
-                        Posted = DateTime.Now,
+                        LastModifiedDate = DateTime.Now,
                         Body = "I would like to be able to place a search form. Any help would be immensely appreciated.",
                         ContentTypeId = 2
                         
@@ -36,7 +36,7 @@ namespace blog
                     {
                         Title = "How to hide and show Divs",
                         Author = "seeddata@gmail.com",
-                        Posted = DateTime.Now,
+                        LastModifiedDate = DateTime.Now,
                         Body = "The div has a title. When we click on the title the div expand. I want the div to collapse when we click on anything else not just the title. How would i do that?",
                         ContentTypeId = 2,
                     });

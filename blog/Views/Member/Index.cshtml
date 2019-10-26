@@ -7,31 +7,64 @@
 
 <div class="banner-container">
     <h1 class="banner-text-container margin15 txtaligncenter"><span class="banner-text">My POSTS</span></h1>
-    <img src="~/images/member_index.jpg" class="width100" />
+    <img src="~/images/member_index.jpg" class="fullwidth" />
 </div>
+<div></div>
+@foreach (var x in Model)
+{
+    <div class="marginTop15 padding15 bkglightblue">
+        <div class="row paddingBottom15">
+            <div class="col-12 marginTopBottom15">
+                <h4><strong><pre>@Html.ActionLink(x.Title,"Details","Member", new { id=x.BlogId})</pre></strong></h4>
+            </div>
+            <div class="col-12 hidden">
+                @Html.TextAreaFor(i => x.Body, new { @class = "fullwidth get-preview" })
+            </div>
+            <div class="col-12 preview">
+                <div class="teaser preview-container">
+                </div>
+            </div>
+        </div>
 
-@foreach (var x in Model) {
-<div class="row">
-    <div class="col-12 marginTopBottom15">
-        <h4><strong><pre>@Html.ActionLink(x.Title,"Details","Member", new { id=x.BlogId})</pre></strong></h4>
+        <div class="row paddingTopBottom15">
+            <div class="col-md-3">
+                @x.LastModifiedDate
+            </div>
+            <div class="col-md-3">
+                <a asp-action="Edit" asp-route-id="@x.BlogId" >Edit</a>
+            </div>
+            <div class="col-md-3">
+                <a asp-action="Delete" asp-route-id="@x.BlogId" >Delete</a>
+            </div>
+            <div class="col-md-3">
+                <a asp-action="Create" >POST</a>
+            </div>
+        </div>
+
+        @if (x.Comments.Any())
+        {
+            foreach (var comment in x.Comments.Where(r => r.BlogId == x.BlogId).OrderByDescending(r => r.LastModifiedDate))
+            {
+            <div class="row bkgfloralwhite margin0 marginBottom15 paddingTop15">
+                <div class="col-md-12 marginBottom15 hidden">
+                    @Html.TextAreaFor(y=>comment.Body, new {@class="fullwidth get-preview", @style="min-height: 300px;" })
+                </div>
+
+                <div class="col-12 preview">
+                    <div class="teaser preview-container">
+                    </div>
+                </div>
+
+                <div class="col-md-6 padding15">
+                    @comment.LastModifiedDate
+                </div>
+                <div class="col-md-6 padding15">
+                    @comment.Commenter
+                </div>
+            </div>
+            }
+        }
+
     </div>
-    <div class="col-12">
-        @x.Body
-    </div>
-</div>
-<div class="row edit_line paddingTopBottom15">
-    <div class="col-md-3">
-        @x.Posted
-    </div>
-    <div class="col-md-3">
-        <a asp-action="Edit" asp-route-id="@x.BlogId">Edit</a>
-    </div>
-    <div class="col-md-3">
-        <a asp-action="Delete" asp-route-id="@x.BlogId">Delete</a>
-    </div>
-    <div class="col-md-3">
-        <a asp-action="Create">POST</a>
-    </div>
-</div>
 }
 

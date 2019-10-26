@@ -104,7 +104,6 @@ nav.navbar {
 }
 
 .banner-container {
-    margin-bottom: 20px;
     margin-left: -15px;
     margin-right: -15px;
     position: relative;
@@ -252,10 +251,6 @@ span.text-info {
     min-height: 200px;
 }
 
-.blog-home:nth-child(2n+1) {
-    background-color: #dce6f2;
-}
-
 .blog-home {
     padding: 0 15px;
     margin-bottom: 15px;
@@ -313,10 +308,6 @@ span.text-info {
     position: absolute;
     right: 90px;
     z-index: 1;
-}
-
-.edit_line {
-    background-color: #f5f5f5;
 }
 
 textarea#Body,
@@ -434,13 +425,17 @@ div[class$="code"] {
     display: inline-block;
 }
 
-.create-preview {
-border: solid 10px #F5F5F5;
-}
-
 .img-about {
     margin: auto;
     width: 100%;
+}
+
+.comment-container .blog {
+    display: none;
+}
+
+.comment-container .blog.on {
+    display: block;
 }
 
 .codeEditorDescription {
@@ -641,7 +636,29 @@ border: solid 10px #F5F5F5;
 .txtalignleft {text-align: left;}
 .txtalignright {text-align: right;}
 
-.width100 {width: 100%;}
+.fullwidth {width: 100%;}
+.minhgt300 {min-height: 300px;}
+
+
+.bkgfloralwhite {background-color: floralwhite;}
+.bkglightgray {background-color: #f5f5f5;}
+.bkgazure {background-color: azure;}
+
+.hidden {
+    display: none;
+}
+
+
+.bkglightblue:nth-child(2n+1) {
+    background-color: #dce6f2;
+    padding-top: 0;
+    padding-bottom: 15px;
+}
+
+
+.noborder {
+    border: 0;
+}
 
 @media only screen and (min-width: 577px) {
 

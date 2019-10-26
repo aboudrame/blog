@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using blog.Data;
 
 namespace blog.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20191019203006_addcommenttoblogdetails")]
+    partial class addcommenttoblogdetails
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -202,9 +204,7 @@ namespace blog.Data.Migrations
 
                     b.Property<int>("ContentTypeId");
 
-                    b.Property<DateTime>("CreatedDate");
-
-                    b.Property<DateTime>("LastModifiedDate");
+                    b.Property<DateTime>("Posted");
 
                     b.Property<string>("Title")
                         .IsRequired();
@@ -230,9 +230,7 @@ namespace blog.Data.Migrations
                     b.Property<string>("Commenter")
                         .IsRequired();
 
-                    b.Property<DateTime>("CreatedDate");
-
-                    b.Property<DateTime>("LastModifiedDate");
+                    b.Property<DateTime>("DateCommented");
 
                     b.HasKey("CommentId");
 
@@ -273,30 +271,6 @@ namespace blog.Data.Migrations
                     b.HasKey("ContentTypeId");
 
                     b.ToTable("ContentTypes");
-                });
-
-            modelBuilder.Entity("blog.ViewModels.RegisterCommentViewModel", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("BlogBody");
-
-                    b.Property<long>("BlogId");
-
-                    b.Property<string>("CommentBody")
-                        .IsRequired();
-
-                    b.Property<string>("Commenter");
-
-                    b.Property<DateTime>("CreatedDate");
-
-                    b.Property<DateTime>("LastModifiedDate");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("RegisterCommentViewModel");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
