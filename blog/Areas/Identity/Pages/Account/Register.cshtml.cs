@@ -84,7 +84,9 @@ namespace blog.Areas.Identity.Pages.Account
                          First_Name = Input.First_Name,
                         Middle_Name = Input.Middle_Name,
                           Last_Name = Input.Last_Name,
-                      UserCreatedOn = DateTime.Now
+                      UserCreatedOn = DateTime.Now,
+                      LastLoginDate = DateTime.Now,
+                      LoginDate = DateTime.Now
                          };
 
                 var result = await _userManager.CreateAsync(user, Input.Password);

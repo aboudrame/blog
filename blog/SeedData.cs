@@ -18,6 +18,24 @@ namespace blog
         {
             var context = serviceProvider.GetRequiredService<ApplicationDbContext>();
             context.Database.EnsureCreated();
+            if (!context.ContentTypes.Any())
+            {
+                context.ContentTypes.Add(
+                    new ContentType()
+                    {
+                        Type = "Course"
+                    });
+
+                context.ContentTypes.Add(
+                    new ContentType()
+                    {
+                        Type = "Article"
+                    });
+
+
+                context.SaveChanges();
+            }
+
             if (!context.Blogs.Any())
             {
                 context.Blogs.Add(
@@ -44,24 +62,22 @@ namespace blog
                 context.SaveChanges();
             }
 
-            if (!context.ContentTypes.Any())
+            if (!context.Roles.Any())
             {
-                context.ContentTypes.Add(
-                    new ContentType()
-                        {
-                            Type = "Course"
-                        });
-
-                context.ContentTypes.Add(
-                    new ContentType()
-                        {
-                            Type = "Article"
-                        });
-                
+                context.Roles.Add(new IdentityRole() {Name = "Admin"});
 
                 context.SaveChanges();
             }
 
+            if (!context.UserRoles.Any())
+            {
+                var roleId = context.Roles.FirstOrDefault(x=>x.Name == "Admin").Id;
+                var userId = context.Users.FirstOrDefault(x=>x.Email == "aboudrame@yahoo.fr").Id;
+                context.UserRoles.Add(new IdentityUserRole<string>() { RoleId = roleId , UserId = userId });
+
+                context.SaveChanges();
+
+            }
         }
     }
 }

@@ -26,7 +26,7 @@ namespace blog.Controllers
         public async Task<IActionResult> Index(string search)
         {
             List<Blog> blog = new List<Blog>();
-            var applicationDbContext = _context.Blogs.Include(b => b.Comments);
+            var applicationDbContext = _context.Blogs.Include(b => b.Comments).Where(x=>x.ContentTypeId == 2);
 
             if (search == null)
             {
@@ -35,15 +35,17 @@ namespace blog.Controllers
                 {
                     blog.Add(x);
                 };
+
             }
             else
             {
-                var getappDbContext = await applicationDbContext.Where(b=>b.Body.Contains(search)).ToListAsync();
+                var getappDbContext = await applicationDbContext.Where(b=>b.Body.ToLower().Contains(search)).ToListAsync();
 
                 foreach (var x in getappDbContext)
                 {
                     blog.Add(x);
                 }
+
             }
 
             if (!blog.Any())

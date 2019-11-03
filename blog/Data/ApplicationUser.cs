@@ -13,6 +13,7 @@ namespace blog.Data
         public string Middle_Name { get; set; }
         public string Last_Name { get; set; }
         public DateTime UserCreatedOn { get; set; }
-
+        public DateTime? LastLoginDate { get; set; } = DateTime.Now;
+        public DateTime? LoginDate { get; set; } = DateTime.Now;
     }
 }

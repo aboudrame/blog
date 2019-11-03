@@ -24,7 +24,7 @@ namespace blog.Controllers
         
         public IActionResult Index()
         {
-             var Course = _db.Blogs.Where(x=>x.ContentTypeId==1).OrderByDescending(x =>  x.LastModifiedDate ).Take(5).ToList();
+             var Course = _db.Blogs.Include(x=>x.Comments).Where(x=>x.ContentTypeId==1).OrderByDescending(x =>  x.LastModifiedDate ).Take(5).ToList();
             return View(Course);
         }
 
@@ -60,10 +60,7 @@ namespace blog.Controllers
             _db.Blogs.Add(blog);
             _db.SaveChanges();
 
-            return RedirectToAction("Blog", "Home", new
-            {
-                id = blog.BlogId
-            });
+            return RedirectToAction("Index", "Home", new { id = blog.BlogId });
         }
 
 
@@ -75,7 +72,8 @@ namespace blog.Controllers
             return View(blog);
         }
 
-        [HttpPost][Authorize]
+        [HttpPost]
+        [Authorize]
         public IActionResult Edit (Blog blog)
         {
             //var _blog = _db.Blogs.OrderBy(x => x.BlogId == id);

@@ -12,7 +12,7 @@
 <form asp-action="Create">
     <div class="row">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <div class="col-12 form-group">
+        <div class="col-12 paddingTop15">
             <h4><pre>@Model.BlogTitle</pre></h4>
             <span asp-validation-for="BlogTitle" class="text-danger"></span>
         </div>
@@ -21,7 +21,7 @@
             @Html.TextAreaFor(y => Model.BlogBody, new { @class = "fullwidth get-preview" })
         </div>
 
-        <div class="preview">
+        <div class="col-12 preview">
             <div class="teaser preview-container">
             </div>
         </div>
@@ -30,23 +30,14 @@
     <div class="row">
         <div class="col-12 paddingTop15">
             @await Html.PartialAsync("_CodeInstructionPartial")
-            @Html.TextAreaFor(x => x.CommentBody, new { @class = "fullwidth minhgt300 get-preview" })
+            @Html.TextAreaFor(x => x.CommentBody, new { @class = "fullwidth tab minhgt300 get-preview" })
             <span asp-validation-for="CommentBody" class="text-danger"></span>
         </div>
-
-        @*<div class="form-group">
-
-            <label asp-for="CommentBody" class="control-label"></label>
-
-            <textarea asp-for="CommentBody" class="form-control"></textarea>
-            <span asp-validation-for="CommentBody" class="text-danger"></span>
-        </div>*@
-        <div class="preview">
+        <div class="col-12 marginBottom15 preview">
             <h4 style="text-align: center;">PREVIEW</h4>
-            <div class="preview-container">
+            <div class="padding15 preview-container" style="border: solid 10px #F5F5F5;">
             </div>
         </div>
-
 
         <div class="col-12">
             <input type="hidden" asp-for="BlogId" class="form-control" />
@@ -55,7 +46,7 @@
         <div class="col-md-6">
             <a asp-action="Index" class="btn btn-primary">Back to List</a>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-6 txtalignright">
             <input type="submit" value="Reply" class="btn btn-primary" />
         </div>
     </div>

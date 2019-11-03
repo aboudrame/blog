@@ -4,14 +4,16 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Contact</h1>
-<hr />
-<div class="row">
-    <div class="col-12" style="padding: 0;">
-        <img src="~/images/f1.jpeg" style="width: 100%;"/>
-    </div>
-    <div class="col-md-12">
-        <form asp-action="Create">
+
+<div class="banner-container">
+    <h1 class="banner-text-container margin15 txtaligncenter"><span class="banner-text">Contact form</span></h1>
+    <img src="~/images/f1.jpeg" class="fullwidth" />
+</div>
+
+
+<form asp-action="Create">
+    <div class="row">
+        <div class="col-md-12">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Title" class="control-label"></label>
@@ -20,19 +22,21 @@
             </div>
             <div class="form-group">
                 <label asp-for="Body" class="control-label"></label>
-                <textarea asp-for="Body" class="form-control" > </textarea>
+                <textarea asp-for="Body" class="form-control"> </textarea>
                 <span asp-validation-for="Body" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="SEND" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
+        <div class="col-md-6">
+            <a asp-action="Index" asp-controller="Home" class="btn btn-primary">Home</a>
+        </div>
+        <div class="col-md-6 txtalignright">
+            <input type="submit" value="SEND" class="btn btn-primary" />
+        </div>
     </div>
-</div>
+</form>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

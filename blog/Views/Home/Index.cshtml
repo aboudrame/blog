@@ -112,22 +112,22 @@
 
                 <div class="left-nav">
                     <ul>
-                        <li>@Html.ActionLink("HTML5", "Index", "Blogs", new { search = "HTML" })</li>
-                        <li>@Html.ActionLink("JavaScript", "Index", "Blogs", new { search = "JavaScript" })</li>
-                        <li>@Html.ActionLink("jQuery", "Index", "Blogs", new { search = "jQuery" })</li>
-                        <li>@Html.ActionLink("AngularJS", "Index", "Blogs", new { search = "AngularJS" })</li>
-                        <li>@Html.ActionLink("CSS3", "Index", "Blogs", new { search = "CSS" })</li>
-                        <li>@Html.ActionLink("C#", "Index", "Blogs", new { search = "C#" })</li>
-                        <li>@Html.ActionLink("Database", "Index", "Blogs", new { search = "Database" })</li>
-                        <li>@Html.ActionLink("ColdFusion", "Index", "Blogs", new { search = "ColdFusion" })</li>
-                        <li>@Html.ActionLink("Entity Framework", "Index", "Blogs", new { search = "Entity Framework" })</li>
-                        <li>@Html.ActionLink("ASP.NET core MVC", "Index", "Blogs", new { search = "MVC" })</li>
-                        <li>@Html.ActionLink("Linq query", "Index", "Blogs", new { search = "Linq query" })</li>
-                        <li>@Html.ActionLink("Dreamweaver", "Index", "Blogs", new { search = "Dreamweaver" })</li>
-                        <li>@Html.ActionLink("Networking", "Index", "Blogs", new { search = "Networking" })</li>
-                        <li>@Html.ActionLink("Integration", "Index", "Blogs", new { search = "Integration" })</li>
-                        <li>@Html.ActionLink("Security", "Index", "Blogs", new { search = "Security" })</li>
-                        <li>@Html.ActionLink("E-commerce", "Index", "Blogs", new { search = "E-commerce" })</li>
+                        <li>@Html.ActionLink("HTML5", "Index", "Blogs", new { search = "html" })</li>
+                        <li>@Html.ActionLink("JavaScript", "Index", "Blogs", new { search = "javascript" })</li>
+                        <li>@Html.ActionLink("jQuery", "Index", "Blogs", new { search = "jquery" })</li>
+                        <li>@Html.ActionLink("AngularJS", "Index", "Blogs", new { search = "angular" })</li>
+                        <li>@Html.ActionLink("CSS3", "Index", "Blogs", new { search = "css" })</li>
+                        <li>@Html.ActionLink("C#", "Index", "Blogs", new { search = "c#" })</li>
+                        <li>@Html.ActionLink("Database", "Index", "Blogs", new { search = "database" })</li>
+                        <li>@Html.ActionLink("ColdFusion", "Index", "Blogs", new { search = "coldfusion" })</li>
+                        <li>@Html.ActionLink("Entity Framework", "Index", "Blogs", new { search = "entity framework" })</li>
+                        <li>@Html.ActionLink("ASP.NET core MVC", "Index", "Blogs", new { search = "mvc" })</li>
+                        <li>@Html.ActionLink("Linq query", "Index", "Blogs", new { search = "linq query" })</li>
+                        <li>@Html.ActionLink("Dreamweaver", "Index", "Blogs", new { search = "dreamweaver" })</li>
+                        <li>@Html.ActionLink("Networking", "Index", "Blogs", new { search = "networking" })</li>
+                        <li>@Html.ActionLink("Integration", "Index", "Blogs", new { search = "integration" })</li>
+                        <li>@Html.ActionLink("Security", "Index", "Blogs", new { search = "security" })</li>
+                        <li>@Html.ActionLink("E-commerce", "Index", "Blogs", new { search = "e-commerce" })</li>
 
                     </ul>
 
@@ -138,38 +138,69 @@
                 <div class="member-area">
                     <span><strong>@Html.ActionLink("Member Area", "Index", "Member")</strong></span> <br />Please login to post, edit, remove, or comment
                     <div class="row">
-                        <div class="col-12">
+                        <div class="col-9">
                             <h2>@Html.ActionLink("Post your question", "Create", "Member")</h2>
                         </div>
-
-
+                        <div class="col-3">
+                            <h4>@Html.ActionLink("code editor", "codeTester", "CodeEditor")</h4>
+                        </div>
                     </div>
                 </div>
 
                 <div class="posts">
-                    @foreach (var post in Model)
+                    @foreach (var x in Model)
                     {
-                        <div class="row">
-                            <div class="col-md-10">
-                                <h5>@Html.ActionLink(post.Title, "blog", "Home", new { id = post.BlogId })</h5>
-                            </div>
-                            
-                            @*@if (User.Identity.Name == post.Author) {
-                            <div class="col-md-1">
-                                <h6>@Html.ActionLink("Edit", "Edit", "Home", new { id = post.BlogId })</h6>
+                        <div class="marginTop15 padding15 bkglightblue">
+                            <div class="row paddingBottom15">
+                                <div class="col-12 marginTopBottom15">
+                                    <h4><strong><pre>@Html.ActionLink(x.Title,"Details","Member", new { id=x.BlogId})</pre></strong></h4>
+                                </div>
+                                <div class="col-12 hidden">
+                                    @Html.TextAreaFor(i => x.Body, new { @class = "fullwidth get-preview" })
+                                </div>
+                                <div class="col-12 preview">
+                                    <div class="teaser preview-container">
+                                    </div>
+                                </div>
                             </div>
 
-                            <div class="col-md-1">
-                                <h6>@Html.ActionLink("Delete", "Delete", "Home", new { id = post.BlogId })</h6>
+                            <div class="row paddingTopBottom15">
+                                <div class="col-12 txtalignright">
+                                    @Html.ActionLink("Post a comment", "Create", "Comments", new { id = x.BlogId })
+                                </div>
                             </div>
-                            }*@
+
+                            @if (x.Comments.Any())
+                            {
+                                foreach (var comment in x.Comments.Where(r => r.BlogId == x.BlogId).OrderByDescending(r => r.LastModifiedDate))
+                                {
+                                    <div class="row bkgfloralwhite margin0 marginBottom15 paddingTop15">
+                                        <div class="col-md-12 marginBottom15 hidden">
+                                            @Html.TextAreaFor(y => comment.Body, new { @class = "fullwidth get-preview", @style = "min-height: 300px;" })
+                                        </div>
+
+                                        <div class="col-12 preview">
+                                            <div class="teaser preview-container">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6 padding15">
+                                            @comment.LastModifiedDate
+                                        </div>
+                                        <div class="col-md-6 padding15">
+                                            @comment.Commenter
+                                        </div>
+                                    </div>
+                                }
+                            }
 
                         </div>
-                        <div class="teaser">@post.Body</div>
-                        <div style="font-style: italic">@post.Author | @post.LastModifiedDate.</div> <br />
-
                     }
+
                 </div>
+
+
+
 
             </div>
         </div>

@@ -1,9 +1,63 @@
-﻿
-@{
-    ViewData["Title"] = "CodeTester";
-}
+﻿<link href="~/js/codemirror/lib/codemirror.css" rel="stylesheet">
+<link href="~/js/codemirror/doc/docs.css" rel="stylesheet">
+<style>
 
-<h1>CodeTester</h1>
+    .CodeMirror {
+        height: auto;
+        border: 1px solid #ddd;
+    }
 
-@await Html.PartialAsync("_CodeEditor")
+    .CodeMirror-scroll {
+        max-height: 200px;
+    }
+
+    .CodeMirror pre {
+        padding-left: 7px;
+        line-height: 1.25;
+    }
+
+    .banner {
+        background: #ffc;
+        padding: 6px;
+        border-bottom: 2px solid silver;
+    }
+
+        .banner div {
+            margin: 0 auto;
+            max-width: 700px;
+            text-align: center;
+        }
+</style>
+
+
+<div>
+    <p class="codeEditorDescription txtaligncenter">
+        It is always a good practice to share the codes that you have tested to ensure accuracy and help others assist you quickly.<br />
+        This code tester is available for HTML, CSS, JavaScript and jQuery codes. <br />
+        Place the jQuery code within the wrapper $(function () { <strong>jQuery code goes here!</strong> }); <br />
+        Please report any issues <strong>@Html.ActionLink("HERE", "Create", "Contacts")</strong>
+    </p>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h4 class="txtaligncenter">HTML</h4>
+        <textarea class="html"></textarea>
+    </div>
+    <div class="col-md-4">
+        <h4 class="txtaligncenter">CSS</h4>
+        <textarea class="css"></textarea>
+    </div>
+    <div class="col-md-4">
+        <h4 class="txtaligncenter">JavaScript</h4>
+        <textarea class="javascript"></textarea>
+    </div>
+
+    <div class="col-12 Result">
+        <h3 class="RUN btn btn-primary">Run the code</h3>
+        <iframe id="Result" src="~/iframe/index"></iframe>
+    </div>
+</div>
+
+
 

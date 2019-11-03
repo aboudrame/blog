@@ -16,9 +16,9 @@ namespace blog.Models
         [Required]
         public string Author { get; set; }
         [Required]
-        public DateTime CreatedDate { get; set; }
+        public DateTime CreatedDate { get; set; } = DateTime.Parse("01/01/9999");
         [Required]
-        public DateTime LastModifiedDate { get; set; }
+        public DateTime LastModifiedDate { get; set; } = DateTime.Parse("01/01/9999");
         [Required]
         public string Body { get; set; }
         [Required]

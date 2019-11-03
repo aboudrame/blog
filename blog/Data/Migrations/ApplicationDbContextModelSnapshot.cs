@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using blog.Data;
 
-namespace blog.Data.Migrations
+namespace Template.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot
@@ -146,11 +146,15 @@ namespace blog.Data.Migrations
 
                     b.Property<string>("First_Name");
 
+                    b.Property<DateTime?>("LastLoginDate");
+
                     b.Property<string>("Last_Name");
 
                     b.Property<bool>("LockoutEnabled");
 
                     b.Property<DateTimeOffset?>("LockoutEnd");
+
+                    b.Property<DateTime?>("LoginDate");
 
                     b.Property<string>("Middle_Name");
 
@@ -273,30 +277,6 @@ namespace blog.Data.Migrations
                     b.HasKey("ContentTypeId");
 
                     b.ToTable("ContentTypes");
-                });
-
-            modelBuilder.Entity("blog.ViewModels.RegisterCommentViewModel", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("BlogBody");
-
-                    b.Property<long>("BlogId");
-
-                    b.Property<string>("CommentBody")
-                        .IsRequired();
-
-                    b.Property<string>("Commenter");
-
-                    b.Property<DateTime>("CreatedDate");
-
-                    b.Property<DateTime>("LastModifiedDate");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("RegisterCommentViewModel");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

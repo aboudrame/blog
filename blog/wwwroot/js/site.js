@@ -10,6 +10,7 @@
             main.codeFormating();
             main.codeInstruction();
             main.toggleblog();
+            main.tabtrap();
         },
 
         banner: function () {
@@ -163,22 +164,20 @@
             });
 
             function format(txt) {
-                var regInlineOpen = /<inlinecode>/gi;
-                var regInlineClose = /<\/inlinecode>/gi;
-                var regBlockOpen = /<blockcode>/gi;
-                var regBlockClose = /<\/blockcode>/gi;
+                var opentag = /</g;             // /(<)([a-z])/ig; //  /(<)(a-z)(a-z|'|"|=|{|}|;|\s)+(>)/gi;
+                                                //var closingtag = /(<)(\/[a-z]+)(>)/ig;
 
-                var bodyTxt = '<pre>' + $(txt).val() + '<\/pre>';
 
-                cleancode = bodyTxt
-                    .replace(regInlineOpen, '<div class="inline-code">')
-                    .replace(regInlineClose, '<\/div>')
-                    .replace(regBlockOpen, '<div class="block-code">')
-                    .replace(regBlockClose, '<\/div>');
-
+                var bodyTxt = $(txt).val();
 
                 $(txt).closest($('.row')).find($('.preview-container')).html('');
-                $(txt).closest($('.row')).find($('.preview-container')).append($(cleancode));
+                $(txt).closest($('.row')).find($('.preview-container')).append($('<pre class="keepWhiteSpace">' + bodyTxt + '</pre>'));
+
+                $(txt).closest($('.row')).find($('.keepWhiteSpace')).children().html(function () {
+
+                    $(this).replaceWith('<span class="code">' + $(this).clone().get(0).outerHTML.toString().replace(opentag, '&lt;') + '</span>');
+                    //$(this).addClass('code');
+                });
 
                 if ($(txt).val().length === 0) {
                     $(txt).closest($('.row')).find($('.preview')).hide();
@@ -201,7 +200,16 @@
                 var el = $(this).closest($('.comment-container')).find($('.blog'));
                 el.toggleClass('on');
             });
-        } 
+        },
+
+        tabtrap: function () {
+            $('.tab').on('keydown', function (e) {
+                if (e.keyCode === 9) {
+                    e.preventDefault();
+                    document.execCommand('insertHTML', false, '&#009');
+                }
+            });
+        }
 
     };
 

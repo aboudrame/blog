@@ -18,11 +18,13 @@ namespace blog.Areas.Identity.Pages.Account
     {
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly ILogger<LoginModel> _logger;
+        private readonly ApplicationDbContext _context;
 
-        public LoginModel(SignInManager<ApplicationUser> signInManager, ILogger<LoginModel> logger)
+        public LoginModel(SignInManager<ApplicationUser> signInManager, ILogger<LoginModel> logger, ApplicationDbContext context)
         {
             _signInManager = signInManager;
             _logger = logger;
+            _context = context;
         }
 
         [BindProperty]
@@ -47,6 +49,9 @@ namespace blog.Areas.Identity.Pages.Account
 
             [Display(Name = "Remember me?")]
             public bool RememberMe { get; set; }
+
+            public DateTime? LastLoginDate { get; set; } = DateTime.Now;
+            public DateTime? LoginDate { get; set; } = DateTime.Now;
         }
 
         public async Task OnGetAsync(string returnUrl = null)
@@ -75,9 +80,20 @@ namespace blog.Areas.Identity.Pages.Account
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
                 var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: true);
+
                 if (result.Succeeded)
                 {
+                    //adding the logic for the Last Login date
+                    var loggeduser = _context.Users.FirstOrDefault(x => x.Email == Input.Email);
+
+                    loggeduser.LastLoginDate = loggeduser.LoginDate;
+                    loggeduser.LoginDate =  DateTime.Now;
+                    _context.Users.Update(loggeduser);
+
+                    await _context.SaveChangesAsync();
+
                     _logger.LogInformation("User logged in.");
+                   
                     return LocalRedirect(returnUrl);
                 }
                 if (result.RequiresTwoFactor)
