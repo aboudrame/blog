@@ -77,6 +77,36 @@ namespace blog.Controllers
             return View(blog);
         }
 
+
+        // GET: Member/Create
+        public IActionResult Create2()
+        {
+            var blog = new Blog();
+
+            blog.Author = User.Identity.Name;
+            blog.CreatedDate = DateTime.Now;
+            blog.LastModifiedDate = DateTime.Now;
+            blog.ContentTypeId = 2;
+
+            return View(blog);
+        }
+
+        // POST: Member/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create2(Blog blog)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Add(blog);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(blog);
+        }
+
         // GET: Member/Edit/5
         public async Task<IActionResult> Edit(long? id)
         {

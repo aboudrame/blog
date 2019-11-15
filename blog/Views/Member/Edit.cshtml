@@ -8,6 +8,7 @@
     <h1 class="banner-text-container margin15 txtaligncenter"><span class="banner-text">Blog Editor</span></h1>
     <img src="~/images/sunset.jpg" class="fullwidth" />
 </div>
+
 <form asp-action="Edit">
     <div class="row">
         <div class="col-12">
@@ -16,30 +17,32 @@
             <input type="hidden" asp-for="BlogId" />
             <div class="form-group">
                 <label asp-for="Title" class="control-label"></label>
-                <input asp-for="Title" class="form-control"  />
+                <input asp-for="Title" class="form-control" />
                 <span asp-validation-for="Title" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input asp-for="Author" class="form-control" type="hidden"/>
+                <input asp-for="Author" class="form-control" type="hidden" />
                 <span asp-validation-for="Author" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input asp-for="LastModifiedDate" class="form-control" type="hidden"/>
+                <input asp-for="LastModifiedDate" class="form-control" type="hidden" />
                 <span asp-validation-for="LastModifiedDate" class="text-danger"></span>
             </div>
-            <div class="form-group">
+
+            <div class="col-12 form-group custom-highlighter">
                 <label asp-for="Body" class="control-label"></label>
                 @await Html.PartialAsync("_CodeInstructionPartial")
-                <textarea asp-for="Body" class="form-control tab get-preview"> </textarea>
+                <div class="row">
+                    <div class="col-12 txtalignright">
+                        <input type="button" value="Preview" class="preview" />
+                    </div>
+                </div>
+                <pre><textarea asp-for="Body" class="form-control tab included-snippets code"></textarea></pre>
                 <span asp-validation-for="Body" class="text-danger"></span>
-            </div>
+                <div class="preview-container">
 
-            <div class="form-group edit-preview preview">
-                <h4 style="text-align: center;">PREVIEW</h4>
-                <div class="preview-container" style="border: solid 10px #F5F5F5; padding: 15px;">
                 </div>
             </div>
-
         </div>
     </div>
     <div class="row">
@@ -47,7 +50,7 @@
             @Html.ActionLink("Back to List", "Index", "Member", null, new { @class = "btn btn-primary" })
         </div>
         <div class="col-md-4 txtaligncenter">
-            @Html.ActionLink("Test The Code", "CodeTester", "CodeEditor", null, new { @class="btn btn-primary"})
+            @Html.ActionLink("Test The Code", "CodeTester", "CodeEditor", null, new { @class = "btn btn-primary" })
         </div>
         <div class="form-group submit col-md-4">
             <input type="submit" value="SAVE" class="btn btn-primary submit" />

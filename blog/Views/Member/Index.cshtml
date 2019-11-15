@@ -4,12 +4,54 @@
     ViewData["Title"] = "Index";
 }
 
+<link href="~/js/codemirror/doc/docs.css" rel="stylesheet">
+<link href="~/js/codemirror/lib/codemirror.css" rel="stylesheet" />
+<style>
+
+    .CodeMirror {
+        height: auto;
+        border: 1px solid #ddd;
+    }
+
+    a, a:visited, a:link, .quasilink {
+        color: #FFF;
+    }
+
+    .CodeMirror-scroll {
+        max-height: 200px;
+    }
+
+    .CodeMirror pre {
+        padding-left: 7px;
+        line-height: 1.25;
+    }
+
+    .banner {
+        background: #ffc;
+        padding: 6px;
+        border-bottom: 2px solid silver;
+    }
+
+        .banner div {
+            margin: 0 auto;
+            max-width: 700px;
+            text-align: center;
+        }
+
+    .readonly + .CodeMirror {
+        pointer-events: none;
+        cursor: copy;
+    }
+</style>
 
 <div class="banner-container">
     <h1 class="banner-text-container margin15 txtaligncenter"><span class="banner-text">My POSTS</span></h1>
     <img src="~/images/member_index.jpg" class="fullwidth" />
 </div>
 <div></div>
+
+
+
 @foreach (var x in Model)
 {
     <div class="marginTop15 padding15 bkglightblue">
@@ -17,13 +59,21 @@
             <div class="col-12 marginTopBottom15">
                 <h4><strong><pre>@Html.ActionLink(x.Title,"Details","Member", new { id=x.BlogId})</pre></strong></h4>
             </div>
-            <div class="col-12 hidden">
-                @Html.TextAreaFor(i => x.Body, new { @class = "fullwidth get-preview" })
-            </div>
-            <div class="col-12 preview">
-                <div class="teaser preview-container">
+            @*<div class="col-12">
+                <pre>@Html.TextAreaFor(i => x.Body, new { @class="highlightcodes"})</pre>
+            </div>*@
+
+
+            <div class="col-12 form-group custom-highlighter">
+                <label asp-for="@x.Body" class="control-label"></label>
+                <pre><textarea asp-for="@x.Body" class="form-control tab included-snippets codeIndex"></textarea></pre>
+                <span asp-validation-for="@x.Body" class="text-danger"></span>
+                <div class="preview-container">
+
                 </div>
             </div>
+
+
         </div>
 
         <div class="row paddingTopBottom15">
@@ -31,13 +81,13 @@
                 @x.LastModifiedDate
             </div>
             <div class="col-md-3">
-                <a asp-action="Edit" asp-route-id="@x.BlogId" >Edit</a>
+                <a asp-action="Edit" asp-route-id="@x.BlogId">Edit</a>
             </div>
             <div class="col-md-3">
-                <a asp-action="Delete" asp-route-id="@x.BlogId" >Delete</a>
+                <a asp-action="Delete" asp-route-id="@x.BlogId">Delete</a>
             </div>
             <div class="col-md-3">
-                <a asp-action="Create" >POST</a>
+                <a asp-action="Create">POST</a>
             </div>
         </div>
 
@@ -45,23 +95,23 @@
         {
             foreach (var comment in x.Comments.Where(r => r.BlogId == x.BlogId).OrderByDescending(r => r.LastModifiedDate))
             {
-            <div class="row bkgfloralwhite margin0 marginBottom15 paddingTop15">
-                <div class="col-md-12 marginBottom15 hidden">
-                    @Html.TextAreaFor(y=>comment.Body, new {@class="fullwidth get-preview", @style="min-height: 300px;" })
-                </div>
+                <div class="row bkgfloralwhite margin0 marginBottom15 paddingTop15">
+                    <div class="col-md-12 marginBottom15 hidden">
+                        @Html.TextAreaFor(y => comment.Body, new { @class = "fullwidth get-preview", @style = "min-height: 300px;" })
+                    </div>
 
-                <div class="col-12 preview">
-                    <div class="teaser preview-container">
+                    <div class="col-12 preview">
+                        <div class="teaser preview-container">
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 padding15">
+                        @comment.LastModifiedDate
+                    </div>
+                    <div class="col-md-6 padding15">
+                        @comment.Commenter
                     </div>
                 </div>
-
-                <div class="col-md-6 padding15">
-                    @comment.LastModifiedDate
-                </div>
-                <div class="col-md-6 padding15">
-                    @comment.Commenter
-                </div>
-            </div>
             }
         }
 

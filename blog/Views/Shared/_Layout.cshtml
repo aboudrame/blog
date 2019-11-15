@@ -6,7 +6,7 @@
     <title>@ViewData["Title"] - blog</title>
 
     <environment include="Development">
-        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
     </environment>
     <environment exclude="Development">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -15,8 +15,10 @@
               crossorigin="anonymous"
               integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" />
     </environment>
-    <link href="~/css/site.css" rel="stylesheet" />
-    <link href="~/css/custom.css" rel="stylesheet" />
+    <link href="~/js/codemirror/doc/docs.css" rel="stylesheet">
+    <link href="~/js/codemirror/lib/codemirror.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/custom.css" />
 </head>
 <body>
     <header>
@@ -109,8 +111,8 @@
     </environment>
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="~/js/custom-teaser.js"></script>
+
     <script src="~/js/codemirror/lib/codemirror.js"></script>
-    <link rel="stylesheet" href="~/js/codemirror/lib/codemirror.css">
     <script src="~/js/codemirror/mode/javascript/javascript.js"></script>
 
     <script src="~/js/codemirror/lib/codemirror.js"></script>
@@ -129,6 +131,7 @@
     <script src="~/js/codemirror/doc/activebookmark.js"></script>
 
     <script src="~/js/custom-codemirror.js"></script>
+
     @RenderSection("Scripts", required: false)
 </body>
 </html>

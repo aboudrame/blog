@@ -27,7 +27,14 @@
                 </h4>
             </div>
 
-            @await Html.PartialAsync("_BlogBodyCodePreviewPartial", blog)
+            <div class="col-12 form-group custom-highlighter">
+                <label asp-for="@blog.Body" class="control-label"></label>
+                <pre><textarea asp-for="@blog.Body" class="form-control tab included-snippets codeIndex"></textarea></pre>
+                <span asp-validation-for="@blog.Body" class="text-danger"></span>
+                <div class="preview-container">
+
+                </div>
+            </div>
 
             <div class="col-md-3">
                 @Html.DisplayFor(x => blog.CreatedDate)

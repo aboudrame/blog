@@ -30,10 +30,31 @@ pre {
     display: block;
 }
 
+div pre {
+    padding-left: 0;
+    border-left: 0;
+}
+
+div a, div a:visited, div a:link, div .quasilink {
+    color: #3c6b92;
+    background-color: #b3b3b3;
+    padding: 5px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+div.left-nav a {
+    background-color: inherit;
+}
+
+div strong {
+    text-decoration: none;
+}
+
 .Banner_text {
     position: absolute;
     top: 50%;
-    transform:translateY(-50%);
+    transform: translateY(-50%);
     left: 15px;
     right: 15px;
 }
@@ -204,8 +225,13 @@ a:hover {
     margin: auto;
 }
 
+.included-snippets + .CodeMirror {
+    background-color: #000080; /*NAVY*/
+}
 
-
+.included-snippets + .cm-s-default .cm-attribute {
+    color: #00ced1; /**/
+}
 
 .left-nav ul {
     list-style: none;
@@ -446,10 +472,6 @@ li[class*="list"] {
     box-shadow: 10px 0 0 #F5F5F5, -10px 0 0 #F5F5F5;
 }
 
-.preview-container {
-    line-height: 3.5;
-}
-
 .tab {
     white-space: pre-wrap;
 }
@@ -488,7 +510,6 @@ li[class*="list"] {
 }
 
 .instruction {
-    margin-left: calc(100% - 145px);
     margin-bottom: 15px;
 }
 
@@ -662,6 +683,40 @@ div.cm-s-default .cm-atom {
 }
 
 /* END 3D */
+
+
+/* Begin codeMirror specific styling */
+
+.CodeMirror {
+    height: auto;
+    border: 1px solid #ddd;
+}
+
+a, a:visited, a:link, .quasilink {
+    color: #FFF;
+}
+
+.CodeMirror-scroll {
+    max-height: 200px;
+}
+
+.CodeMirror pre {
+    padding-left: 7px;
+    line-height: 1.25;
+}
+
+.banner {
+    background: #ffc;
+    padding: 6px;
+    border-bottom: 2px solid silver;
+}
+
+    .banner div {
+        margin: 0 auto;
+        max-width: 700px;
+        text-align: center;
+    }
+/* End codeMirror specific styling */
 
 .margin0 {margin: 0;}
 .margin15 {margin: 15px;}
