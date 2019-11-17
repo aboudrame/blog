@@ -29,20 +29,8 @@
                 <span asp-validation-for="LastModifiedDate" class="text-danger"></span>
             </div>
 
-            <div class="col-12 form-group custom-highlighter">
-                <label asp-for="Body" class="control-label"></label>
-                @await Html.PartialAsync("_CodeInstructionPartial")
-                <div class="row">
-                    <div class="col-12 txtalignright">
-                        <input type="button" value="Preview" class="preview" />
-                    </div>
-                </div>
-                <pre><textarea asp-for="Body" class="form-control tab included-snippets code"></textarea></pre>
-                <span asp-validation-for="Body" class="text-danger"></span>
-                <div class="preview-container">
+            @await Html.PartialAsync("_CreateEditBodyPartial", ViewData["blog"])
 
-                </div>
-            </div>
         </div>
     </div>
     <div class="row">

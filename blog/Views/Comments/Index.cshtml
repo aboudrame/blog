@@ -13,17 +13,13 @@
 {
     <div class="comment-container bkgfloralwhite marginBottom15 padding15" style="padding-bottom: 0;">
         <div class="row comment marginBottom15">
-            @*<div class="col-12 paddingTop15 paddingBottom15">
-                @comment.Body
-            </div>*@
 
-            <div class="col-12 hidden">
-                <textarea asp-for="@comment.Body" class="form-control get-preview"> </textarea>
+            <div class="col-12 form-group custom-highlighter">
+                <label asp-for="@comment.Body" class="control-label"></label>
+                <pre><textarea asp-for="@comment.Body" class="form-control tab included-snippets codeIndex"></textarea></pre>
                 <span asp-validation-for="@comment.Body" class="text-danger"></span>
-            </div>
-
-            <div class="col-12 preview">
                 <div class="preview-container">
+
                 </div>
             </div>
 
@@ -37,7 +33,7 @@
                 @Html.ActionLink("EDIT", "Edit", "Comments", new { id = comment.CommentId })
             </div>
             <div class="col-md-3 paddingTop15 paddingBottom15">
-                <input type="button" value="Blog" class="toggleblog" />
+                @Html.ActionLink("BLOG", "Details", "Member", new { id = comment.BlogId })
             </div>
         </div>
 

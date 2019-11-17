@@ -18,18 +18,8 @@
                 <input asp-for="LastModifiedDate" class="form-control" type="hidden" />
                 <span asp-validation-for="LastModifiedDate" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Body" class="control-label"></label>
-                @await Html.PartialAsync("_CodeInstructionPartial")
-                <textarea asp-for="Body" class="form-control get-preview"> </textarea>
-                <span asp-validation-for="Body" class="text-danger"></span>
-            </div>
 
-            <div class="form-group edit-preview preview">
-                <h4 style="text-align: center;">PREVIEW</h4>
-                <div class="preview-container" style="border: solid 10px #F5F5F5; padding: 15px;">
-                </div>
-            </div>
+            @await Html.PartialAsync("_CreateEditBodyPartial", ViewData["comment"])}
 
         </div>
     </div>

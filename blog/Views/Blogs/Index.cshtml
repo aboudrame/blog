@@ -51,29 +51,37 @@
         </div>
 
         @if (blog.Comments.Any())
-            {
+         {
                 @foreach (var comment in blog.Comments.Where(x=>x.BlogId == blog.BlogId).OrderByDescending(x => x.CreatedDate).Take(5))
                 {
                     <div class="row bkgfloralwhite marginTopBottom15 paddingTop15">
-                        <div class="col-12 hidden">
-                            <pre>@Html.TextAreaFor(x => comment.Body, new {@class="form-control get-preview" })</pre>
-                        </div>
-                        <div class="col-12 noborder preview ">
-                            <div class="preview-container">
-                            </div>
-                        </div>
 
+                    <div class="col-12 form-group custom-highlighter">
+                        <label asp-for="@comment.Body" class="control-label"></label>
+                        <pre><textarea asp-for="@comment.Body" class="form-control tab included-snippets codeIndex"></textarea></pre>
+                        <span asp-validation-for="@comment.Body" class="text-danger"></span>
+                        <div class="preview-container">
 
-                        <div class="col-md-6 padding15">
-                            @comment.CreatedDate
-                        </div>
-                        <div class="col-md-6 padding15">
-                            @comment.Commenter
                         </div>
                     </div>
-                }
 
-        }
+                    @*<div class="col-12 hidden">
+                        <pre>@Html.TextAreaFor(x => comment.Body, new {@class="form-control get-preview" })</pre>
+                    </div>
+                    <div class="col-12 noborder preview ">
+                        <div class="preview-container">
+                        </div>
+                    </div>*@
+
+                    <div class="col-md-6 padding15">
+                        @comment.CreatedDate
+                    </div>
+                    <div class="col-md-6 padding15">
+                        @comment.Commenter
+                    </div>
+                    </div>
+                }
+         }
     </div>
  }
 

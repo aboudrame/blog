@@ -15,7 +15,9 @@
         @Html.DisplayFor(model => model.Title)
     </div>
 
-    @await Html.PartialAsync("_BlogBodyCodePreviewPartial")
+    <div class="col-12 marginBottom15" style="font-weight: bold; font-size: 1.2em;">
+        <pre>@Html.DisplayFor(model => model.Body)</pre>
+    </div>
 
     <div class="col-md-3"><a asp-action="Index" class="btn btn-primary">Back to List</a></div>
     <div class="col-md-3" style="font-style: italic;">@Html.DisplayFor(model => model.Author)</div>
@@ -30,14 +32,10 @@
             <pre>@string.Format("{0}", comment.Body)</pre>
         </div>*@
 
-        <div class="col-md-12 marginBottom15 hidden">
-            @Html.TextAreaFor(y => comment.Body, new { @class = "fullwidth get-preview"})
+        <div class="col-md-12 marginBottom15">
+            @Html.TextAreaFor(y => comment.Body)
         </div>
 
-        <div class="col-12 preview">
-            <div class="teaser preview-container">
-            </div>
-        </div>
         <div class="col-md-6 padding15">
             @comment.Commenter
         </div>

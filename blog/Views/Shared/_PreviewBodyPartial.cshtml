@@ -1,0 +1,20 @@
+﻿@model blog.ViewModels.BlogCommentViewModel
+
+<div class="col-12 form-group custom-highlighter">
+
+    @if (ViewData["blog"] != null)
+    {
+        <label asp-for="@Model.Blog.Body" class="control-label"></label>
+        <pre><textarea asp-for="@Model.Blog.Body" class="form-control included-snippets codeIndex"></textarea></pre>
+        <span asp-validation-for="@Model.Blog.Body" class="text-danger"></span>
+    }
+    @if (ViewData["comment"] != null)
+    {
+        <label asp-for="@Model.Comment.Body" class="control-label"></label>
+        <pre><textarea asp-for="@Model.Comment.Body" class="form-control included-snippets codeIndex"></textarea></pre>
+        <span asp-validation-for="@Model.Comment.Body" class="text-danger"></span>
+    }
+    <div class="preview-container">
+
+    </div>
+</div>

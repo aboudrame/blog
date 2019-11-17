@@ -43,8 +43,19 @@ div a, div a:visited, div a:link, div .quasilink {
     font-weight: bold;
 }
 
-div.left-nav a {
+div.left-nav a,
+div.member-area a,
+div.bkglightblue a,
+h2.topic-title a,
+ul.navbar-nav a,
+div.about-content a {
     background-color: inherit;
+}
+
+a h2,
+a h3,
+a h1 {
+    margin-bottom: 0;
 }
 
 div strong {
@@ -476,6 +487,8 @@ li[class*="list"] {
     white-space: pre-wrap;
 }
 
+section {border-top: initial;}
+
 .img-about {
     margin: auto;
     width: 100%;
@@ -711,11 +724,11 @@ a, a:visited, a:link, .quasilink {
     border-bottom: 2px solid silver;
 }
 
-    .banner div {
-        margin: 0 auto;
-        max-width: 700px;
-        text-align: center;
-    }
+.banner div {
+    margin: 0 auto;
+    max-width: 700px;
+    text-align: center;
+}
 /* End codeMirror specific styling */
 
 .margin0 {margin: 0;}
@@ -724,7 +737,9 @@ a, a:visited, a:link, .quasilink {
 .marginLeft15 {margin-left: 15px;}
 .marginRight15 {margin-right: 15px;}
 .marginBottom15 {margin-bottom: 15px;}
-.marginTopBottom15 {margin: 15px 0;}
+.marginTopBottom15 {margin-top: 15px; margin-bottom: 15px;}
+.marginLeftRight15 {margin-left: 15px; margin-right: 15px;}
+.marginAuto {margin: auto;}
 
 .padding0 {padding: 0;}
 .padding15 {padding: 15px;}
@@ -732,15 +747,14 @@ a, a:visited, a:link, .quasilink {
 .paddingLeft15 {padding-left: 15px;}
 .paddingRight15 {padding-right: 15px;}
 .paddingBottom15 {padding-bottom: 15px;}
-.paddingTopBottom15 {padding: 15px 0;}
+.paddingTopBottom15 {padding-top: 15px; padding-bottom: 15px;}
+.paddingLeftRight15 {padding-left: 15px; padding-right: 15px;}
 
 .txtaligncenter {text-align: center;}
 .txtalignleft {text-align: left;}
 .txtalignright {text-align: right;}
 
 .fullwidth {width: 100%;}
-.minhgt300 {min-height: 300px;}
-
 
 .bkgfloralwhite {background-color: floralwhite;}
 .bkglightgray {background-color: #f5f5f5;}
@@ -750,6 +764,9 @@ a, a:visited, a:link, .quasilink {
     display: none;
 }
 
+.displayblk {
+    display: block;
+}
 
 .bkglightblue:nth-child(2n+1) {
     background-color: #dce6f2;

@@ -1,22 +1,19 @@
-﻿
-<div>
-    <input type="button" value="Instruction" class="instruction btn btn-primary" />
-</div>
-<div class="code-instruction">
-        Type in the box below as you normally would. Place the code snippets within a wrapper, the white spaces are preserved. There are two types of wrapper: <br />
+﻿    <div class="col-12 paddingTop15 code-instruction bkgazure">
+        Type in the box below as you normally would. Follow this instruction to place any codes that you would like to share with the community. 
         <ul>
-            <li>
-                <strong>&lt;inlinecode>CODE Here&lt;/inlinecode></strong>
-                <p>
-                    Use this inlinecode tag to code the inline codes. The code and the the rest of the text would be on the same line.
-                </p>
-            </li>
-            
-            <li>
-               <strong>&lt;blockcode>CODE Here&lt;/blockcode></strong>
-                <p>
-                    Use this blockcode tag to code the block codes. The code would take the full line.
-                </p>
-            </li>
+            <li>Place two set of openning square brackets <span style="color: red; font-weight: bold;">[[</span> before the code</li>
+            <li>End the code with two set of closing square brackets <span style="color: red; font-weight: bold;">]]</span></li>
+            <li>The square brackets should be placed on the new lines</li>
+            <li>Use the preview button to see how the code would be rendered on the browser</li>
+            <li>Codes might be tested @Html.ActionLink("here","CodeTester","CodeEditor", null, new {@style="background-color: inherit;"})</li>
         </ul>
-</div>
+        For instance:
+        <pre>
+        [[
+            &lt;script type="text/javascript">
+                var greeting = "hello word!";
+                alert(greeting);
+            &lt;/script>
+        ]]
+        </pre>
+    </div>

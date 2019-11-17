@@ -7,10 +7,8 @@
             main.codeEditorNav();
             main.placeholder();
             main.ToolsRotation();
-            main.codeFormating();
-            main.codeInstruction();
-            main.toggleblog();
-            main.tabtrap();
+           // main.tabtrap();
+            main.instruction();
         },
 
         banner: function () {
@@ -152,62 +150,17 @@
 
             }
         },
-
-        codeFormating: function () {
-
-            $('.get-preview').each(function () {
-                format(this);
-            });
-
-            $('.get-preview').off('keyup').on('keyup', function () {
-                format(this);
-            });
-
-            function format(txt) {
-                var opentag = /</g;             // /(<)([a-z])/ig; //  /(<)(a-z)(a-z|'|"|=|{|}|;|\s)+(>)/gi;
-                                                //var closingtag = /(<)(\/[a-z]+)(>)/ig;
-
-
-                var bodyTxt = $(txt).val();
-
-                $(txt).closest($('.row')).find($('.preview-container')).html('');
-                $(txt).closest($('.row')).find($('.preview-container')).append($('<pre class="keepWhiteSpace">' + bodyTxt + '</pre>'));
-
-                $(txt).closest($('.row')).find($('.keepWhiteSpace')).children().html(function () {
-
-                    $(this).replaceWith('<span class="code">' + $(this).clone().get(0).outerHTML.toString().replace(opentag, '&lt;') + '</span>');
-                    //$(this).addClass('code');
-                });
-
-                if ($(txt).val().length === 0) {
-                    $(txt).closest($('.row')).find($('.preview')).hide();
-                }
-                else {
-                    $(txt).closest($('.row')).find($('.preview')).show();
-                }
-            }
-
-        },
-
-        codeInstruction: function () {
-            $('.instruction').off('click').on('click', function () {
-                $('.code-instruction').toggleClass('on');
-            });
-        },
-
-        toggleblog: function () {
-            $('.comment-container .toggleblog').off('click').on('click', function () {
-                var el = $(this).closest($('.comment-container')).find($('.blog'));
-                el.toggleClass('on');
-            });
-        },
-
         tabtrap: function () {
             $('.tab').on('keydown', function (e) {
                 if (e.keyCode === 9) {
                     e.preventDefault();
                     document.execCommand('insertHTML', false, '&#009');
                 }
+            });
+        },
+        instruction: function () {
+            $('.btn-instruction').off('click').on('click', function () {
+                $(this).closest($('.instruction')).find($('.code-instruction')).toggle();
             });
         }
 

@@ -25,9 +25,13 @@ namespace blog.Controllers
         // GET: Comments
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Comments.Include(c => c.blog).Where(x=>x.Commenter == User.Identity.Name).OrderByDescending(x=>x.LastModifiedDate);
+            var comment = await _context.Comments.Include(c => c.blog).Where(x=>x.Commenter == User.Identity.Name).OrderByDescending(x=>x.LastModifiedDate).ToListAsync();
+            //BlogCommentViewModel blogCommentViewModel = new BlogCommentViewModel();
 
-            return View(await applicationDbContext.ToListAsync());
+            //foreach (var c in comment) {
+            //    blogCommentViewModel.Comment = comment;
+            //}
+            return View(comment);
         }
 
         // GET: Comments/Details/5
@@ -55,9 +59,15 @@ namespace blog.Controllers
             RegisterCommentViewModel registerCommentViewModel = new RegisterCommentViewModel();
             Blog blog = await _context.Blogs.FindAsync(id);
 
+            BlogCommentViewModel blogCommentViewModel = new BlogCommentViewModel();
+            Comment comment = new Comment();
+
             registerCommentViewModel.BlogTitle = blog.Title;
             registerCommentViewModel.BlogBody = blog.Body;
             registerCommentViewModel.BlogId = blog.BlogId;
+
+            blogCommentViewModel.Comment = comment;
+            ViewData["comment"] = blogCommentViewModel;
 
             return View(registerCommentViewModel);
         }
@@ -108,6 +118,11 @@ namespace blog.Controllers
 
 
             ViewData["BlogId"] = new SelectList(_context.Blogs, "BlogId", "Author", comment.BlogId);
+
+            BlogCommentViewModel blogCommentViewModel = new BlogCommentViewModel();
+            blogCommentViewModel.Comment = comment;
+            ViewData["comment"] = blogCommentViewModel; 
+
             return View(comment);
         }
 
