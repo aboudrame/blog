@@ -8,7 +8,6 @@ using Microsoft.EntityFrameworkCore;
 using blog.Data;
 using blog.Models;
 using Microsoft.AspNetCore.Authorization;
-using blog.ViewModels;
 
 namespace blog.Controllers
 {
@@ -25,9 +24,8 @@ namespace blog.Controllers
         // GET: Member
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Blogs.Include(x=>x.Comments).Where(x=>x.Author == User.Identity.Name).OrderByDescending(x=>x.LastModifiedDate);
-
-            return View(await applicationDbContext.ToListAsync());
+            var blog = await _context.Blogs.Include(x=>x.Comments).Where(x=>x.Author == User.Identity.Name).OrderByDescending(x=>x.LastModifiedDate).ToListAsync();
+            return View(blog);
         }
 
         // GET: Member/Details/5
@@ -52,16 +50,11 @@ namespace blog.Controllers
         public IActionResult  Create()
         {
             var blog = new Blog();
-            BlogCommentViewModel blogCommentViewModel = new BlogCommentViewModel();
 
             blog.Author = User.Identity.Name;
             blog.CreatedDate = DateTime.Now;
             blog.LastModifiedDate = DateTime.Now;
             blog.ContentTypeId = 2;
-
-            blogCommentViewModel.Blog = blog;
-            ViewData["blog"] = blogCommentViewModel;
-
             return View(blog);
         }
 
@@ -126,9 +119,6 @@ namespace blog.Controllers
             }
 
             blog.LastModifiedDate = DateTime.Now;
-            BlogCommentViewModel blogCommentViewModel = new BlogCommentViewModel();
-            blogCommentViewModel.Blog = blog;
-            ViewData["blog"] = blogCommentViewModel;
 
             return View(blog);
         }

@@ -1,5 +1,4 @@
-﻿@model blog.ViewModels.RegisterCommentViewModel
-
+﻿@model blog.Models.Comment
 @{
     ViewData["Title"] = "Create";
 }
@@ -9,37 +8,49 @@
     <img src="~/images/comment.jpg" class="fullwidth" />
 </div>
 
-<form asp-action="Create">
+
     <div class="row">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="col-12 paddingTop15">
-            <h4><pre>@Model.BlogTitle</pre></h4>
-            <span asp-validation-for="BlogTitle" class="text-danger"></span>
+            <h4><input type="text" asp-for="@Model.blog.Title" value="@Model.blog.Title" disabled style="border: 0; padding: 15px;" /></h4>
+            <span asp-validation-for="@Model.blog.Title" class="text-danger"></span>
         </div>
 
         <div class="col-12 form-group custom-highlighter">
-            <label asp-for="@Model.BlogBody" class="control-label"></label>
-            <pre><textarea asp-for="@Model.BlogBody" class="form-control tab included-snippets codeIndex"></textarea></pre>
-            <span asp-validation-for="@Model.BlogBody" class="text-danger"></span>
+            @*<label asp-for="@Model.blog.Body" class="control-label"></label>*@
+            <pre><textarea asp-for="@Model.blog.Body" class="form-control tab included-snippets codeIndex"></textarea></pre>
+            <span asp-validation-for="@Model.blog.Body" class="text-danger"></span>
             <div class="preview-container">
 
             </div>
         </div>
     </div>
-    <div class="row">
+    <form asp-action="Create">
+        <div class="row">
 
-        @await Html.PartialAsync("_CreateEditBodyPartial", ViewData["comment"])
+            <div class="col-12 form-group custom-highlighter">
+                @await Html.PartialAsync("_CodeInstructionPartial")
 
-        <div class="col-12">
-            <input type="hidden" asp-for="BlogId" class="form-control" />
-            <span asp-validation-for="BlogId" class="text-danger"></span>
+                <pre><textarea asp-for="@Model.Body" class="form-control included-snippets code"></textarea></pre>
+                <span asp-validation-for="@Model.Body" class="text-danger"></span>
+
+                <div class="preview-container">
+
+                </div>
+            </div>
+
+            <div class="col-12">
+                <input type="hidden" asp-for="@Model.BlogId" />
+                <input type="hidden" asp-for="@Model.Commenter" value="@User.Identity.Name" />
+                <input type="hidden" asp-for="@Model.CreatedDate" value="@DateTime.Now" />
+                <input type="hidden" asp-for="@Model.LastModifiedDate" value="@DateTime.Now" />
+            </div>
+            <div class="col-md-6">
+                <a asp-action="Index" class="btn btn-primary">Back to List</a>
+            </div>
+            <div class="col-md-6 txtalignright">
+                <input type="submit" value="Reply" class="btn btn-primary" />
+            </div>
         </div>
-        <div class="col-md-6">
-            <a asp-action="Index" class="btn btn-primary">Back to List</a>
-        </div>
-        <div class="col-md-6 txtalignright">
-            <input type="submit" value="Reply" class="btn btn-primary" />
-        </div>
-    </div>
-</form>
+    </form>
 

@@ -4,7 +4,6 @@ using System.Text;
 using blog.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using blog.ViewModels;
 
 namespace blog.Data
 {

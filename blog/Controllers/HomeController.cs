@@ -43,24 +43,26 @@ namespace blog.Controllers
         public IActionResult Create()
         {
             var myCourse = new Blog();
-
             return View(myCourse);
         }
-
 
         [Authorize]
         [HttpPost]
         public IActionResult Create(Blog blog)
         {
-            blog.LastModifiedDate = DateTime.Now;
-            blog.CreatedDate = DateTime.Now;
-            blog.Author = User.Identity.Name;
-            blog.ContentTypeId = 1;
-            
-            _db.Blogs.Add(blog);
-            _db.SaveChanges();
+            if (ModelState.IsValid) {
+                blog.LastModifiedDate = DateTime.Now;
+                blog.CreatedDate = DateTime.Now;
+                blog.Author = User.Identity.Name;
+                blog.ContentTypeId = 1;
 
-            return RedirectToAction("Index", "Home", new { id = blog.BlogId });
+                _db.Blogs.Add(blog);
+                _db.SaveChanges();
+
+                return RedirectToAction("Index", "Home", new { id = blog.BlogId });
+            }
+
+            return View(blog);
         }
 
 

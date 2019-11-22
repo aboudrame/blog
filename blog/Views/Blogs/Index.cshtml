@@ -57,7 +57,7 @@
                     <div class="row bkgfloralwhite marginTopBottom15 paddingTop15">
 
                     <div class="col-12 form-group custom-highlighter">
-                        <label asp-for="@comment.Body" class="control-label"></label>
+                        @*<label asp-for="@comment.Body" class="control-label"></label>*@
                         <pre><textarea asp-for="@comment.Body" class="form-control tab included-snippets codeIndex"></textarea></pre>
                         <span asp-validation-for="@comment.Body" class="text-danger"></span>
                         <div class="preview-container">

@@ -703,6 +703,7 @@ div.cm-s-default .cm-atom {
 .CodeMirror {
     height: auto;
     border: 1px solid #ddd;
+    margin-top: 15px;
 }
 
 a, a:visited, a:link, .quasilink {

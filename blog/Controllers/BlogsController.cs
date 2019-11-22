@@ -8,7 +8,6 @@ using Microsoft.EntityFrameworkCore;
 using blog.Data;
 using blog.Models;
 using Microsoft.AspNetCore.Authorization;
-using blog.ViewModels;
 
 namespace blog.Controllers
 {
@@ -201,40 +200,7 @@ namespace blog.Controllers
         {
             return _context.Blogs.Any(e => e.BlogId == id);
         }
-        [Authorize]
-        public async Task<IActionResult> Comment(long id)
-        {
-
-            var blog = await _context.Blogs.FindAsync(id);
-            RegisterCommentViewModel comment = new RegisterCommentViewModel();
-
-            comment.BlogBody = blog.Body;
-
-            return View(comment);
-        }
         
-        [HttpPost]
-        [Authorize]
-        public async Task<IActionResult> Comment(long id, RegisterCommentViewModel registerCommentViewModel )
-        {
-            if (ModelState.IsValid)
-            {
-                Comment comment = new Comment
-                {
-                    CreatedDate = DateTime.Now,
-                        Commenter = User.Identity.Name,
-                           BlogId = id,
-                             Body = registerCommentViewModel.CommentBody
-                };
-
-                _context.Comments.Add(comment);
-               await _context.SaveChangesAsync();
-
-                return RedirectToAction("Index", "Blogs");
-            }
-
-            return View(registerCommentViewModel);
-        }
 
     }
 }

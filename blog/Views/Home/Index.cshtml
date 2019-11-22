@@ -155,13 +155,17 @@
                                 <div class="col-12 marginTopBottom15">
                                     <h4><strong><pre>@Html.ActionLink(x.Title,"Details","Member", new { id=x.BlogId})</pre></strong></h4>
                                 </div>
-                                <div class="col-12 hidden">
-                                    @Html.TextAreaFor(i => x.Body, new { @class = "fullwidth get-preview" })
-                                </div>
-                                <div class="col-12 preview">
-                                    <div class="teaser preview-container">
+
+
+                                <div class="col-12 form-group custom-highlighter">
+                                    <label asp-for="@x.Body" class="control-label"></label>
+                                    <pre><textarea asp-for="@x.Body" class="form-control tab included-snippets codeIndex"></textarea></pre>
+                                    <span asp-validation-for="@x.Body" class="text-danger"></span>
+                                    <div class="preview-container">
+
                                     </div>
                                 </div>
+
                             </div>
 
                             <div class="row paddingTopBottom15">
@@ -175,12 +179,13 @@
                                 foreach (var comment in x.Comments.Where(r => r.BlogId == x.BlogId).OrderByDescending(r => r.LastModifiedDate))
                                 {
                                     <div class="row bkgfloralwhite margin0 marginBottom15 paddingTop15">
-                                        <div class="col-md-12 marginBottom15 hidden">
-                                            @Html.TextAreaFor(y => comment.Body, new { @class = "fullwidth get-preview", @style = "min-height: 300px;" })
-                                        </div>
 
-                                        <div class="col-12 preview">
-                                            <div class="teaser preview-container">
+                                        <div class="col-12 form-group custom-highlighter">
+                                            <label asp-for="@comment.Body" class="control-label"></label>
+                                            <pre><textarea asp-for="@comment.Body" class="form-control tab included-snippets codeIndex"></textarea></pre>
+                                            <span asp-validation-for="@comment.Body" class="text-danger"></span>
+                                            <div class="preview-container">
+
                                             </div>
                                         </div>
 

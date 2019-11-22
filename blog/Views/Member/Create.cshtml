@@ -22,7 +22,17 @@
             <span asp-validation-for="Title" class="text-danger"></span>
         </div>
 
-        @await  Html.PartialAsync("_CreateEditBodyPartial", ViewData["blog"])
+        <div class="col-12 form-group custom-highlighter">
+            @await  Html.PartialAsync("_CodeInstructionPartial")
+
+            <label asp-for="Body" class="control-label"></label>
+            <pre><textarea asp-for="Body" class="form-control included-snippets code"></textarea></pre>
+            <span asp-validation-for="Body" class="text-danger"></span>
+
+            <div class="preview-container">
+
+            </div>
+        </div>
 
         <div class="col-12 hidden">
             <input asp-for="CreatedDate" class="form-control" /> <input asp-for="LastModifiedDate" class="form-control" />

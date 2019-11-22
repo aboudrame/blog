@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using blog.Data;
 using blog.Models;
-using blog.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 
 namespace blog.Controllers
@@ -26,11 +25,6 @@ namespace blog.Controllers
         public async Task<IActionResult> Index()
         {
             var comment = await _context.Comments.Include(c => c.blog).Where(x=>x.Commenter == User.Identity.Name).OrderByDescending(x=>x.LastModifiedDate).ToListAsync();
-            //BlogCommentViewModel blogCommentViewModel = new BlogCommentViewModel();
-
-            //foreach (var c in comment) {
-            //    blogCommentViewModel.Comment = comment;
-            //}
             return View(comment);
         }
 
@@ -56,20 +50,13 @@ namespace blog.Controllers
         // GET: Comments/Create
         public async Task<IActionResult> Create(long id)
         {
-            RegisterCommentViewModel registerCommentViewModel = new RegisterCommentViewModel();
+            Comment comment = new Comment();
             Blog blog = await _context.Blogs.FindAsync(id);
 
-            BlogCommentViewModel blogCommentViewModel = new BlogCommentViewModel();
-            Comment comment = new Comment();
+            comment.BlogId = id;
+            comment.blog = blog;
 
-            registerCommentViewModel.BlogTitle = blog.Title;
-            registerCommentViewModel.BlogBody = blog.Body;
-            registerCommentViewModel.BlogId = blog.BlogId;
-
-            blogCommentViewModel.Comment = comment;
-            ViewData["comment"] = blogCommentViewModel;
-
-            return View(registerCommentViewModel);
+            return View(comment);
         }
 
         // POST: Comments/Create
@@ -77,29 +64,21 @@ namespace blog.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(long id, RegisterCommentViewModel registerCommentViewModel)
+        public async Task<IActionResult> Create(long id, Comment comment)
         {
-            if (id != registerCommentViewModel.BlogId)
+            if (id != comment.BlogId)
             {
                 return NotFound();
             }
 
             if (ModelState.IsValid)
             {
-                Comment comment = new Comment() {
-                    BlogId = registerCommentViewModel.BlogId,
-                    Body = registerCommentViewModel.CommentBody,
-                    CreatedDate = DateTime.Now,
-                    LastModifiedDate = DateTime.Now,
-                    Commenter = User.Identity.Name
-                };
-
-                _context.Add(comment);
+                _context.Comments.Add(comment);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index", "Blogs");
             }
 
-            return View(registerCommentViewModel);
+            return View(comment);
         }
 
         // GET: Comments/Edit/5
@@ -118,10 +97,8 @@ namespace blog.Controllers
 
 
             ViewData["BlogId"] = new SelectList(_context.Blogs, "BlogId", "Author", comment.BlogId);
-
-            BlogCommentViewModel blogCommentViewModel = new BlogCommentViewModel();
-            blogCommentViewModel.Comment = comment;
-            ViewData["comment"] = blogCommentViewModel; 
+            Blog blog = await _context.Blogs.FindAsync(comment.BlogId);
+            comment.blog = blog;
 
             return View(comment);
         }
@@ -142,7 +119,7 @@ namespace blog.Controllers
             {
                 try
                 {
-                    _context.Update(comment);
+                    _context.Comments.Update(comment);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
