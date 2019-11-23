@@ -50,24 +50,27 @@
         {
             foreach (var comment in x.Comments.Where(r => r.BlogId == x.BlogId).OrderByDescending(r => r.LastModifiedDate))
             {
-    <div class="row bkgfloralwhite margin0 marginBottom15 paddingTop15">
+                <div class="row bkgfloralwhite margin0 marginBottom15 paddingTop15">
 
-            <div class="col-12 form-group custom-highlighter">
-                <label asp-for="@comment.Body" class="control-label"></label>
-                <pre><textarea asp-for="@comment.Body" class="form-control tab included-snippets codeIndex"></textarea></pre>
-                <span asp-validation-for="@comment.Body" class="text-danger"></span>
-                <div class="preview-container">
+                    <div class="col-12 form-group custom-highlighter">
+                        <label asp-for="@comment.Body" class="control-label"></label>
+                        <pre><textarea asp-for="@comment.Body" class="form-control tab included-snippets codeIndex"></textarea></pre>
+                        <span asp-validation-for="@comment.Body" class="text-danger"></span>
+                        <div class="preview-container">
 
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 padding15">
+                        @comment.LastModifiedDate
+                    </div>
+                    <div class="col-md-4 padding15 txtaligncenter">
+                        @comment.Commenter
+                    </div>
+                    <div class="col-md-4 padding15 txtalignright">
+                        @Html.ActionLink("Manage comments", "Index", "Comments")
+                    </div>
                 </div>
-            </div>
-
-            <div class="col-md-6 padding15">
-                @comment.LastModifiedDate
-            </div>
-            <div class="col-md-6 padding15">
-                @comment.Commenter
-            </div>
-    </div>
             }
         }
 

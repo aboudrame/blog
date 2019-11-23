@@ -329,6 +329,10 @@ span.text-info {
     display: none;
 }
 
+.CodeTester .CodeMirror.cm-s-default,
+.CodeTester .CodeMirror-scroll {
+    min-height: 300px;
+}
 
 .banner-text-container {
     position: absolute;

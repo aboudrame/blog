@@ -14,12 +14,11 @@
     <div class="col-12">
         <h4>@Model.Title</h4>
     </div>
-    <div class="col-12 hidden">
-        @Html.TextAreaFor(x => x.Body, new { @class = "fullwidth get-preview" })
-    </div>
+    <div class="col-12 form-group custom-highlighter">
+        <pre><textarea asp-for="@Model.Body" class="form-control tab included-snippets codeIndex"></textarea></pre>
+        <span asp-validation-for="@Model.Body" class="text-danger"></span>
+        <div class="preview-container">
 
-    <div class="col-12 preview">
-        <div class="teaser preview-container">
         </div>
     </div>
     <div class="col-12 padding15">
@@ -31,6 +30,10 @@
 <div>
     <form asp-action="Delete">
         <input type="hidden" asp-for="BlogId" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> <a asp-action="Index" class="btn btn-primary">Back to List</a>
+        <div class="row">
+            <div class="col-md-6"><a href="@ViewBag.Referer" class="btn btn-primary">Back to List</a></div>
+            <div class="col-md-6 txtalignright"><input type="submit" value="Delete" class="btn btn-danger" /> </div>
+        </div>
+        
     </form>
 </div>

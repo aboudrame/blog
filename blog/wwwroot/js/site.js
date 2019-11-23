@@ -3,7 +3,7 @@
         init: function () {
             main.banner();
             main.profile();
-            main.codeEditor();
+           // main.codeEditor(); to be deleted later
             main.codeEditorNav();
             main.placeholder();
             main.ToolsRotation();
@@ -36,18 +36,18 @@
             $('.profile img').show(5000);
         },
 
-        codeEditor: function () {
+        codeEditor: function () {//I will delete this code later as I rewrite another click event on $(".RUN") under custom-codemirror.js
 
             $('.RUN').off('click').on('click', function () {
                 var IFRAME = $('#Result');
-
                 var getHTML = $('textarea[name="HTML"]').val();
                 var getCSS = $('textarea[name="CSS"]').val();
                 var getJavaScript = $('textarea[name="JavaScript"]').val();
 
+
                 var IFRAME_HEAD = IFRAME.contents().find('head');
                 var IFRAME_BODY = IFRAME.contents().find('body');
-
+                
                 var js = document.createElement('script');
                 var css = document.createElement('style');
 

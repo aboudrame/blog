@@ -133,6 +133,10 @@
                 exec();
             });
 
+            $(".CodeTester .CodeMirror").off("keyup").on("keyup", function () {
+                exec();
+            });
+
             function exec() {
                 iframeHead = $('#Result').contents().find('head');
                 iframeBody = $('#Result').contents().find('body');

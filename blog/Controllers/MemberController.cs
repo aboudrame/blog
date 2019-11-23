@@ -43,6 +43,7 @@ namespace blog.Controllers
                 return NotFound();
             }
 
+            ViewBag.RefererURL = HttpContext.Request.Headers["Referer"].ToString();
             return View(blog);
         }
 
@@ -173,6 +174,7 @@ namespace blog.Controllers
                 return NotFound();
             }
 
+            ViewBag.Referer = HttpContext.Request.Headers["Referer"].ToString();
             return View(blog);
         }
 

@@ -27,14 +27,10 @@ namespace blog.Controllers
 
         public IActionResult CodeTester ()
         {
-            ViewBag.UrlReferer = HttpContext.Request.Headers["Referer"].ToString();
-            return View(new Blog());
-        }
-
-        public IActionResult CodeTester2()
-        {
+            ViewBag.Referer = HttpContext.Request.Headers["Referer"].ToString();
             return View();
         }
+
 
         // GET: CodeEditor/Details/5
         public async Task<IActionResult> Details(long? id)

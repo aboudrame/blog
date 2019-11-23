@@ -25,6 +25,7 @@ namespace blog.Controllers
         public async Task<IActionResult> Index()
         {
             var comment = await _context.Comments.Include(c => c.blog).Where(x=>x.Commenter == User.Identity.Name).OrderByDescending(x=>x.LastModifiedDate).ToListAsync();
+            ViewBag.Referer = HttpContext.Request.Headers["Referer"];
             return View(comment);
         }
 
