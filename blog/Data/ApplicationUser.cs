@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace blog.Data
 {
-    public class ApplicationUser: IdentityUser
+    public class ApplicationUser : IdentityUser
     {
         public string First_Name { get; set; }
         public string Middle_Name { get; set; }
         public string Last_Name { get; set; }
         public DateTime UserCreatedOn { get; set; }
-        public DateTime? LastLoginDate { get; set; } = DateTime.Now;
-        public DateTime? LoginDate { get; set; } = DateTime.Now;
+        public DateTime? LastLoginDate { get; set; }
+        public DateTime? LoginDate { get; set; }
     }
 }

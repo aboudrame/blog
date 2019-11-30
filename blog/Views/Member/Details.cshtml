@@ -1,4 +1,5 @@
-﻿@model blog.Models.Blog
+﻿@inject blog.RefererService referer
+@model blog.Models.Blog
 
 @{
     ViewData["Title"] = "Details";
@@ -23,7 +24,7 @@
         </div>
     </div>
 
-    <div class="col-md-3"><a href="@ViewBag.RefererURL" class="btn btn-primary">Back to List</a></div>
+    <div class="col-md-3"><a href="@referer.referer()" class="btn btn-primary">Back to List</a></div>
     <div class="col-md-3" style="font-style: italic;">@Html.DisplayFor(model => model.Author)</div>
     <div class="col-md-3" style="font-style: italic;">@Html.DisplayFor(model => model.LastModifiedDate)</div>
 </div>

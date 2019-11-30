@@ -13,18 +13,21 @@
   <ItemGroup>
     <Compile Remove="Data\Migrations\20191028194008_addDefaultDate.cs" />
     <Compile Remove="Data\Migrations\20191028194008_addDefaultDate.Designer.cs" />
+    <Compile Remove="Data\Migrations\20191130053236_removeLoginDateDefault.cs" />
+    <Compile Remove="Data\Migrations\20191130053236_removeLoginDateDefault.Designer.cs" />
   </ItemGroup>
 
 
   <ItemGroup>
     <PackageReference Include="EASendMail" Version="7.5.0.3" />
-    <PackageReference Include="MailKit" Version="2.3.1.6" />
+    <PackageReference Include="MailKit" Version="2.4.1" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="2.2.0" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.4" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.0.0" />
+    <PackageReference Include="Sendgrid" Version="9.12.0" />
   </ItemGroup>
 
 

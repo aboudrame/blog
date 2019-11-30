@@ -15,6 +15,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using blog.Models;
+using blog.Services;
 
 namespace blog
 {
@@ -54,10 +55,15 @@ namespace blog
                     .AddEntityFrameworkStores<ApplicationDbContext>()
                     .AddDefaultTokenProviders();
 
+            //adding support for url referer service
+            services.AddTransient<HttpContextAccessor>();
+            services.AddTransient<RefererService>();
+
+            //adding support for sendgrip service
+            services.AddTransient<IEmailSender, EmailSender>();
+            services.Configure<UserSecret>(Configuration);
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

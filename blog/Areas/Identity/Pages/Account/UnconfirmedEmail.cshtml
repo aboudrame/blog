@@ -1,0 +1,20 @@
+﻿@page 
+@model blog.Areas.Identity.Pages.Account.UnconfirmedEmailModel
+@{
+}
+
+<div class="banner-container">
+    <h1 class="banner-text-container margin15 txtaligncenter"><span class="banner-text">Unconfirmed Email address</span></h1>
+    <img src="~/images/sunset.jpg" class="fullwidth" />
+</div>
+
+<div class="row">
+    <div class="col-12 paddingTop15">
+        <p>
+            Your email address has NOT been confirmed yet. <br />
+        </p>
+        <p>
+            Please confirm your registered email address <a style="background-color: inherit;" href='mailto:@ViewData["Email"]'>@ViewData["Email"]</a> by clicking on the confirmation link included in the email that was sent to you.
+        </p>
+    </div>
+</div>

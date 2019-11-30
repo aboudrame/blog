@@ -12,11 +12,10 @@ using Microsoft.AspNetCore.Authorization;
 namespace blog.Controllers
 {
     [Authorize]
-    public class MemberController : Controller
+    public class CourseController : Controller
     {
         private readonly ApplicationDbContext _context;
-
-        public MemberController(ApplicationDbContext context)
+        public CourseController(ApplicationDbContext context)
         {
             _context = context;
         }
@@ -25,6 +24,7 @@ namespace blog.Controllers
         public async Task<IActionResult> Index()
         {
             var blog = await _context.Blogs.Include(x=>x.Comments).Where(x=>x.Author == User.Identity.Name).OrderByDescending(x=>x.LastModifiedDate).ToListAsync();
+
             return View(blog);
         }
 
@@ -173,6 +173,7 @@ namespace blog.Controllers
             {
                 return NotFound();
             }
+
 
             ViewBag.Referer = HttpContext.Request.Headers["Referer"].ToString();
             return View(blog);

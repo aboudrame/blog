@@ -746,6 +746,7 @@ a, a:visited, a:link, .quasilink {
 .marginLeftRight15 {margin-left: 15px; margin-right: 15px;}
 .marginAuto {margin: auto;}
 
+/* Padding */
 .padding0 {padding: 0;}
 .padding15 {padding: 15px;}
 .paddingTop15 {padding-top: 15px;}
@@ -755,6 +756,10 @@ a, a:visited, a:link, .quasilink {
 .paddingTopBottom15 {padding-top: 15px; padding-bottom: 15px;}
 .paddingLeftRight15 {padding-left: 15px; padding-right: 15px;}
 
+/* Important */
+.paddingRight0_ {padding-right: 0 !important;}
+
+/* Text alignment */
 .txtaligncenter {text-align: center;}
 .txtalignleft {text-align: left;}
 .txtalignright {text-align: right;}

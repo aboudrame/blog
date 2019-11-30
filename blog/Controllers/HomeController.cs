@@ -28,7 +28,7 @@ namespace blog.Controllers
             return View(Course);
         }
 
-        public IActionResult Course(long id)
+        public IActionResult Course1(long id)
         {
             //var blog = _db.Blogs.FirstOrDefault(x => x.BlogId == id);
             //var Category = _db.Categories.FirstOrDefault(x => x.CategoryId == blog.CategoryId);

@@ -11,27 +11,27 @@ using Microsoft.AspNetCore.Mvc;
 namespace blog.Controllers
 {
     [Authorize(Roles ="Admin")]
-    public class AdministratorController : Controller
+    public class RoleController : Controller
     {
         private readonly ApplicationDbContext _context;
-        private readonly RoleManager<IdentityRole> roleManager;
-        private readonly UserManager<ApplicationUser> userManager;  
+        private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly UserManager<ApplicationUser> _userManager;  
 
-        public AdministratorController(RoleManager<IdentityRole> roleManager, UserManager<ApplicationUser> userManager, ApplicationDbContext context)
+        public RoleController(RoleManager<IdentityRole> roleManager, UserManager<ApplicationUser> userManager, ApplicationDbContext context)
         {
-            this.roleManager = roleManager;
-            this.userManager = userManager;
-            this._context = context;
+            _roleManager = roleManager;
+            _userManager = userManager;
+            _context = context;
         }
 
         [HttpGet]
-        public IActionResult CreateRole ()
+        public IActionResult Create ()
         {
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateRole(CreateRoleViewModel model)
+        public async Task<IActionResult> Create(CreateRoleViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -40,7 +40,7 @@ namespace blog.Controllers
                     Name = model.RoleName                                 
                 };
                 
-                IdentityResult result = await roleManager.CreateAsync(identityRole);
+                IdentityResult result = await _roleManager.CreateAsync(identityRole);
 
                 if (result.Succeeded)
                 {
@@ -84,10 +84,10 @@ namespace blog.Controllers
                 };
 
                 
-                ApplicationUser getUser  = await userManager.FindByIdAsync(identityUser.UserName);
-                IdentityRole getRole = await roleManager.FindByIdAsync(model.RoleId);
+                ApplicationUser getUser  = await _userManager.FindByIdAsync(identityUser.UserName);
+                IdentityRole getRole = await _roleManager.FindByIdAsync(model.RoleId);
 
-                IdentityResult result = await userManager.AddToRoleAsync(getUser, getRole.ToString());
+                IdentityResult result = await _userManager.AddToRoleAsync(getUser, getRole.ToString());
 
                 if (result.Succeeded)
                 {

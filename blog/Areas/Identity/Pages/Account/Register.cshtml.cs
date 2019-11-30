@@ -28,8 +28,8 @@ namespace blog.Areas.Identity.Pages.Account
             IEmailSender emailSender)
         {
             _userManager = userManager;
-            _signInManager = signInManager;
-            _logger = logger;
+          _signInManager = signInManager;
+                 _logger = logger;
             _emailSender = emailSender;
         }
 
@@ -85,11 +85,10 @@ namespace blog.Areas.Identity.Pages.Account
                         Middle_Name = Input.Middle_Name,
                           Last_Name = Input.Last_Name,
                       UserCreatedOn = DateTime.Now,
-                      LastLoginDate = DateTime.Now,
-                      LoginDate = DateTime.Now
                          };
 
                 var result = await _userManager.CreateAsync(user, Input.Password);
+                
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
@@ -100,12 +99,18 @@ namespace blog.Areas.Identity.Pages.Account
                         pageHandler: null,
                         values: new { userId = user.Id, code = code },
                         protocol: Request.Scheme);
+                    var newmember = Url.Page(
+                        "/Account/NewMember",
+                        pageHandler: null,
+                        values: new {userId = user.Id},
+                        protocol: Request.Scheme);
 
-                    await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
-                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
-                    await _signInManager.SignInAsync(user, isPersistent: false);
-                    return LocalRedirect(returnUrl);
+                   // await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
+                   //     $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+
+                   //  await _signInManager.SignInAsync(user, isPersistent: false);
+                    return Redirect(newmember); // LocalRedirect(returnUrl);
                 }
                 foreach (var error in result.Errors)
                 {

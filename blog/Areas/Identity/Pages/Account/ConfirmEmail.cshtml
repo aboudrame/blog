@@ -1,0 +1,18 @@
+﻿@page
+@model ConfirmEmailModel
+@{
+    ViewData["Title"] = "Confirm email";
+}
+
+<div class="banner-container">
+    <h1 class="banner-text-container margin15 txtaligncenter"><span class="banner-text">Account Confirmation</span></h1>
+    <img src="~/images/sunset.jpg" class="fullwidth" />
+</div>
+
+<h1>@ViewData["Title"]</h1>
+<div>
+    <p>
+        Thank you for confirming your email.
+    </p>
+    <p>Please go ahead and log in into your account <a href="/Identity/Account/login">here</a>.</p>
+</div>
