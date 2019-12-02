@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
-using blog.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using blog.Data;
 
 namespace blog.Areas.Identity.Pages.Account
 {
@@ -28,8 +28,8 @@ namespace blog.Areas.Identity.Pages.Account
             IEmailSender emailSender)
         {
             _userManager = userManager;
-          _signInManager = signInManager;
-                 _logger = logger;
+            _signInManager = signInManager;
+            _logger = logger;
             _emailSender = emailSender;
         }
 
@@ -41,9 +41,9 @@ namespace blog.Areas.Identity.Pages.Account
         public class InputModel
         {
             [Required]
-            [StringLength(20, ErrorMessage ="The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 3)]
+            [StringLength(20, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 3)]
             public string First_Name { get; set; }
-            
+
             public string Middle_Name { get; set; }
             [Required]
             [StringLength(20, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 3)]
@@ -77,18 +77,19 @@ namespace blog.Areas.Identity.Pages.Account
             returnUrl = returnUrl ?? Url.Content("~/");
             if (ModelState.IsValid)
             {
-               
+
                 var user = new ApplicationUser
-                        {  UserName = Input.Email,
-                              Email = Input.Email,
-                         First_Name = Input.First_Name,
-                        Middle_Name = Input.Middle_Name,
-                          Last_Name = Input.Last_Name,
-                      UserCreatedOn = DateTime.Now,
-                         };
+                {
+                    UserName = Input.Email,
+                    Email = Input.Email,
+                    First_Name = Input.First_Name,
+                    Middle_Name = Input.Middle_Name,
+                    Last_Name = Input.Last_Name,
+                    UserCreatedOn = DateTime.Now,
+                };
 
                 var result = await _userManager.CreateAsync(user, Input.Password);
-                
+
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
@@ -97,19 +98,19 @@ namespace blog.Areas.Identity.Pages.Account
                     var callbackUrl = Url.Page(
                         "/Account/ConfirmEmail",
                         pageHandler: null,
-                        values: new { userId = user.Id, code = code },
+                        values: new { userId = user.Id, code },
                         protocol: Request.Scheme);
                     var newmember = Url.Page(
                         "/Account/NewMember",
                         pageHandler: null,
-                        values: new {userId = user.Id},
+                        values: new { userId = user.Id },
                         protocol: Request.Scheme);
 
 
-                   // await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
-                   //     $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                    // await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
+                    //     $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
-                   //  await _signInManager.SignInAsync(user, isPersistent: false);
+                    //  await _signInManager.SignInAsync(user, isPersistent: false);
                     return Redirect(newmember); // LocalRedirect(returnUrl);
                 }
                 foreach (var error in result.Errors)

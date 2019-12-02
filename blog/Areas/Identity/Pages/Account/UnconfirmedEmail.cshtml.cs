@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using blog.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using blog.Data;
 
 namespace blog.Areas.Identity.Pages.Account
 {
@@ -18,7 +18,7 @@ namespace blog.Areas.Identity.Pages.Account
         public async Task OnGetAsync(string userId)
         {
             var user = await _db.Users.FindAsync(userId);
-            
+
             ViewData["Email"] = user.Email;
         }
     }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace blog
 {
-    public class RefererService: Controller
+    public class RefererService : Controller
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
 

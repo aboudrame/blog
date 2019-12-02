@@ -1,11 +1,10 @@
-﻿using blog.Data;
-using MailKit.Net.Smtp;
+﻿using MailKit.Net.Smtp;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using MimeKit;
 using MimeKit.Utils;
+using blog.Data;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -15,7 +14,6 @@ using System.Threading.Tasks;
 
 namespace blog
 {
-
     public class EmailSenderService
     {
         private readonly IHostingEnvironment _env;
@@ -27,7 +25,7 @@ namespace blog
             _env = env;
             _config = config;
             _HttpContextAccessor = HttpContextAccessor;
-            _db = db;            
+            _db = db;
         }
         public void Sender(string ToEmailAddress)
         {
@@ -50,7 +48,7 @@ namespace blog
             MimeEntity banner;
             MimeEntity profile;
             string getTheRoot;
-            
+
             if (_config.GetValue<string>("ASPNETCORE_ENVIRONMENT") == "Development")
             {
                 getTheRoot = string.Format(@"C:\Users\aboubacar\source\repos\blog\blog\wwwroot");
@@ -60,7 +58,7 @@ namespace blog
                 getTheRoot = string.Format(@"h:\root\home\aboudrame-002\www\root\wwwroot");
             }
 
-            banner  = builder.LinkedResources.Add(getTheRoot + @"\images\emailcontact.jpeg");
+            banner = builder.LinkedResources.Add(getTheRoot + @"\images\emailcontact.jpeg");
             profile = builder.LinkedResources.Add(getTheRoot + @"\images\about-profile.png");
 
             banner.ContentId = MimeUtils.GenerateMessageId();
@@ -69,7 +67,7 @@ namespace blog
             var LogginUserId = _HttpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
             var LogginUser = _db.Users.FirstOrDefault(x => x.Id == LogginUserId);
             var Full_Name = LogginUser.First_Name + ' ' + LogginUser.Last_Name;
-        
+
             builder.HtmlBody = string.Format(builder.HtmlBody, banner.ContentId, profile.ContentId, Full_Name);
             message.Body = builder.ToMessageBody();
 

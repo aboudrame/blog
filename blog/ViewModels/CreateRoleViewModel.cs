@@ -4,11 +4,11 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace blog.Models
+namespace blog.ViewModels
 {
     public class CreateRoleViewModel
     {
         [Required]
-        public string RoleName {get; set;}
+        public string RoleName { get; set; }
     }
 }

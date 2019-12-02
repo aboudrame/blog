@@ -1,11 +1,11 @@
-﻿using blog.Data;
-using blog.Models;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
+using blog.Data;
+using blog.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+//using System.Net.Mime;
 using System.Threading.Tasks;
 
 namespace blog
@@ -13,7 +13,7 @@ namespace blog
     public static class SeedData
     {
 
-       
+
         public static void Initializer(IServiceProvider serviceProvider)
         {
             var context = serviceProvider.GetRequiredService<ApplicationDbContext>();
@@ -46,7 +46,7 @@ namespace blog
                         LastModifiedDate = DateTime.Now,
                         Body = "I would like to be able to place a search form. Any help would be immensely appreciated.",
                         ContentTypeId = 2
-                        
+
                     });
 
                 context.Blogs.Add(
@@ -64,16 +64,16 @@ namespace blog
 
             if (!context.Roles.Any())
             {
-                context.Roles.Add(new IdentityRole() {Name = "Admin"});
+                context.Roles.Add(new IdentityRole() { Name = "Admin" });
 
                 context.SaveChanges();
             }
 
             if (!context.UserRoles.Any())
             {
-                var roleId = context.Roles.FirstOrDefault(x=>x.Name == "Admin").Id;
-                var userId = context.Users.FirstOrDefault(x=>x.Email == "aboudrame@yahoo.fr").Id;
-                context.UserRoles.Add(new IdentityUserRole<string>() { RoleId = roleId , UserId = userId });
+                var roleId = context.Roles.FirstOrDefault(x => x.Name == "Admin").Id;
+                var userId = context.Users.FirstOrDefault(x => x.Email == "aboudrame@yahoo.fr").Id;
+                context.UserRoles.Add(new IdentityUserRole<string>() { RoleId = roleId, UserId = userId });
 
                 context.SaveChanges();
 

@@ -52,8 +52,8 @@ namespace blog.Areas.Identity.Pages.Account
             [Display(Name = "Remember me?")]
             public bool RememberMe { get; set; }
 
-            public DateTime? LastLoginDate { get; set; } 
-            public DateTime? LoginDate { get; set; } 
+            public DateTime? LastLoginDate { get; set; }
+            public DateTime? LoginDate { get; set; }
         }
 
         public async Task OnGetAsync(string returnUrl = null)
@@ -79,26 +79,26 @@ namespace blog.Areas.Identity.Pages.Account
 
             if (ModelState.IsValid)
             {
-               var user = _context.Users.FirstOrDefault(x=>x.Email == Input.Email);
-                
-               var EmailConfirmed = await _userManager.IsEmailConfirmedAsync(user);
+                var user = _context.Users.FirstOrDefault(x => x.Email == Input.Email);
+
+                var EmailConfirmed = await _userManager.IsEmailConfirmedAsync(user);
 
                 if (!EmailConfirmed)
                 {//if the user has not been confirmed yet, redirect to the unconfirmed email address page.
                     user = await _userManager.FindByEmailAsync(Input.Email);
-                    
+
                     var url = Url.Page(
-                        "/Account/UnconfirmedEmail", 
-                        null, 
-                        values: new { userId = user.Id }, 
+                        "/Account/UnconfirmedEmail",
+                        null,
+                        values: new { userId = user.Id },
                         protocol: Request.Scheme
                         );
 
                     return Redirect(url);
                 }
-                    // This doesn't count login failures towards account lockout
-                    // To enable password failures to trigger account lockout, set lockoutOnFailure: true
-                    var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: true);
+                // This doesn't count login failures towards account lockout
+                // To enable password failures to trigger account lockout, set lockoutOnFailure: true
+                var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: true);
 
 
                 if (result.Succeeded)

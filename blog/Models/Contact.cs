@@ -12,10 +12,10 @@ namespace blog.Models
         [Required]
         public string Title { get; set; }
         [Required]
-        public string Body {get; set;}
+        public string Body { get; set; }
         [Required]
         public DateTime Posted { get; set; }
-        
+
         public string User { get; set; }
     }
 }

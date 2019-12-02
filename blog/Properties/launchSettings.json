@@ -1,14 +1,10 @@
-{
+﻿{
   "iisSettings": {
-    "windowsAuthentication": false,
-    "anonymousAuthentication": true,
-    "iis": {
-      "applicationUrl": "http://localhost/blog",
-      "sslPort": 0
-    },
+    "windowsAuthentication": false, 
+    "anonymousAuthentication": true, 
     "iisExpress": {
-      "applicationUrl": "http://localhost:54031",
-      "sslPort": 44347
+      "applicationUrl": "http://localhost:55859",
+      "sslPort": 44312
     }
   },
   "profiles": {
@@ -20,17 +16,12 @@
       }
     },
     "blog": {
-      "commandName": "IISExpress",
+      "commandName": "Project",
       "launchBrowser": true,
+      "applicationUrl": "https://localhost:5001;http://localhost:5000",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Production"
-      },
-      "nativeDebugging": true,
-      "applicationUrl": "https://localhost:5001;http://localhost:5000"
-    },
-    "Azure Dev Spaces": {
-      "commandName": "AzureDevSpaces",
-      "launchBrowser": true
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
     }
   }
 }

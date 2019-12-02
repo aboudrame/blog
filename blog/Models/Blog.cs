@@ -7,12 +7,11 @@ using System.Threading.Tasks;
 
 namespace blog.Models
 {
-
     public class Blog
     {
         public long BlogId { get; set; }
         [Required]
-        public string Title {get;  set; }
+        public string Title { get; set; }
         [Required]
         public string Author { get; set; }
         [Required]
@@ -44,7 +43,7 @@ namespace blog.Models
         [Required]
         public string Commenter { get; set; }
         [Required]
-        public DateTime CreatedDate { get; set; } 
+        public DateTime CreatedDate { get; set; }
         [Required]
         public DateTime LastModifiedDate { get; set; }
         [Required]
@@ -52,7 +51,4 @@ namespace blog.Models
         public virtual Blog blog { get; set; }
     }
 
-  
 }
-
-

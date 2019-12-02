@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using blog.Data;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using blog.Data;
 
 namespace blog
 {
@@ -22,10 +22,12 @@ namespace blog
             {
                 var serviceProvider = scope.ServiceProvider;
                 var context = serviceProvider.GetRequiredService<ApplicationDbContext>();
-                try {
+                try
+                {
                     SeedData.Initializer(serviceProvider);
-                        }
-                catch (Exception ex) {
+                }
+                catch (Exception ex)
+                {
                     var logger = serviceProvider.GetRequiredService<ILogger<Program>>();
                     logger.LogError(ex, "An error occurred seeding the DB.");
                 }
@@ -38,4 +40,16 @@ namespace blog
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>();
     }
+
+    //public class Program
+    //{
+    //    public static void Main(string[] args)
+    //    {
+    //        CreateWebHostBuilder(args).Build().Run();
+    //    }
+
+    //    public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
+    //        WebHost.CreateDefaultBuilder(args)
+    //            .UseStartup<Startup>();
+    //}
 }

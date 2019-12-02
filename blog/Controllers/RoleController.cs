@@ -4,9 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using blog.Data;
 using blog.Models;
+//using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using blog.ViewModels;
 
 namespace blog.Controllers
 {

@@ -1,13 +1,12 @@
-﻿using blog.Data;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
+using blog.Data;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace blog.Models
+namespace blog.ViewModels
 {
     public class AddToRoleViewModel
     {

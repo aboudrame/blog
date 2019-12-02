@@ -50,12 +50,14 @@ namespace blog.Controllers
         // GET: Member/Create
         public IActionResult  Create()
         {
-            var blog = new Blog();
+            var blog = new Blog
+            {
+                Author = User.Identity.Name,
+                CreatedDate = DateTime.Now,
+                LastModifiedDate = DateTime.Now,
+                ContentTypeId = 2
+            };
 
-            blog.Author = User.Identity.Name;
-            blog.CreatedDate = DateTime.Now;
-            blog.LastModifiedDate = DateTime.Now;
-            blog.ContentTypeId = 2;
             return View(blog);
         }
 
