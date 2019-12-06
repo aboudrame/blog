@@ -1,0 +1,58 @@
+﻿@inject blog.RefererService referer
+@model blog.Models.Blog
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+
+<div class="banner-container">
+    <h1 class="banner-text-container margin15 txtaligncenter"><span class="banner-text">Blog Details</span></h1>
+    <img src="~/images/blog_details.jpg" class="fullwidth" />
+</div>
+
+<div class="row marginBottom15">
+    <div class="col-12 marginBottom15" style="font-weight: bold; font-size: 1.2em;">
+        @Html.DisplayFor(model => model.Title)
+    </div>
+
+    <div class="col-12 form-group custom-highlighter">
+        <pre><textarea asp-for="@Model.Body" class="form-control tab included-snippets codeIndex"></textarea></pre>
+        <span asp-validation-for="@Model.Body" class="text-danger"></span>
+        <div class="preview-container">
+
+        </div>
+    </div>
+
+    <div class="col-md-3"><a href="@referer.referer()" class="btn btn-primary">Back to List</a></div>
+    <div class="col-md-3" style="font-style: italic;">@Html.DisplayFor(model => model.Author)</div>
+    <div class="col-md-3" style="font-style: italic;">@Html.DisplayFor(model => model.LastModifiedDate)</div>
+</div>
+
+@if (@Model.Comments.Any()) {
+    @foreach(var comment in Model.Comments.Where(x=>x.BlogId == Model.BlogId).OrderByDescending(x=>x.LastModifiedDate))
+    {
+        <div class="row bkgfloralwhite marginBottom15 paddingTopBottom15">
+
+            <div class="col-12 form-group custom-highlighter">
+                <pre><textarea asp-for="@comment.Body" class="form-control tab included-snippets codeIndex"></textarea></pre>
+                <span asp-validation-for="@comment.Body" class="text-danger"></span>
+                <div class="preview-container">
+
+                </div>
+            </div>
+
+
+            <div class="col-md-4 padding15">
+                @comment.Commenter
+            </div>
+            <div class="col-md-4 padding15 txtaligncenter">
+                @comment.LastModifiedDate
+            </div>
+            <div class="col-md-4 padding15 txtalignright">
+                @Html.ActionLink("Manage comments", "Index", "Comments")
+            </div>
+        </div>
+    }
+}
+

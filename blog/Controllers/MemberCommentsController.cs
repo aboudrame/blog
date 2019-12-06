@@ -12,11 +12,11 @@ using Microsoft.AspNetCore.Authorization;
 namespace blog.Controllers
 {
     [Authorize]
-    public class CommentsController : Controller
+    public class MemberCommentsController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public CommentsController(ApplicationDbContext context)
+        public MemberCommentsController(ApplicationDbContext context)
         {
             _context = context;
         }

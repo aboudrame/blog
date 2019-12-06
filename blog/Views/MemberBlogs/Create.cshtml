@@ -4,6 +4,7 @@
     ViewData["Title"] = "Create";
 }
 
+
 <div class="banner-container">
     <h1 class="banner-text-container margin15 txtaligncenter"><span class="banner-text">Create a new post</span></h1>
     <img src="~/images/sunset.jpg" class="fullwidth" />
@@ -12,28 +13,29 @@
 <form asp-action="Create">
     <div class="row">
         <div asp-validation-summary="All" class="col-12 text-danger"></div>
-            <input type="hidden" asp-for="Author" class="form-control" value="@User.Identity.Name" />
+        <div class="col-12 form-group">
+            <input type="hidden" asp-for="Author" class="form-control" />
+            <input type="hidden" asp-for="ContentTypeId" class="form-control" value=2 />
 
+        </div>
         <div class="col-12 form-group">
             <label asp-for="Title" class="control-label"></label>
             <input asp-for="Title" class="form-control" />
             <span asp-validation-for="Title" class="text-danger"></span>
         </div>
 
-        @await Html.PartialAsync("_CreateEditBodyPartial", ViewData["blog"])
-
-        @*<div class="col-12 form-group">
+        <div class="col-12 form-group custom-highlighter">
+            @await  Html.PartialAsync("_CodeInstructionPartial")
 
             <label asp-for="Body" class="control-label"></label>
-            @await Html.PartialAsync("_CodeInstructionPartial")
-            <textarea asp-for="Body" class="form-control get-preview"></textarea>
+            <pre><textarea asp-for="Body" class="form-control included-snippets code"></textarea></pre>
             <span asp-validation-for="Body" class="text-danger"></span>
-        </div>
-        <div class="col-12 preview">
-            <h4 style="text-align: center;">PREVIEW</h4>
-            <div class="preview-container" style="border: solid 10px #F5F5F5; padding: 15px;">
+
+            <div class="preview-container">
+
             </div>
-        </div>*@
+        </div>
+
         <div class="col-12 hidden">
             <input asp-for="CreatedDate" class="form-control" /> <input asp-for="LastModifiedDate" class="form-control" />
         </div>
@@ -56,5 +58,4 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    }
-
+}

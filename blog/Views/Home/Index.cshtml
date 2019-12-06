@@ -136,10 +136,10 @@
             
             <div class="col-md-9 home-main-content-area">
                 <div class="member-area">
-                    <span><strong>@Html.ActionLink("Member Area", "Index", "Member")</strong></span> <br />Please login to post, edit, remove, or comment
+                    <span><strong>@Html.ActionLink("Member Area", "Index", "MemberBlogs")</strong></span> <br />Please login to post, edit, remove, or comment
                     <div class="row">
                         <div class="col-md-6 txtaligncenter">
-                            <h5>@Html.ActionLink("Post your question", "Create", "Member")</h5>
+                            <h5>@Html.ActionLink("Post your question", "Create", "MemberBlogs")</h5>
                         </div>
                         <div class="col-md-6 txtaligncenter">
                             <h5>@Html.ActionLink("code editor", "codeTester", "CodeEditor")</h5>
@@ -153,7 +153,7 @@
                         <div class="marginTop15 padding15 bkglightblue">
                             <div class="row paddingBottom15">
                                 <div class="col-12 marginTopBottom15">
-                                    <h4><strong><pre>@Html.ActionLink(x.Title,"Details","Member", new { id=x.BlogId})</pre></strong></h4>
+                                    <h4><strong><pre>@Html.ActionLink(x.Title,"Details","MemberBlogs", new { id=x.BlogId})</pre></strong></h4>
                                 </div>
 
 
@@ -170,7 +170,7 @@
 
                             <div class="row paddingTopBottom15">
                                 <div class="col-12 txtalignright">
-                                    @Html.ActionLink("Post a comment", "Create", "Comments", new { id = x.BlogId })
+                                    @Html.ActionLink("Post a comment", "Create", "MemberComments", new { id = x.BlogId })
                                 </div>
                             </div>
 

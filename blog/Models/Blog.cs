@@ -15,13 +15,13 @@ namespace blog.Models
         [Required]
         public string Author { get; set; }
         [Required]
-        public DateTime CreatedDate { get; set; } = DateTime.Parse("01/01/9999");
+        public DateTime CreatedDate { get; set; }
         [Required]
-        public DateTime LastModifiedDate { get; set; } = DateTime.Parse("01/01/9999");
+        public DateTime LastModifiedDate { get; set; }
         [Required]
         public string Body { get; set; }
         [Required]
-        public int ContentTypeId { get; set; } = 2;
+        public int ContentTypeId { get; set; }
         [NotMapped]
         public List<ContentType> ContentTypes { get; set; }
         public virtual ICollection<Comment> Comments { get; set; }

@@ -1,0 +1,29 @@
+﻿<div class="row instruction">
+    <div class="col-md-6">
+        <input type="button" value="Instruction" class="btn-instruction btn btn-primary" />
+    </div>
+    <div class="col-md-6 txtalignright">
+        <input type="button" value="Preview" class="preview" />
+    </div>
+
+    <div class="col-12 paddingTop15 code-instruction bkgazure">
+        Type in the box below as you normally would. Follow this instruction to place any codes that you would like to share with the community.
+        <ul>
+            <li>Place two set of openning square brackets <span style="color: red; font-weight: bold;">[[</span> before the code</li>
+            <li>End the code with two set of closing square brackets <span style="color: red; font-weight: bold;">]]</span></li>
+            <li>The square brackets should be placed on the new lines</li>
+            <li>Use the preview button to see how the code would be rendered on the browser</li>
+            <li>Codes might be tested @Html.ActionLink("here", "CodeTester", "CodeEditor", null, new { @style = "background-color: inherit;" })</li>
+        </ul>
+        For instance:
+        <pre>
+        [[
+            &lt;script type="text/javascript">
+                var greeting = "hello word!";
+                alert(greeting);
+            &lt;/script>
+        ]]
+        </pre>
+    </div>
+
+</div>

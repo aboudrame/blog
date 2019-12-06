@@ -13,13 +13,13 @@ using blog.ViewModels;
 namespace blog.Controllers
 {
     [Authorize(Roles ="Admin")]
-    public class RoleController : Controller
+    public class AdminRolesController : Controller
     {
         private readonly ApplicationDbContext _context;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly UserManager<ApplicationUser> _userManager;  
 
-        public RoleController(RoleManager<IdentityRole> roleManager, UserManager<ApplicationUser> userManager, ApplicationDbContext context)
+        public AdminRolesController(RoleManager<IdentityRole> roleManager, UserManager<ApplicationUser> userManager, ApplicationDbContext context)
         {
             _roleManager = roleManager;
             _userManager = userManager;

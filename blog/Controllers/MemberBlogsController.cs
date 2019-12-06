@@ -12,10 +12,10 @@ using Microsoft.AspNetCore.Authorization;
 namespace blog.Controllers
 {
     [Authorize]
-    public class CourseController : Controller
+    public class MemberBlogsController : Controller
     {
         private readonly ApplicationDbContext _context;
-        public CourseController(ApplicationDbContext context)
+        public MemberBlogsController(ApplicationDbContext context)
         {
             _context = context;
         }
@@ -23,7 +23,7 @@ namespace blog.Controllers
         // GET: Member
         public async Task<IActionResult> Index()
         {
-            var blog = await _context.Blogs.Include(x=>x.Comments).Where(x=>x.Author == User.Identity.Name).OrderByDescending(x=>x.LastModifiedDate).ToListAsync();
+            var blog = await _context.Blogs.Include(x => x.Comments).Where(x => x.Author == User.Identity.Name).OrderByDescending(x => x.LastModifiedDate).ToListAsync();
 
             return View(blog);
         }
@@ -36,7 +36,7 @@ namespace blog.Controllers
                 return NotFound();
             }
 
-            var blog = await _context.Blogs.Include(x=>x.Comments)
+            var blog = await _context.Blogs.Include(x => x.Comments)
                 .FirstOrDefaultAsync(m => m.BlogId == id);
             if (blog == null)
             {
@@ -48,7 +48,7 @@ namespace blog.Controllers
         }
 
         // GET: Member/Create
-        public IActionResult  Create()
+        public IActionResult Create()
         {
             var blog = new Blog
             {
@@ -226,7 +226,7 @@ namespace blog.Controllers
         //                   Commenter = registerCommentViewModel.Commenter,
         //                      BlogId = registerCommentViewModel.BlogId,
         //                        Body = registerCommentViewModel.CommentBody,
-                    
+
         //        };
 
         //        _context.Comments.Add(comment);

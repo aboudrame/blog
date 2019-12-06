@@ -1,0 +1,39 @@
+﻿@model blog.Models.Blog
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+
+<div class="banner-container">
+    <h1 class="banner-text-container margin15 txtaligncenter"><span class="banner-text">Detete a BLOG</span></h1>
+    <img src="~/images/delete.jpg" class="fullwidth" />
+</div>
+<h3 class="txtaligncenter padding15">Are you sure you want to delete this BLOG?</h3>
+<div class="row">
+    <div class="col-12">
+        <h4>@Model.Title</h4>
+    </div>
+    <div class="col-12 form-group custom-highlighter">
+        <pre><textarea asp-for="@Model.Body" class="form-control tab included-snippets codeIndex"></textarea></pre>
+        <span asp-validation-for="@Model.Body" class="text-danger"></span>
+        <div class="preview-container">
+
+        </div>
+    </div>
+    <div class="col-12 padding15">
+        @Model.LastModifiedDate
+    </div>
+</div>
+
+
+<div>
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="BlogId" />
+        <div class="row">
+            <div class="col-md-6"><a href="@ViewBag.Referer" class="btn btn-primary">Back to List</a></div>
+            <div class="col-md-6 txtalignright"><input type="submit" value="Delete" class="btn btn-danger" /> </div>
+        </div>
+        
+    </form>
+</div>
