@@ -33,11 +33,25 @@ namespace blog.Areas.Identity.Pages.Account
                 return NotFound($"Unable to load user with ID '{userId}'.");
             }
 
+           
             var result = await _userManager.ConfirmEmailAsync(user, code);
+
+            foreach (var e in result.Errors)
+            {
+                if (e.Code == "InvalidToken")
+                {
+                    return Redirect(Url.Page("/Account/InvalidToken",null, null));
+                }
+            }
+
             if (!result.Succeeded)
             {
                 throw new InvalidOperationException($"Error confirming email for user with ID '{userId}':");
             }
+
+
+
+
 
             return Page();
         }

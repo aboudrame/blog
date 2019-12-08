@@ -52,6 +52,7 @@ namespace blog.Areas.Identity.Pages.Account
 
             var user = _db.Users.FirstOrDefault(x => x.Email == RegisteredEmailAddress);
 
+            await _userManager.UpdateSecurityStampAsync(user); // Invalidate all previous email confirmation tokens
             var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
 
             var callbackUrl = Url.Page(
