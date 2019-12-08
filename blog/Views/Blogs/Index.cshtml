@@ -28,7 +28,7 @@
             </div>
 
             <div class="col-12 form-group custom-highlighter">
-                <label asp-for="@blog.Body" class="control-label"></label>
+                @*<label asp-for="@blog.Body" class="control-label"></label>*@
                 <pre><textarea asp-for="@blog.Body" class="form-control tab included-snippets codeIndex"></textarea></pre>
                 <span asp-validation-for="@blog.Body" class="text-danger"></span>
                 <div class="preview-container">
@@ -43,7 +43,7 @@
                 @Html.DisplayFor(x => blog.LastModifiedDate)
             </div>
             <div class="col-md-3">
-                @Html.DisplayFor(x => blog.Author)
+                @blog.Author.ToString().Split("@")[0]
             </div>
             <div class="col-md-3">
                 @Html.ActionLink("REPLY", "Create", "MemberComments", new { id = blog.BlogId })

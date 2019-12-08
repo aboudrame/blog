@@ -18,11 +18,11 @@
     <div class="marginTop15 padding15 bkglightblue">
         <div class="row paddingBottom15">
             <div class="col-12 marginTopBottom15">
-                <h4><strong><pre>@Html.ActionLink(x.Title,"Details","Member", new { id=x.BlogId})</pre></strong></h4>
+                <h4><strong><pre>@Html.ActionLink(x.Title,"Details","MemberBlogs", new { id=x.BlogId})</pre></strong></h4>
             </div>
 
             <div class="col-12 form-group custom-highlighter">
-                <label asp-for="@x.Body" class="control-label"></label>
+                @*<label asp-for="@x.Body" class="control-label"></label>*@
                 <pre><textarea asp-for="@x.Body" class="form-control tab included-snippets codeIndex"></textarea></pre>
                 <span asp-validation-for="@x.Body" class="text-danger"></span>
                 <div class="preview-container">
@@ -65,10 +65,10 @@
                         @comment.LastModifiedDate
                     </div>
                     <div class="col-md-4 padding15 txtaligncenter">
-                        @comment.Commenter
+                        @comment.Commenter.ToString().Split("@")[0]
                     </div>
                     <div class="col-md-4 padding15 txtalignright">
-                        @Html.ActionLink("Manage comments", "Index", "Comments")
+                        @Html.ActionLink("Manage comments", "Index", "MemberComments")
                     </div>
                 </div>
             }

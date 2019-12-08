@@ -12,7 +12,7 @@
     <div class="row">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="col-12 paddingTop15">
-            <h4><input type="text" asp-for="@Model.blog.Title" value="@Model.blog.Title" disabled style="border: 0; padding: 15px;" /></h4>
+            <h4>@Model.blog.Title</h4>
             <span asp-validation-for="@Model.blog.Title" class="text-danger"></span>
         </div>
 

@@ -27,13 +27,13 @@
                 @comment.LastModifiedDate
             </div>
             <div class="col-md-2 paddingTopBottom15 txtalignleft">
-                @Html.ActionLink("DELETE", "Delete", "Comments", new { id = comment.CommentId })
+                @Html.ActionLink("DELETE", "Delete", "MemberComments", new { id = comment.CommentId })
             </div>
             <div class="col-md-2 paddingTopBottom15 txtaligncenter">
-                @Html.ActionLink("EDIT", "Edit", "Comments", new { id = comment.CommentId })
+                @Html.ActionLink("EDIT", "Edit", "MemberComments", new { id = comment.CommentId })
             </div>
             <div class="col-md-2 paddingTopBottom15 txtaligncenter">
-                @Html.ActionLink("BLOG", "Details", "Member", new { id = comment.BlogId })
+                @Html.ActionLink("BLOG", "Details", "MemberBlogs", new { id = comment.BlogId })
             </div>
             <div class="col-md-2 paddingTopBottom15  txtalignright">
                 <a href="@ViewBag.Referer" >Back</a> 
@@ -42,7 +42,7 @@
 
         <div class="row bkgazure paddingTopBottom15 blog">
             <div class="col-12">
-                @Html.ActionLink(comment.blog.Title, "Details", "Member", new { id = comment.BlogId })
+                @Html.ActionLink(comment.blog.Title, "Details", "MemberBlogs", new { id = comment.BlogId })
             </div>
 
             <div class="col-12 hidden">

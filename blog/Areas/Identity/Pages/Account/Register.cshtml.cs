@@ -100,6 +100,7 @@ namespace blog.Areas.Identity.Pages.Account
                         pageHandler: null,
                         values: new { userId = user.Id, code },
                         protocol: Request.Scheme);
+
                     var newmember = Url.Page(
                         "/Account/NewMember",
                         pageHandler: null,
@@ -107,8 +108,8 @@ namespace blog.Areas.Identity.Pages.Account
                         protocol: Request.Scheme);
 
 
-                    // await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
-                    //     $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                    await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
+                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
                     //  await _signInManager.SignInAsync(user, isPersistent: false);
                     return Redirect(newmember); // LocalRedirect(returnUrl);

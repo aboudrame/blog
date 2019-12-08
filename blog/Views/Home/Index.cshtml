@@ -193,7 +193,7 @@
                                             @comment.LastModifiedDate
                                         </div>
                                         <div class="col-md-6 padding15">
-                                            @comment.Commenter
+                                            @comment.Commenter.ToString().Split("@")[0]
                                         </div>
                                     </div>
                                 }

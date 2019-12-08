@@ -15,7 +15,20 @@
             Your email address has NOT been confirmed yet. <br />
         </p>
         <p>
-            Please confirm your registered email address <a style="background-color: inherit;" href='mailto:@ViewData["Email"]'>@ViewData["Email"]</a> by clicking on the confirmation link included in the email that was sent to you.
+            Please confirm your registered email address <span><b>@ViewData["Email"]</b></span> by clicking on the confirmation link included in the email that was sent to you.
         </p>
+        <form method="post">
+            <p>
+                If you didn't receive the code or have lost it, you can request new code here. The previous code will be invalidated.
+            </p>
+            <table>
+                <tr>
+                    <td class="txtalignright">Confirm the email address:</td>
+                    <td><input type="email" value="@Model.ConfirmEmailAddress"  name="ConfirmEmailAddress" /></td>
+                </tr>
+            </table>
+            <input type="hidden" value='@ViewData["Email"]' name="RegisteredEmailAddress" />
+            <input type="submit" value="Request new account confirmation code" /> 
+        </form>
     </div>
 </div>
