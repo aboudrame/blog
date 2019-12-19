@@ -1,9 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <UserSecretsId>aspnet--5ACC4C6C-2925-4BF6-9E13-1FD5C7B17041</UserSecretsId>
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+    <AssemblyName>blog</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
@@ -11,6 +12,10 @@
     <Compile Remove="Data\Migrations\20191205024055_removeDefaulftForLastModifiedDate.Designer.cs" />
     <Compile Remove="Data\Migrations\20191205032913_extendIdentityTable.cs" />
     <Compile Remove="Data\Migrations\20191205032913_extendIdentityTable.Designer.cs" />
+    <Compile Remove="Data\Migrations\20191212230824_addingUserIdtoblog.cs" />
+    <Compile Remove="Data\Migrations\20191212230824_addingUserIdtoblog.Designer.cs" />
+    <Compile Remove="Data\Migrations\20191215181420_addStatus.cs" />
+    <Compile Remove="Data\Migrations\20191215181420_addStatus.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -43,14 +48,21 @@
 
 
   <ItemGroup>
+    <PackageReference Include="DashboardCode.Routines.Storage.EfCore.Relational.InMemory" Version="3.0.0" />
     <PackageReference Include="MailKit" Version="2.4.1" />
-    <PackageReference Include="Microsoft.AspNetCore.App" />
-    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.0" />
     <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.9.8">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Sendgrid" Version="9.12.0" />
   </ItemGroup>
 

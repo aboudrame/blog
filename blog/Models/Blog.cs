@@ -27,28 +27,6 @@ namespace blog.Models
         public virtual ICollection<Comment> Comments { get; set; }
     }
 
-    public class ContentType
-    {
-        public int ContentTypeId { get; set; }
-        public string Type { get; set; }
-
-        public virtual ICollection<Blog> Blogs { get; set; }
-    }
-
-    public class Comment
-    {
-        public long CommentId { get; set; }
-        [Required]
-        public string Body { get; set; }
-        [Required]
-        public string Commenter { get; set; }
-        [Required]
-        public DateTime CreatedDate { get; set; }
-        [Required]
-        public DateTime LastModifiedDate { get; set; }
-        [Required]
-        public long BlogId { get; set; }
-        public virtual Blog blog { get; set; }
-    }
+  
 
 }

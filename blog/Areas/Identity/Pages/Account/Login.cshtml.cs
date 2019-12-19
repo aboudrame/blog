@@ -80,6 +80,15 @@ namespace blog.Areas.Identity.Pages.Account
             if (ModelState.IsValid)
             {
                 var user = _context.Users.FirstOrDefault(x => x.Email == Input.Email);
+                if (user == null)
+                {
+                    return Redirect(Url.Page("/Account/UnknownUser"));
+                }
+
+                if (user.Status == "2")
+                {
+                    return Redirect(Url.Page("/Account/BlockedAccount"));
+                }
 
                 var EmailConfirmed = await _userManager.IsEmailConfirmedAsync(user);
 

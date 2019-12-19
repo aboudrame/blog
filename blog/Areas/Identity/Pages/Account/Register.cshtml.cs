@@ -80,12 +80,13 @@ namespace blog.Areas.Identity.Pages.Account
 
                 var user = new ApplicationUser
                 {
-                    UserName = Input.Email,
-                    Email = Input.Email,
-                    First_Name = Input.First_Name,
-                    Middle_Name = Input.Middle_Name,
-                    Last_Name = Input.Last_Name,
+                         UserName = Input.Email,
+                            Email = Input.Email,
+                       First_Name = Input.First_Name,
+                      Middle_Name = Input.Middle_Name,
+                        Last_Name = Input.Last_Name,
                     UserCreatedOn = DateTime.Now,
+                           Status = "1"
                 };
 
                 var result = await _userManager.CreateAsync(user, Input.Password);

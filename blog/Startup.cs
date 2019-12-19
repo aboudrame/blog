@@ -51,13 +51,14 @@ namespace blog
 
             //implementing role based login
             services.AddIdentity<ApplicationUser, IdentityRole>()
-                    .AddDefaultUI(UIFramework.Bootstrap4)
+                    .AddDefaultUI()
                     .AddEntityFrameworkStores<ApplicationDbContext>()
                     .AddDefaultTokenProviders();
 
             //adding support for url referer service
             services.AddTransient<HttpContextAccessor>();
             services.AddTransient<RefererService>();
+            services.AddTransient<Seeds>();
 
             //adding support for sendgrip service
             services.AddTransient<IEmailSender, EmailSender>();
@@ -67,13 +68,13 @@ namespace blog
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IServiceProvider serviceProvider)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IServiceProvider serviceProvider, Seeds seeds)
         {
-
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
+               
             }
             else
             {
@@ -88,21 +89,37 @@ namespace blog
             app.UseStaticFiles();
             app.UseCookiePolicy();
 
+            app.UseRouting();
+
             app.UseAuthentication();
+            app.UseAuthorization();
 
-            app.UseMvc(routes =>
+            seeds.Initializer();
+
+            //app.UseMvc(routes =>
+            //{
+            //    routes.MapRoute(
+            //        name: "searchkeyword",
+            //        template: "{Home}/{Index}/{search}");
+            //});
+
+            //app.UseMvc(routes =>
+            //{
+            //    routes.MapRoute(
+            //        name: "default",
+            //        template: "{controller=Home}/{action=Index}/{id?}");
+            //});
+
+            app.UseEndpoints(endpoints =>
             {
-                routes.MapRoute(
-                    name: "searchkeyword",
-                    template: "{Home}/{Index}/{search}");
+              endpoints.MapControllerRoute(
+                     name: "default", 
+                  pattern: "{controller=Home}/{action=Index}/{id?}", 
+                 defaults: "Home/Index");
+
+              endpoints.MapRazorPages();
             });
 
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
-            });
 
 
         }

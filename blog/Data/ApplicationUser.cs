@@ -14,5 +14,6 @@ namespace blog.Data
         public DateTime UserCreatedOn { get; set; }
         public DateTime? LastLoginDate { get; set; }
         public DateTime? LoginDate { get; set; }
+        public string Status { get; set; }
     }
 }
