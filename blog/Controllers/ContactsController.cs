@@ -14,9 +14,11 @@ using System.Net.Mail;
 using System.Net;
 using Microsoft.AspNetCore.Hosting;
 using blog;
+using blog.Services;
 
 namespace blog.Controllers
 {
+    [Authorize]
     public class ContactsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -53,7 +55,6 @@ namespace blog.Controllers
         }
 
         // GET: Contacts/Create
-        [Authorize]
         public IActionResult Create()
         {
             return View();
@@ -64,7 +65,6 @@ namespace blog.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize]
         public async Task<IActionResult> Create([Bind("Id,Title,Body")] Contact contact)
         {
 
