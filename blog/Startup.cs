@@ -64,11 +64,13 @@ namespace blog
             services.AddTransient<IEmailSender, EmailSender>();
             services.Configure<UserSecret>(Configuration);
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            //services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddControllersWithViews();
+            services.AddRazorPages();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IServiceProvider serviceProvider, Seeds seeds)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IServiceProvider serviceProvider, UserManager<ApplicationUser> userManager)
         {
             if (env.IsDevelopment())
             {
@@ -83,8 +85,6 @@ namespace blog
                 app.UseHsts();
             }
 
-
-            // UpdateDatabase(app); //adding automatic migration
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
@@ -94,21 +94,8 @@ namespace blog
             app.UseAuthentication();
             app.UseAuthorization();
 
-            seeds.Initializer();
 
-            //app.UseMvc(routes =>
-            //{
-            //    routes.MapRoute(
-            //        name: "searchkeyword",
-            //        template: "{Home}/{Index}/{search}");
-            //});
-
-            //app.UseMvc(routes =>
-            //{
-            //    routes.MapRoute(
-            //        name: "default",
-            //        template: "{controller=Home}/{action=Index}/{id?}");
-            //});
+            SeedsTest.Initializer(serviceProvider, userManager);
 
             app.UseEndpoints(endpoints =>
             {
@@ -120,24 +107,7 @@ namespace blog
               endpoints.MapRazorPages();
             });
 
-
-
         }
-
-        //adding automatic migration
-        //private static void UpdateDatabase(IApplicationBuilder app)
-        //{
-        //    using (var serviceScope = app.ApplicationServices
-        //        .GetRequiredService<IServiceScopeFactory>()
-        //        .CreateScope())
-        //    {
-        //        using (var context = serviceScope.ServiceProvider.GetService<ApplicationDbContext>())
-        //        {
-        //            context.Database.Migrate();
-        //        }
-        //    }
-        //}
-
 
     }
 }

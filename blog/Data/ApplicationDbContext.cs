@@ -4,6 +4,7 @@ using System.Text;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using blog.Models;
+using blog.Services;
 
 namespace blog.Data
 {
@@ -12,7 +13,7 @@ namespace blog.Data
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
-
+            
         }
 
         public DbSet<Blog> Blogs { get; set; }
