@@ -58,7 +58,7 @@ namespace blog
             //adding support for url referer service
             services.AddTransient<HttpContextAccessor>();
             services.AddTransient<RefererService>();
-            services.AddTransient<Seeds>();
+           // services.AddTransient<Seeds>();
 
             //adding support for sendgrip service
             services.AddTransient<IEmailSender, EmailSender>();
@@ -70,7 +70,7 @@ namespace blog
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IServiceProvider serviceProvider, UserManager<ApplicationUser> userManager)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ApplicationDbContext context, UserManager<ApplicationUser> userManager, IConfiguration config)
         {
             if (env.IsDevelopment())
             {
@@ -95,7 +95,7 @@ namespace blog
             app.UseAuthorization();
 
 
-            SeedsTest.Initializer(serviceProvider, userManager);
+            Seeds.Initializer(context, userManager, config);
 
             app.UseEndpoints(endpoints =>
             {

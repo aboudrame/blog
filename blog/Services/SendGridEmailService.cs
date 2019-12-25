@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using SendGrid;
 using SendGrid.Helpers.Mail;
 using Microsoft.Extensions.Configuration;
-
+using Microsoft.AspNetCore.Hosting;
 
 namespace blog.Services
 {
@@ -25,24 +25,44 @@ namespace blog.Services
 
     public class EmailSender : IEmailSender
     {
-        public EmailSender(IOptions<UserSecret> optionsAccessor)
+        private readonly IConfiguration _config;
+        private readonly IHostingEnvironment _env;
+        public EmailSender(IOptions<UserSecret> optionsAccessor, IConfiguration config, IHostingEnvironment env)
         {
             Options = optionsAccessor.Value;
+            _config = config;
+            _env = env;
         }
 
         public UserSecret Options { get; } //set only via Secret Manager
 
         public Task SendEmailAsync(string email, string subject, string message)
         {
-            return Execute(Options.SendGridKey, subject, message, email);
+            var SendGridKey = "";
+            //_config.GetValue<string>("ASPNETCORE_ENVIRONMENT") == "Development"
+
+            if (_env.IsDevelopment())
+            {
+                //On development environment, read from the secret store
+                SendGridKey = Options.SendGridKey;
+            }
+            else
+            {
+                //On production, read from the environment variable
+                SendGridKey = _config.GetValue<string>("Secret:APIKey");
+            }
+
+            return Execute(SendGridKey, subject, message, email);
         }
 
         public Task Execute(string apiKey, string subject, string message, string email)
         {
             var client = new SendGridClient(apiKey);
+            var Admin = _config.GetValue<string>("Secret:Admin");
+            var SendGridAPIUser = _config.GetValue<string>("Secret:APIUser");
             var msg = new SendGridMessage()
             {
-                From = new EmailAddress("webmaster@aboudrame.com", Options.SendGridUser),
+                From = new EmailAddress(Admin, SendGridAPIUser),
                 Subject = subject,
                 PlainTextContent = message,
                 HtmlContent = message

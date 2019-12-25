@@ -8,44 +8,35 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using Microsoft.Extensions.Configuration;
 
 namespace blog.Services
 {
-    public class Seeds
+    public static class Seeds
     {
-        private readonly ApplicationDbContext _context;
-        private readonly UserManager<ApplicationUser> _userManager;
 
-        public Seeds(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
+        public static void Initializer(ApplicationDbContext context, UserManager<ApplicationUser> userManager, IConfiguration config)
         {
-            _context = context;
-            _userManager = userManager;
-        }
-        public void Initializer()
-        {
-           
-            _context.Database.EnsureCreated();
-            if (!_context.ContentTypes.Any())
+            if (!context.ContentTypes.Any())
             {
-                _context.ContentTypes.Add(
+                context.ContentTypes.Add(
                     new ContentType()
                     {
                         Type = "Course"
                     });
 
-                _context.ContentTypes.Add(
+                context.ContentTypes.Add(
                     new ContentType()
                     {
                         Type = "Article"
                     });
 
-
-                _context.SaveChanges();
+                context.SaveChanges();
             }
 
-            if (!_context.Blogs.Any())
+            if (!context.Blogs.Any())
             {
-                _context.Blogs.Add(
+                context.Blogs.Add(
                     new Blog()
                     {
                         Title = "How to place a form over a picture?",
@@ -56,7 +47,7 @@ namespace blog.Services
 
                     });
 
-                _context.Blogs.Add(
+                context.Blogs.Add(
                     new Blog()
                     {
                         Title = "How to hide and show Divs",
@@ -66,20 +57,40 @@ namespace blog.Services
                         ContentTypeId = 2,
                     });
 
-                _context.SaveChanges();
+                context.SaveChanges();
             }
 
-            if (!_context.Roles.Any())
+            if (!context.Statuses.Any(x=>x.Status == "Active"))
             {
-                _context.Roles.Add(new IdentityRole() { Name = "Admin" });
+                context.Statuses.Add(
+                    new StatusModel()
+                    {
+                        Status = "Active"
+                    });
+                context.SaveChanges();
+            }
 
-                _context.SaveChanges();
+            if (!context.Statuses.Any(x => x.Status == "Blocked"))
+            { 
+                context.Statuses.Add(
+                    new StatusModel()
+                    {
+                        Status = "Blocked"
+                    });
+
+                context.SaveChanges();
+            }
+
+            if (!context.Roles.Any(x=>x.Name == "Admin"))
+            {
+                context.Roles.Add(new IdentityRole() { Name = "Admin" });
+
+                context.SaveChanges();
             }
 
 
-            if (!_context.Users.Any())
+            if (!context.Users.Any(x=>x.Email == "aboudrame@yahoo.fr") )
             {
-                var passwordHassher = new PasswordHasher<ApplicationUser>();
                 var user = new ApplicationUser()
                 {
                     Email = "aboudrame@yahoo.fr",
@@ -91,36 +102,21 @@ namespace blog.Services
                     Status = "1"
                 };
 
-                var result =  _userManager.CreateAsync(user, "Fatoumata_1").Result;
+                var result = userManager.CreateAsync(user, config.GetValue<string>("UserSettings:UserPassword")).Result;
 
             }
 
-            if (!_context.UserRoles.Any())
+            if (!context.UserRoles.Any())
             {
-                var roleId = _context.Roles.FirstOrDefault(x => x.Name == "Admin").Id;
-                var userId = _context.Users.FirstOrDefault(x => x.Email == "aboudrame@yahoo.fr").Id;
-                _context.UserRoles.Add(new IdentityUserRole<string>() { RoleId = roleId, UserId = userId });
+                var roleId = context.Roles.FirstOrDefault(x => x.Name == "Admin").Id;
+                var userId = context.Users.FirstOrDefault(x => x.Email == "aboudrame@yahoo.fr").Id;
+                context.UserRoles.Add(new IdentityUserRole<string>() { RoleId = roleId, UserId = userId });
 
-                _context.SaveChanges();
+                context.SaveChanges();
 
             }
 
-            if (!_context.Statuses.Any())
-            {
-                _context.Statuses.Add(
-                    new StatusModel()
-                    {
-                        Status = "Active"
-                    });
 
-                _context.Statuses.Add(
-                    new StatusModel()
-                    {
-                        Status = "Blocked"
-                    });
-
-                _context.SaveChanges();
-            }
 
 
         }

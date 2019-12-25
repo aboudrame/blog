@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using blog.Data;
 using Microsoft.AspNetCore.Identity;
+using blog.Services;
 
 namespace blog
 {
@@ -17,7 +18,26 @@ namespace blog
     {
         public static void Main(string[] args)
         {
-            CreateWebHostBuilder(args).Build().Run();
+             CreateWebHostBuilder(args).Build().Run();
+
+            //var host = CreateWebHostBuilder(args).Build();
+            //using (var scope = host.Services.CreateScope())
+            //{
+            //    var serviceProvider = scope.ServiceProvider;
+            //    var context = serviceProvider.GetRequiredService<ApplicationDbContext>();
+            //    var userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+            //    try
+            //    {
+            //        Seeds.Initializer(context, userManager);
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        var logger = serviceProvider.GetRequiredService<ILogger<Program>>();
+            //        logger.LogError(ex, "An error occurred seeding the DB.");
+            //    }
+            //}
+
+            //host.Run();
         }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
