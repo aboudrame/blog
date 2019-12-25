@@ -58,7 +58,6 @@ namespace blog
             //adding support for url referer service
             services.AddTransient<HttpContextAccessor>();
             services.AddTransient<RefererService>();
-           // services.AddTransient<Seeds>();
 
             //adding support for sendgrip service
             services.AddTransient<IEmailSender, EmailSender>();
@@ -76,7 +75,6 @@ namespace blog
             {
                 app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
-               
             }
             else
             {
@@ -85,6 +83,7 @@ namespace blog
                 app.UseHsts();
             }
 
+            
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();

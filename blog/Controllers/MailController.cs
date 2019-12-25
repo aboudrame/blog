@@ -99,8 +99,11 @@ namespace blog.Controllers
 
             using (var client = new SmtpClient())
             {
+                string AdminYahoo = Environment.GetEnvironmentVariable("AdminYahoo");
+                string PW = Environment.GetEnvironmentVariable("Adminpw");
+
                 client.Connect("smtp.mail.yahoo.com", 465, true);
-                client.Authenticate("aboudrame@yahoo.fr", "Fatoumata_1");
+                client.Authenticate(AdminYahoo, PW);
                 await client.SendAsync(message);
                 client.Disconnect(true);
             }

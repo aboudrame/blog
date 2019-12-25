@@ -12,12 +12,12 @@
       "commandName": "IISExpress",
       "launchBrowser": true,
       "environmentVariables": {
-        "SendGridAPIUser": "Aboubacar Drame",
-        "Adminpw": "Fatoumata_1",
-        "SendGridAPIKey": "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",
-        "Admin": "webmaster@aboudrame.com",
         "ASPNETCORE_ENVIRONMENT": "Development",
-        "AdminYahoo": "aboudrame@yahoo.fr"
+               "SendGridAPIUser": "Aboubacar Drame",
+                "SendGridAPIKey": "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",
+                         "Admin": "webmaster@aboudrame.com",
+                    "AdminYahoo": "aboudrame@yahoo.fr",
+                       "Adminpw": "Fatoumata_1"
       }
     },
     "blog": {

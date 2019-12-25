@@ -39,7 +39,6 @@ namespace blog.Services
         public Task SendEmailAsync(string email, string subject, string message)
         {
             var SendGridKey = "";
-            //_config.GetValue<string>("ASPNETCORE_ENVIRONMENT") == "Development"
 
             if (_env.IsDevelopment())
             {
@@ -49,7 +48,7 @@ namespace blog.Services
             else
             {
                 //On production, read from the environment variable
-                SendGridKey = _config.GetValue<string>("Secret:APIKey");
+                SendGridKey = Environment.GetEnvironmentVariable("SendGridAPIKey");
             }
 
             return Execute(SendGridKey, subject, message, email);
@@ -58,8 +57,8 @@ namespace blog.Services
         public Task Execute(string apiKey, string subject, string message, string email)
         {
             var client = new SendGridClient(apiKey);
-            var Admin = _config.GetValue<string>("Secret:Admin");
-            var SendGridAPIUser = _config.GetValue<string>("Secret:APIUser");
+            var Admin = Environment.GetEnvironmentVariable("Admin");
+            var SendGridAPIUser = Environment.GetEnvironmentVariable("SendGridAPIUser");
             var msg = new SendGridMessage()
             {
                 From = new EmailAddress(Admin, SendGridAPIUser),

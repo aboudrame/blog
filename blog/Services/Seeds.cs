@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Hosting;
 
 namespace blog.Services
 {
@@ -89,7 +90,7 @@ namespace blog.Services
             }
 
 
-            if (!context.Users.Any(x=>x.Email == "aboudrame@yahoo.fr") )
+            if (!context.Users.Any(x => x.Email == "aboudrame@yahoo.fr"))
             {
                 var user = new ApplicationUser()
                 {
@@ -102,8 +103,8 @@ namespace blog.Services
                     Status = "1"
                 };
 
-                var result = userManager.CreateAsync(user, config.GetValue<string>("UserSettings:UserPassword")).Result;
-
+                   IdentityResult result = userManager.CreateAsync(user, Environment.GetEnvironmentVariable("Adminpw")).Result;
+                
             }
 
             if (!context.UserRoles.Any())
