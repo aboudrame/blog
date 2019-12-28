@@ -265,6 +265,7 @@ namespace blog.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserID")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("BlogId");
@@ -429,7 +430,9 @@ namespace blog.Data.Migrations
 
                     b.HasOne("blog.Data.ApplicationUser", "ApplicationUser")
                         .WithMany("blogs")
-                        .HasForeignKey("UserID");
+                        .HasForeignKey("UserID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("blog.Models.Comment", b =>

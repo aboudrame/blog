@@ -24,7 +24,6 @@ namespace blog.Controllers
         public async Task<IActionResult> Index()
         {
             var blog = await _context.Blogs.Include(x => x.Comments).Where(x => x.Author == User.Identity.Name).OrderByDescending(x => x.LastModifiedDate).ToListAsync();
-
             return View(blog);
         }
 
@@ -53,6 +52,7 @@ namespace blog.Controllers
             var blog = new Blog
             {
                 Author = User.Identity.Name,
+                UserID = _context.Users.FirstOrDefault(x=>x.Email == User.Identity.Name).Id,
                 CreatedDate = DateTime.Now,
                 LastModifiedDate = DateTime.Now,
                 ContentTypeId = 2

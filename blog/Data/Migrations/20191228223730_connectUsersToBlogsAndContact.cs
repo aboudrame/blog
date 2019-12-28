@@ -14,7 +14,8 @@ namespace blog.Data.Migrations
             migrationBuilder.AddColumn<string>(
                 name: "UserID",
                 table: "Blogs",
-                nullable: true);
+                nullable: false,
+                defaultValue: "");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Contacts_UserId",
@@ -32,7 +33,7 @@ namespace blog.Data.Migrations
                 column: "UserID",
                 principalTable: "AspNetUsers",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Restrict);
+                onDelete: ReferentialAction.Cascade);
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Contacts_AspNetUsers_UserId",

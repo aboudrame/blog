@@ -18,6 +18,55 @@ namespace blog.Services
 
         public static void Initializer(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
+            if (!context.Roles.Any(x => x.Name == "Admin"))
+            {
+                context.Roles.Add(new IdentityRole() { Name = "Admin" });
+
+                context.SaveChanges();
+            }
+
+
+            if (!context.Users.Any(x => x.Email == "aboudrame@yahoo.fr"))
+            {
+                var user = new ApplicationUser()
+                {
+                    Email = "aboudrame@yahoo.fr",
+                    UserName = "aboudrame@yahoo.fr",
+                    EmailConfirmed = true,
+                    First_Name = "Aboubacar",
+                    Last_Name = "Drame",
+                    UserCreatedOn = DateTime.Now,
+                    Status = "1"
+                };
+
+                if (!string.IsNullOrEmpty(Environment.GetEnvironmentVariable("Adminpw")))
+                {
+                    IdentityResult result = userManager.CreateAsync(user, Environment.GetEnvironmentVariable("Adminpw")).Result;
+                }
+
+                context.SaveChanges();
+            }
+
+            if (!context.Users.Any(x=>x.Email == "seeddata@gmail.com")) { 
+                var user1 = new ApplicationUser()
+                {
+                    Email = "seeddata@gmail.com",
+                    UserName = "seeddata@gmail.com",
+                    EmailConfirmed = true,
+                    First_Name = "Aboubacar",
+                    Last_Name = "Drame",
+                    UserCreatedOn = DateTime.Now,
+                    Status = "1"
+                };
+
+                if (!string.IsNullOrEmpty(Environment.GetEnvironmentVariable("Adminpw")))
+                {
+                    IdentityResult result = userManager.CreateAsync(user1, Environment.GetEnvironmentVariable("Adminpw")).Result;
+                }
+
+                context.SaveChanges();
+            }
+
             if (!context.ContentTypes.Any())
             {
                 context.ContentTypes.Add(
@@ -35,13 +84,14 @@ namespace blog.Services
                 context.SaveChanges();
             }
 
-            if (!context.Blogs.Any())
+            if (!context.Blogs.Any(x=>x.Author == "seeddata@gmail.com"))
             {
                 context.Blogs.Add(
                     new Blog()
                     {
                         Title = "How to place a form over a picture?",
                         Author = "seeddata@gmail.com",
+                        UserID = context.Users.FirstOrDefault(x=>x.Email == "seeddata@gmail.com").Id,
                         LastModifiedDate = DateTime.Now,
                         Body = "I would like to be able to place a search form. Any help would be immensely appreciated.",
                         ContentTypeId = 2
@@ -53,6 +103,7 @@ namespace blog.Services
                     {
                         Title = "How to hide and show Divs",
                         Author = "seeddata@gmail.com",
+                        UserID = context.Users.FirstOrDefault(x => x.Email == "seeddata@gmail.com").Id,
                         LastModifiedDate = DateTime.Now,
                         Body = "The div has a title. When we click on the title the div expand. I want the div to collapse when we click on anything else not just the title. How would i do that?",
                         ContentTypeId = 2,
@@ -82,32 +133,7 @@ namespace blog.Services
                 context.SaveChanges();
             }
 
-            if (!context.Roles.Any(x=>x.Name == "Admin"))
-            {
-                context.Roles.Add(new IdentityRole() { Name = "Admin" });
 
-                context.SaveChanges();
-            }
-
-
-            if (!context.Users.Any(x => x.Email == "aboudrame@yahoo.fr"))
-            {
-                var user = new ApplicationUser()
-                {
-                    Email = "aboudrame@yahoo.fr",
-                    UserName = "aboudrame@yahoo.fr",
-                    EmailConfirmed = true,
-                    First_Name = "Aboubacar",
-                    Last_Name = "Drame",
-                    UserCreatedOn = DateTime.Now,
-                    Status = "1"
-                };
-
-                if ( !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("Adminpw")) ) {
-                    IdentityResult result = userManager.CreateAsync(user, Environment.GetEnvironmentVariable("Adminpw")).Result;
-                }
-                
-            }
 
             if (!context.Users.Any(x=>x.Email == "aboudrame@yahoo.fr") && !context.Roles.Any(x=>x.Name == "Admin"))
             {

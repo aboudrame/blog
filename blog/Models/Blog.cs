@@ -13,8 +13,9 @@ namespace blog.Models
         public long BlogId { get; set; }
         [Required]
         public string Title { get; set; }
+        [Required]
         [ForeignKey("ApplicationUser")]
-        public string UserID { get; }
+        public string UserID { get; set; }
         [Required]
         public string Author { get; set; }
         [Required]

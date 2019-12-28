@@ -10,7 +10,7 @@ using blog.Data;
 namespace blog.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20191228190710_connectUsersToBlogsAndContact")]
+    [Migration("20191228223730_connectUsersToBlogsAndContact")]
     partial class connectUsersToBlogsAndContact
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -267,6 +267,7 @@ namespace blog.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserID")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("BlogId");
@@ -431,7 +432,9 @@ namespace blog.Data.Migrations
 
                     b.HasOne("blog.Data.ApplicationUser", "ApplicationUser")
                         .WithMany("blogs")
-                        .HasForeignKey("UserID");
+                        .HasForeignKey("UserID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("blog.Models.Comment", b =>

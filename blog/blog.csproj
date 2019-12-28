@@ -18,6 +18,10 @@
     <Compile Remove="Data\Migrations\20191215181420_addStatus.Designer.cs" />
     <Compile Remove="Data\Migrations\20191228185040_createUsersToBlogs.cs" />
     <Compile Remove="Data\Migrations\20191228185040_createUsersToBlogs.Designer.cs" />
+    <Compile Remove="Data\Migrations\20191228190710_connectUsersToBlogsAndContact.cs" />
+    <Compile Remove="Data\Migrations\20191228190710_connectUsersToBlogsAndContact.Designer.cs" />
+    <Compile Remove="Data\Migrations\20191228213322_addDefaultUserId.cs" />
+    <Compile Remove="Data\Migrations\20191228213322_addDefaultUserId.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
