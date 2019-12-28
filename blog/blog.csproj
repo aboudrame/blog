@@ -16,6 +16,8 @@
     <Compile Remove="Data\Migrations\20191212230824_addingUserIdtoblog.Designer.cs" />
     <Compile Remove="Data\Migrations\20191215181420_addStatus.cs" />
     <Compile Remove="Data\Migrations\20191215181420_addStatus.Designer.cs" />
+    <Compile Remove="Data\Migrations\20191228185040_createUsersToBlogs.cs" />
+    <Compile Remove="Data\Migrations\20191228185040_createUsersToBlogs.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

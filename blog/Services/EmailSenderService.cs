@@ -75,12 +75,14 @@ namespace blog.Services
 
             using (var client = new SmtpClient())
             {
-                string AdminYahoo = Environment.GetEnvironmentVariable("AdminYahoo");
-                string PW = Environment.GetEnvironmentVariable("Adminpw");
-                client.Connect("smtp.mail.yahoo.com", 465, true);
-                client.Authenticate(AdminYahoo, PW);
-                client.Send(message);
-                client.Disconnect(true);
+                if (!string.IsNullOrEmpty(Environment.GetEnvironmentVariable("AdminYahoo")) && !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("Adminpw"))) {
+                    string AdminYahoo = Environment.GetEnvironmentVariable("AdminYahoo");
+                    string PW = Environment.GetEnvironmentVariable("Adminpw");
+                    client.Connect("smtp.mail.yahoo.com", 465, true);
+                    client.Authenticate(AdminYahoo, PW);
+                    client.Send(message);
+                    client.Disconnect(true);
+                }
             }
 
         }

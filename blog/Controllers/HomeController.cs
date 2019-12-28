@@ -28,17 +28,6 @@ namespace blog.Controllers
             return View(Course);
         }
 
-        public IActionResult Course1(long id)
-        {
-            //var blog = _db.Blogs.FirstOrDefault(x => x.BlogId == id);
-            //var Category = _db.Categories.FirstOrDefault(x => x.CategoryId == blog.CategoryId);
-                       
-            //blog.Category. = Category.Name;
-           // var userStore = new userStore<application>();
-
-            return View();
-        }
-
         [Authorize]
         public IActionResult Create()
         {
@@ -78,8 +67,6 @@ namespace blog.Controllers
         [Authorize]
         public IActionResult Edit (Blog blog)
         {
-            //var _blog = _db.Blogs.OrderBy(x => x.BlogId == id);
-
             _db.Blogs.Update(blog);
             _db.SaveChanges();
             return RedirectToAction("Index", "Home");

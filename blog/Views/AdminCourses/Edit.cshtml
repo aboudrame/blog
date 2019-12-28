@@ -12,28 +12,22 @@
 <form asp-action="Edit">
     <div class="row">
         <div class="col-12">
-
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="BlogId" />
-            <div class="form-group">
-                <label asp-for="Title" class="control-label"></label>
-                <input asp-for="Title" class="form-control" />
-                <span asp-validation-for="Title" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input asp-for="Author" class="form-control" type="hidden" />
-                <span asp-validation-for="Author" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input asp-for="LastModifiedDate" class="form-control" type="hidden" />
-                <span asp-validation-for="LastModifiedDate" class="text-danger"></span>
-            </div>
+            <input type="hidden" asp-for="@Model.BlogId" />
+            <input type="hidden" asp-for="@Model.LastModifiedDate" />
+            <input type="hidden" asp-for="@Model.Author" />
+            <input type="hidden" asp-for="@Model.ContentTypeId" />
 
+            <div class="form-group">
+                <label asp-for="@Model.Title" class="control-label"></label>
+                <input asp-for="@Model.Title" class="form-control" />
+                <span asp-validation-for="@Model.Title" class="text-danger"></span>
+            </div>
             <div class="col-12 form-group custom-highlighter">
                 @await Html.PartialAsync("_CodeInstructionPartial")
 
-                <pre><textarea asp-for="Body" class="form-control included-snippets code"></textarea></pre>
-                <span asp-validation-for="Body" class="text-danger"></span>
+                <pre><textarea asp-for="@Model.Body" class="form-control included-snippets code"></textarea></pre>
+                <span asp-validation-for="@Model.Body" class="text-danger"></span>
 
                 <div class="preview-container">
 

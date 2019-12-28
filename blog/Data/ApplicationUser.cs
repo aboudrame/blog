@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using blog.Models;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,5 +16,7 @@ namespace blog.Data
         public DateTime? LastLoginDate { get; set; }
         public DateTime? LoginDate { get; set; }
         public string Status { get; set; }
+        public IEnumerable<Blog> blogs { get; set; }
+        public IEnumerable<Contact> contacts { get; set; }
     }
 }

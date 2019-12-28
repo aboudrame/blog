@@ -16,7 +16,7 @@ namespace blog.Services
     public static class Seeds
     {
 
-        public static void Initializer(ApplicationDbContext context, UserManager<ApplicationUser> userManager, IConfiguration config)
+        public static void Initializer(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
             if (!context.ContentTypes.Any())
             {
@@ -103,12 +103,15 @@ namespace blog.Services
                     Status = "1"
                 };
 
-                   IdentityResult result = userManager.CreateAsync(user, Environment.GetEnvironmentVariable("Adminpw")).Result;
+                if ( !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("Adminpw")) ) {
+                    IdentityResult result = userManager.CreateAsync(user, Environment.GetEnvironmentVariable("Adminpw")).Result;
+                }
                 
             }
 
-            if (!context.UserRoles.Any())
+            if (!context.Users.Any(x=>x.Email == "aboudrame@yahoo.fr") && !context.Roles.Any(x=>x.Name == "Admin"))
             {
+
                 var roleId = context.Roles.FirstOrDefault(x => x.Name == "Admin").Id;
                 var userId = context.Users.FirstOrDefault(x => x.Email == "aboudrame@yahoo.fr").Id;
                 context.UserRoles.Add(new IdentityUserRole<string>() { RoleId = roleId, UserId = userId });
@@ -116,10 +119,6 @@ namespace blog.Services
                 context.SaveChanges();
 
             }
-
-
-
-
         }
     }
 }

@@ -23,14 +23,12 @@ namespace blog.Services
         public string SendGridKey { get; set; } //This will hold the SendGrid API Key
     }
 
-    public class EmailSender : IEmailSender
+    public class EmailSender :  IEmailSender
     {
-        private readonly IConfiguration _config;
         private readonly IHostingEnvironment _env;
-        public EmailSender(IOptions<UserSecret> optionsAccessor, IConfiguration config, IHostingEnvironment env)
+        public EmailSender(IOptions<UserSecret> optionsAccessor, IHostingEnvironment env)
         {
             Options = optionsAccessor.Value;
-            _config = config;
             _env = env;
         }
 
@@ -47,19 +45,34 @@ namespace blog.Services
             }
             else
             {
-                //On production, read from the environment variable
-                SendGridKey = Environment.GetEnvironmentVariable("SendGridAPIKey");
+                if (!string.IsNullOrEmpty(Environment.GetEnvironmentVariable("SendGridAPIKey"))) {
+                    //On production, read from the environment variable
+                    SendGridKey = Environment.GetEnvironmentVariable("SendGridAPIKey");
+                }
             }
 
-            return Execute(SendGridKey, subject, message, email);
+            if (!string.IsNullOrEmpty(SendGridKey))
+            {
+
+                return Execute(SendGridKey, subject, message, email);
+            }
+
+            return null;
         }
 
         public Task Execute(string apiKey, string subject, string message, string email)
         {
-            var client = new SendGridClient(apiKey);
-            var Admin = Environment.GetEnvironmentVariable("Admin");
-            var SendGridAPIUser = Environment.GetEnvironmentVariable("SendGridAPIUser");
-            var msg = new SendGridMessage()
+            if (string.IsNullOrEmpty(apiKey) || 
+                string.IsNullOrEmpty(Environment.GetEnvironmentVariable("Admin")) ||
+                string.IsNullOrEmpty(Environment.GetEnvironmentVariable("SendGridAPIUser")))
+            {
+                return null;
+            }
+                
+             SendGridClient client = new SendGridClient(apiKey);
+                      string Admin = Environment.GetEnvironmentVariable("Admin");
+            string SendGridAPIUser = Environment.GetEnvironmentVariable("SendGridAPIUser");
+               SendGridMessage msg = new SendGridMessage()
             {
                 From = new EmailAddress(Admin, SendGridAPIUser),
                 Subject = subject,

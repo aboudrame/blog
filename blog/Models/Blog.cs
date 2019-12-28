@@ -1,4 +1,5 @@
-﻿using System;
+﻿using blog.Data;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -12,6 +13,8 @@ namespace blog.Models
         public long BlogId { get; set; }
         [Required]
         public string Title { get; set; }
+        [ForeignKey("ApplicationUser")]
+        public string UserID { get; }
         [Required]
         public string Author { get; set; }
         [Required]
@@ -25,6 +28,8 @@ namespace blog.Models
         [NotMapped]
         public List<ContentType> ContentTypes { get; set; }
         public virtual ICollection<Comment> Comments { get; set; }
+
+        public virtual ApplicationUser ApplicationUser { get; set; }
     }
 
   

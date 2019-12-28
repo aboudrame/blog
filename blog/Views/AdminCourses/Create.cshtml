@@ -14,9 +14,10 @@
     <div class="row">
         <div asp-validation-summary="All" class="col-12 text-danger"></div>
         <div class="col-12 form-group">
-            <input type="hidden" asp-for="Author" class="form-control" />
-            <input type="hidden" asp-for="ContentTypeId" class="form-control" value=1 />
-
+            <input type="hidden" asp-for="Author"  />
+            <input type="hidden" asp-for="ContentTypeId"  />
+            <input type="hidden" asp-for="CreatedDate"  /> 
+            <input type="hidden" asp-for="LastModifiedDate"  />
         </div>
         <div class="col-12 form-group">
             <label asp-for="Title" class="control-label"></label>
@@ -26,18 +27,12 @@
 
         <div class="col-12 form-group custom-highlighter">
             @await  Html.PartialAsync("_CodeInstructionPartial")
-
-            <label asp-for="Body" class="control-label"></label>
             <pre><textarea asp-for="Body" class="form-control included-snippets code"></textarea></pre>
             <span asp-validation-for="Body" class="text-danger"></span>
 
             <div class="preview-container">
 
             </div>
-        </div>
-
-        <div class="col-12 hidden">
-            <input asp-for="CreatedDate" class="form-control" /> <input asp-for="LastModifiedDate" class="form-control" />
         </div>
     </div>
     <div class="row paddingTop15">

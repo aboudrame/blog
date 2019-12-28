@@ -40,7 +40,7 @@ namespace blog.Areas.Identity.Pages.Account
             {
                 if (e.Code == "InvalidToken")
                 {
-                    return Redirect(Url.Page("/Account/InvalidToken",null, null));
+                    return Redirect(Url.Page("/Account/InvalidToken"));
                 }
             }
 

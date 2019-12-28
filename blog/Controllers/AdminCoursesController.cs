@@ -76,36 +76,6 @@ namespace blog.Controllers
             return View(blog);
         }
 
-
-        // GET: Member/Create
-        //public IActionResult Create2()
-        //{
-        //    var blog = new Blog();
-
-        //    blog.Author = User.Identity.Name;
-        //    blog.CreatedDate = DateTime.Now;
-        //    blog.LastModifiedDate = DateTime.Now;
-        //    blog.ContentTypeId = 2;
-
-        //    return View(blog);
-        //}
-
-        //// POST: Member/Create
-        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        //// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Create2(Blog blog)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        _context.Add(blog);
-        //        await _context.SaveChangesAsync();
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    return View(blog);
-        //}
-
         // GET: Member/Edit/5
         public async Task<IActionResult> Edit(long? id)
         {
@@ -168,8 +138,7 @@ namespace blog.Controllers
                 return NotFound();
             }
 
-            var blog = await _context.Blogs
-                .FirstOrDefaultAsync(m => m.BlogId == id);
+            var blog = await _context.Blogs.FirstOrDefaultAsync(m => m.BlogId == id);
             if (blog == null)
             {
                 return NotFound();
@@ -196,45 +165,5 @@ namespace blog.Controllers
             return _context.Blogs.Any(e => e.BlogId == id);
         }
 
-
-        //public async Task<IActionResult> CreateComment(long id)
-        //{
-
-        //    var blog = await _context.Blogs.FindAsync(id);
-        //    RegisterCommentViewModel registerCommentViewModel = new RegisterCommentViewModel();
-
-        //    registerCommentViewModel.BlogBody = blog.Body;
-        //    registerCommentViewModel.BlogId = blog.BlogId;
-        //    registerCommentViewModel.CreatedDate = DateTime.Now;
-        //    registerCommentViewModel.LastModifiedDate = DateTime.Now;
-        //    registerCommentViewModel.Commenter = User.Identity.Name;
-
-        //    return View(registerCommentViewModel);
-        //}
-
-        //[HttpPost]
-        //[Authorize]
-        //public async Task<IActionResult> CreateComment(RegisterCommentViewModel registerCommentViewModel)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        Comment comment = new Comment
-        //        {
-        //                 CreatedDate = registerCommentViewModel.CreatedDate,
-        //            LastModifiedDate = registerCommentViewModel.LastModifiedDate,
-        //                   Commenter = registerCommentViewModel.Commenter,
-        //                      BlogId = registerCommentViewModel.BlogId,
-        //                        Body = registerCommentViewModel.CommentBody,
-
-        //        };
-
-        //        _context.Comments.Add(comment);
-        //        await _context.SaveChangesAsync();
-
-        //        return RedirectToAction("Index", "Blogs");
-        //    }
-
-        //    return View(registerCommentViewModel);
-        //}
     }
 }

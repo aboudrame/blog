@@ -44,11 +44,6 @@ namespace blog
 
             services.AddTransient<EmailSenderService>();
 
-            //services.AddDefaultIdentity<IdentityUser>()
-            //   .AddRoles<IdentityRole>()
-            //   .AddDefaultUI(UIFramework.Bootstrap4)
-            //   .AddEntityFrameworkStores<ApplicationDbContext>();
-
             //implementing role based login
             services.AddIdentity<ApplicationUser, IdentityRole>()
                     .AddDefaultUI()
@@ -69,7 +64,7 @@ namespace blog
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ApplicationDbContext context, UserManager<ApplicationUser> userManager, IConfiguration config)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
             if (env.IsDevelopment())
             {
@@ -94,7 +89,7 @@ namespace blog
             app.UseAuthorization();
 
 
-            Seeds.Initializer(context, userManager, config);
+            Seeds.Initializer(context, userManager);
 
             app.UseEndpoints(endpoints =>
             {
