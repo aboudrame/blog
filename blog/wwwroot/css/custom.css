@@ -531,9 +531,13 @@ section {
     display: none;
 }
 
-    .code-instruction.on {
-        display: block;
-    }
+.code-instruction.on {
+    display: block;
+}
+
+.highlight {
+    background-color: red;
+}
 
 .instruction {
     margin-bottom: 15px;
@@ -546,6 +550,33 @@ section {
 .tools ul {
     margin: auto;
     padding: 0;
+}
+
+.snippets-wrap,
+.preview-container {
+    float: left;
+    width: 50%;
+}
+
+.snippets-wrap {
+    padding-right: 10px;
+}
+
+.snippets-wrap-container {
+    border: solid 2px #b3b3b3;
+}
+
+.preview-container {
+    padding-left: 10px;
+}
+
+.dragbar {
+    position: absolute;
+    background-color: #b3b3b3;
+    left: calc(50% - 5px);
+    cursor: col-resize;
+    width: 10px;
+    height: 100%;
 }
 
 div.CodeMirror-scroll {

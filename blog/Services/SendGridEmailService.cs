@@ -66,9 +66,11 @@ namespace blog.Services
                 string.IsNullOrEmpty(Environment.GetEnvironmentVariable("Admin")) ||
                 string.IsNullOrEmpty(Environment.GetEnvironmentVariable("SendGridAPIUser")))
             {
-                return null;
+                return null; //If the email cannot be sent due to the a missing required input, go to the error page
             }
-                
+            
+            
+            //Read values from the environment variables
              SendGridClient client = new SendGridClient(apiKey);
                       string Admin = Environment.GetEnvironmentVariable("Admin");
             string SendGridAPIUser = Environment.GetEnvironmentVariable("SendGridAPIUser");
@@ -85,7 +87,8 @@ namespace blog.Services
             // Disable click tracking.
             // See https://sendgrid.com/docs/User_Guide/Settings/tracking.html
             msg.SetClickTracking(false, false);
-
+            
+            //Send email to the user
             return client.SendEmailAsync(msg);
         }
     }

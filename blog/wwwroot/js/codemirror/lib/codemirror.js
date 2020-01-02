@@ -6013,11 +6013,11 @@
       // Sync editor state
       if (updateMaxLine) { cm.curOp.updateMaxLine = true; }
       if (marker.collapsed)
-        { regChange(cm, from.line, to.line + 1); }
+      { regChange(cm, from.line, to.line + 1);}
       else if (marker.className || marker.startStyle || marker.endStyle || marker.css ||
                marker.attributes || marker.title)
-        { for (var i = from.line; i <= to.line; i++) { regLineChange(cm, i, "text"); } }
-      if (marker.atomic) { reCheckSelection(cm.doc); }
+      { for (var i = from.line; i <= to.line; i++) { regLineChange(cm, i, "text"); } }
+      if (marker.atomic) { reCheckSelection(cm.doc);}
       signalLater(cm, "markerAdded", cm, marker);
     }
     return marker

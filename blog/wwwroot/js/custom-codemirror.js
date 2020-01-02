@@ -188,14 +188,30 @@
         },
 
         CodePreview: function () {
-            $('.custom-highlighter .preview').off('click').on('click', function () {
+            //$('.custom-highlighter .preview').off('click').on('click', function () {
+            //    codesnippet($(this));
+            //});
+
+            $('.CodeMirror').off("keyup").on("keyup", function () {
                 codesnippet($(this));
             });
 
             function codesnippet(el) {
                 var editorval = htmleditor.getValue();
-                x = '<pre>' + editorval.replace(/\[\[/g, '<textarea class="code1">').replace(/\]\]/g, '</textarea>') + '</pre>';
-                $(el).closest($('.custom-highlighter')).find($('.preview-container')).css('display', 'block').html(x);
+                x = '<pre>' +
+                    editorval
+                    .replace(/\[\[/g, '<textarea class="code1">')
+                    .replace(/]]/g, '</textarea>')
+                    + '</pre>';
+                $(el).closest($('.custom-highlighter')).find($('.preview-container')).html(x);
+
+                $(".code1").each(function () {
+                    $(this).html($(this).html().replace(/\[{/g, "").replace(/\}]/g, ""));
+                });
+
+                $('.preview-container').each(function () {
+                    $(this).html($(this).html().replace(/\[{/g, '<span class="highlight">').replace(/}]/g, "</span>"));
+                });
 
                 $('.code1').each(function () {
                     $(this).html($.trim($(this).html())); //this will remore the empty line at the bottom of the codeMirror instance
@@ -208,24 +224,21 @@
                         closetags: true
                     });
                 });
-            
+
                 var cm = $(el).closest($('.custom-highlighter')).find($('.included-snippets')).next($('.CodeMirror'));
                 var cm_preview = $(el).closest($('.custom-highlighter')).find($('.preview-container'));
 
-                if ($(el).val() === 'Edit') {
-                    $(el).val('Preview');
-                    cm_preview.hide();
-                    cm.show();
-                }
-                else {
-                    $(el).val('Edit');
-                    cm_preview.show();
-                    cm.hide();
-                }
-
-
+                //if ($(el).val() === 'Edit') {
+                //    $(el).val('Preview');
+                //    cm_preview.hide();
+                //    cm.show();
+                //}
+                //else {
+                //    $(el).val('Edit');
+                //    cm_preview.show();
+                //    cm.hide();
+                //}
             }
-            
         },
 
         indexPageCode: function () {
@@ -246,7 +259,6 @@
                     closetags: true
                 });
             });
-        
         }
     };
 

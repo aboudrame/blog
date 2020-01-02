@@ -16,7 +16,7 @@
         <div class="col-12 form-group">
             <input type="hidden" asp-for="@Model.Author" />
             <input type="hidden" asp-for="@Model.ContentTypeId" />
-            <input type="hidden" asp-for="@Model.CreatedDate" /> 
+            <input type="hidden" asp-for="@Model.CreatedDate" />
             <input type="hidden" asp-for="@Model.LastModifiedDate" />
             <input type="hidden" asp-for="@Model.UserID" />
 
@@ -26,14 +26,16 @@
             <input asp-for="@Model.Title" class="form-control" />
             <span asp-validation-for="@Model.Title" class="text-danger"></span>
         </div>
-
-        <div class="col-12 form-group custom-highlighter">
-            @await  Html.PartialAsync("_CodeInstructionPartial")
-
-            <label asp-for="@Model.Body" class="control-label"></label>
-            <pre><textarea asp-for="@Model.Body" class="form-control included-snippets code"></textarea></pre>
-            <span asp-validation-for="@Model.Body" class="text-danger"></span>
-
+    </div>
+    @await Html.PartialAsync("_CodeInstructionPartial")
+    <div class="row form-group custom-highlighter">
+        <div class="col-12 paddingBottom15 snippets-wrap-container">
+            <div class="snippets-wrap">
+                <pre><textarea asp-for="@Model.Body" class="form-control included-snippets code"></textarea></pre>
+                <span asp-validation-for="@Model.Body" class="text-danger"></span>
+            </div>
+            <div class="dragbar">
+            </div>
             <div class="preview-container">
 
             </div>

@@ -3,12 +3,11 @@
         init: function () {
             main.banner();
             main.profile();
-           // main.codeEditor(); to be deleted later
-            main.codeEditorNav();
+           // main.codeEditorNav(); to be deleted later
             main.placeholder();
             main.ToolsRotation();
-           // main.tabtrap();
             main.instruction();
+            main.dragE();
         },
 
         banner: function () {
@@ -35,41 +34,6 @@
         profile: function () {
             $('.profile img').show(5000);
         },
-
-        codeEditor: function () {//I will delete this code later as I rewrite another click event on $(".RUN") under custom-codemirror.js
-
-            $('.RUN').off('click').on('click', function () {
-                var IFRAME = $('#Result');
-                var getHTML = $('textarea[name="HTML"]').val();
-                var getCSS = $('textarea[name="CSS"]').val();
-                var getJavaScript = $('textarea[name="JavaScript"]').val();
-
-
-                var IFRAME_HEAD = IFRAME.contents().find('head');
-                var IFRAME_BODY = IFRAME.contents().find('body');
-                
-                var js = document.createElement('script');
-                var css = document.createElement('style');
-
-
-                css.type = "text/css";
-                js.type = "text/javascript";
-
-                $(css).html(getCSS);
-                $(js).html(getJavaScript);
-
-                IFRAME_HEAD.html('');
-                IFRAME_HEAD
-                    .append(css)
-                    .append(js);
-
-                IFRAME_BODY.html('');
-                IFRAME_BODY.append(getHTML);
-
-            });
-
-        },
-
 
         codeEditorNav: function () {
             $('.codeeditor > div').each(function () {
@@ -150,18 +114,54 @@
 
             }
         },
-        tabtrap: function () {
-            $('.tab').on('keydown', function (e) {
-                if (e.keyCode === 9) {
-                    e.preventDefault();
-                    document.execCommand('insertHTML', false, '&#009');
-                }
-            });
-        },
         instruction: function () {
             $('.btn-instruction').off('click').on('click', function () {
                 $(this).closest($('.instruction')).find($('.code-instruction')).toggle();
             });
+        },
+        dragE: function () {
+            dragElement($(".dragbar")[0]);
+
+            function dragElement(elmnt) {
+                var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+                if (document.getElementById(elmnt.id + "header")) {
+                    // if present, the header is where you move the DIV from:
+                    document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
+                } else {
+                    // otherwise, move the DIV from anywhere inside the DIV:
+                    elmnt.onmousedown = dragMouseDown;
+                }
+
+                function dragMouseDown(e) {
+                    e = e || window.event;
+                    e.preventDefault();
+                    // get the mouse cursor position at startup:
+                    pos3 = e.clientX;
+                    pos4 = e.clientY;
+                    document.onmouseup = closeDragElement;
+                    // call a function whenever the cursor moves:
+                    document.onmousemove = elementDrag;
+                }
+
+                function elementDrag(e) {
+                    e = e || window.event;
+                    e.preventDefault();
+                    // calculate the new cursor position:
+                    pos1 = pos3 - e.clientX;
+                    pos2 = pos4 - e.clientY;
+                    pos3 = e.clientX;
+                    pos4 = e.clientY;
+                    // set the element's new position:
+                   // elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+                    elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+                }
+
+                function closeDragElement() {
+                    // stop moving when mouse button is released:
+                    document.onmouseup = null;
+                    document.onmousemove = null;
+                }
+            }
         }
 
     };

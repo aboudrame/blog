@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using System.Text.Encodings.Web;
 
 namespace blog.Areas.Identity.Pages.Account
-{
+{ //This is code resends the new email confirmation token to the user. All previous tokens will be invalidated under the security stamp
     public class UnconfirmedEmailModel : PageModel
     {
         private readonly ApplicationDbContext _db;

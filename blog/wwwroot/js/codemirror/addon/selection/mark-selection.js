@@ -7,7 +7,7 @@
 // selected text the CSS class given as option value, or
 // "CodeMirror-selectedtext" when the value is not a string.
 
-(function(mod) {
+(function (mod) {
   if (typeof exports == "object" && typeof module == "object") // CommonJS
     mod(require("../../lib/codemirror"));
   else if (typeof define == "function" && define.amd) // AMD
@@ -17,7 +17,7 @@
 })(function(CodeMirror) {
   "use strict";
 
-  CodeMirror.defineOption("styleSelectedText", false, function(cm, val, old) {
+  CodeMirror.defineOption("styleSelectedText", false, function (cm, val, old) {
     var prev = old && old != CodeMirror.Init;
     if (val && !prev) {
       cm.state.markedSelection = [];
@@ -47,15 +47,19 @@
   var Pos = CodeMirror.Pos;
   var cmp = CodeMirror.cmpPos;
 
+ 
+
   function coverRange(cm, from, to, addAt) {
     if (cmp(from, to) == 0) return;
     var array = cm.state.markedSelection;
     var cls = cm.state.markedSelectionStyle;
-    for (var line = from.line;;) {
+    for (var line = from.line; ;) {
       var start = line == from.line ? from : Pos(line, 0);
       var endLine = line + CHUNK_SIZE, atEnd = endLine >= to.line;
       var end = atEnd ? to : Pos(endLine, 0);
-      var mark = cm.markText(start, end, {className: cls});
+
+      var mark = cm.markText(start, end, { className: cls });
+
       if (addAt == null) array.push(mark);
       else array.splice(addAt++, 0, mark);
       if (atEnd) break;
