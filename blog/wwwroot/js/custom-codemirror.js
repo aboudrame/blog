@@ -188,9 +188,6 @@
         },
 
         CodePreview: function () {
-            //$('.custom-highlighter .preview').off('click').on('click', function () {
-            //    codesnippet($(this));
-            //});
 
             $('.CodeMirror').off("keyup").on("keyup", function () {
                 codesnippet($(this));
@@ -227,17 +224,6 @@
 
                 var cm = $(el).closest($('.custom-highlighter')).find($('.included-snippets')).next($('.CodeMirror'));
                 var cm_preview = $(el).closest($('.custom-highlighter')).find($('.preview-container'));
-
-                //if ($(el).val() === 'Edit') {
-                //    $(el).val('Preview');
-                //    cm_preview.hide();
-                //    cm.show();
-                //}
-                //else {
-                //    $(el).val('Edit');
-                //    cm_preview.show();
-                //    cm.hide();
-                //}
             }
         },
 

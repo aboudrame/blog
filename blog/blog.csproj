@@ -54,6 +54,8 @@
 
 
   <ItemGroup>
+    <PackageReference Include="angularjs" Version="1.7.8.1" />
+    <PackageReference Include="AngularJS.Core" Version="1.7.8" />
     <PackageReference Include="DashboardCode.Routines.Storage.EfCore.Relational.InMemory" Version="3.0.0" />
     <PackageReference Include="MailKit" Version="2.4.1" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.0" />
@@ -69,6 +71,8 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="3.1.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.0" />
     <PackageReference Include="Sendgrid" Version="9.12.0" />
   </ItemGroup>
 

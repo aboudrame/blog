@@ -7,7 +7,8 @@
             main.placeholder();
             main.ToolsRotation();
             main.instruction();
-            main.dragE();
+            // main.dragE();
+            main.dragbar();
         },
 
         banner: function () {
@@ -162,6 +163,35 @@
                     document.onmousemove = null;
                 }
             }
+        },
+
+        dragbar: function () {
+            $('.dragbar').on('mousedown', function (e) {
+                e = e || window.event;
+                e.preventDefault();
+
+                $this = $(this);
+                posX0 = e.clientX;
+
+                $('.snippets-wrap-container').off('mouseup').on('mouseup', function () {
+                    $(this).off('mousedown');
+                    $(this).off('mousemove');
+                });
+
+                $('.snippets-wrap-container').on('mousemove', function (e) {
+                    e = e || window.event;
+                    e.preventDefault();
+                    dist = window.posX0 - e.clientX;
+                    posX0 = e.clientX;
+                    $this.css('left', $($this)[0].offsetLeft - dist + "px");
+                    
+                });
+
+            });
+
+
+
+
         }
 
     };
